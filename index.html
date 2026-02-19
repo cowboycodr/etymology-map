@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etymology Map</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-base:    #1e1e2e;
+      --bg-surface: #181825;
+      --bg-hover:   #313244;
+      --border:     #313244;
+      --tree-line:  #313244;
+
+      --text-primary:   #cdd6f4;
+      --text-secondary: #bac2de;
+      --text-muted:     #6c7086;
+
+      --accent:     #89b4fa;
+      --accent-bg:  #1a2a3d;
+
+      /* language tag colours */
+      --c-pie:        #f38ba8; --c-pie-bg:        #3d1a1f;
+      --c-latin:      #fab387; --c-latin-bg:      #3d2a1a;
+      --c-greek:      #a6e3a1; --c-greek-bg:      #1a3020;
+      --c-english:    #89b4fa; --c-english-bg:    #1a2a3d;
+      --c-norse:      #89dceb; --c-norse-bg:      #1a3038;
+      --c-slavic:     #94e2d5; --c-slavic-bg:     #1a3330;
+      --c-iranian:    #f9e2af; --c-iranian-bg:    #3d3010;
+      --c-phoenician: #f9e2af; --c-phoenician-bg: #3d2f10;
+      --c-other:      #cba6f7; --c-other-bg:      #2a1a3d;
+
+      --row-h: 26px;
+      --guide-w: 20px;
+    }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'SF Mono', 'Cascadia Code', 'Menlo', 'Consolas', monospace;
+      font-size: 13px;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ───────────────────────────────────────────── */
+
+    .sidebar {
+      width: 196px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-title {
+      padding: 14px 12px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .word-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 4px 0;
+    }
+
+    .word-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 10px;
+      margin: 1px 4px;
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: background 0.08s, color 0.08s;
+      user-select: none;
+    }
+    .word-item:hover  { background: var(--bg-hover); color: var(--text-primary); }
+    .word-item.active { background: var(--accent-bg); color: var(--accent); }
+
+    .word-item .dot {
+      font-size: 9px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .word-item.active .dot { color: var(--accent); }
+
+    /* ── MAIN ──────────────────────────────────────────────── */
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .main-header {
+      padding: 16px 22px 14px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-base);
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .header-left { min-width: 0; }
+
+    .header-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .header-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      font-style: italic;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: color 0.1s, border-color 0.1s;
+    }
+    .btn:hover { color: var(--text-primary); border-color: var(--text-muted); }
+
+    .tree-area {
+      flex: 1;
+      overflow: auto;
+      padding: 12px 24px 24px 12px;
+    }
+
+    .empty-state {
+      color: var(--text-muted);
+      padding: 48px 24px;
+      font-size: 12px;
+    }
+
+    /* ── TREE ──────────────────────────────────────────────── */
+
+    .node-row {
+      display: flex;
+      align-items: center;
+      height: var(--row-h);
+      border-radius: 3px;
+      cursor: pointer;
+      padding-right: 10px;
+      white-space: nowrap;
+      transition: background 0.07s;
+    }
+    .node-row:hover { background: var(--bg-hover); }
+
+    /* guide strip (tree lines) */
+    .guides {
+      display: flex;
+      align-items: stretch;
+      height: var(--row-h);
+      flex-shrink: 0;
+    }
+
+    .guide {
+      width: var(--guide-w);
+      height: var(--row-h);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    /* pass-through: full vertical line */
+    .guide.pass::before {
+      content: '';
+      position: absolute;
+      left: 9px; top: 0; bottom: 0;
+      width: 1px;
+      background: var(--tree-line);
+    }
+
+    /* tee (├─): full vertical + horizontal at midpoint */
+    .guide.tee::before {
+      content: '';
+      position: absolute;
+      left: 9px; top: 0; bottom: 0;
+      width: 1px;
+      background: var(--tree-line);
+    }
+    .guide.tee::after {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: calc(var(--row-h) / 2);
+      right: 0;
+      height: 1px;
+      background: var(--tree-line);
+    }
+
+    /* elbow (└─): top-half vertical + horizontal at midpoint */
+    .guide.elbow::before {
+      content: '';
+      position: absolute;
+      left: 9px; top: 0;
+      height: calc(var(--row-h) / 2);
+      width: 1px;
+      background: var(--tree-line);
+    }
+    .guide.elbow::after {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: calc(var(--row-h) / 2);
+      right: 0;
+      height: 1px;
+      background: var(--tree-line);
+    }
+
+    /* chevron */
+    .chevron {
+      width: 16px;
+      height: var(--row-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--text-muted);
+      font-size: 9px;
+      transition: transform 0.14s;
+    }
+    .chevron.open { transform: rotate(90deg); }
+    .chevron.leaf { opacity: 0; pointer-events: none; }
+
+    /* label */
+    .node-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding-left: 2px;
+    }
+
+    .node-word    { font-weight: 500; color: var(--text-primary); }
+    .node-date    { font-size: 11px; color: var(--text-muted); opacity: 0.7; }
+    .node-meaning { font-size: 11.5px; color: var(--text-muted); font-style: italic; }
+
+    .lang-tag {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+
+    .node-children.collapsed { display: none; }
+
+    /* vim cursor */
+    .node-row.selected {
+      background: var(--bg-hover);
+      box-shadow: inset 2px 0 0 var(--accent);
+    }
+
+    /* hint bar */
+    .hint-bar {
+      flex-shrink: 0;
+      padding: 5px 22px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-surface);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .hint-bar span { font-size: 10px; color: var(--text-muted); }
+    .hk {
+      display: inline-block;
+      font-size: 10px;
+      color: var(--text-secondary);
+      background: var(--bg-hover);
+      border: 1px solid #45475a;
+      border-radius: 3px;
+      padding: 0 4px;
+      line-height: 1.5;
+      font-family: inherit;
+    }
+
+    /* language colours */
+    .lang-pie        { background: var(--c-pie-bg);        color: var(--c-pie);        }
+    .lang-latin      { background: var(--c-latin-bg);      color: var(--c-latin);      }
+    .lang-greek      { background: var(--c-greek-bg);      color: var(--c-greek);      }
+    .lang-english    { background: var(--c-english-bg);    color: var(--c-english);    }
+    .lang-norse      { background: var(--c-norse-bg);      color: var(--c-norse);      }
+    .lang-slavic     { background: var(--c-slavic-bg);     color: var(--c-slavic);     }
+    .lang-iranian    { background: var(--c-iranian-bg);    color: var(--c-iranian);    }
+    .lang-phoenician { background: var(--c-phoenician-bg); color: var(--c-phoenician); }
+    .lang-other      { background: var(--c-other-bg);      color: var(--c-other);      }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+    /* ── CMD PALETTE ─────────────────────────────────────────── */
+
+    .cmd-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 999;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 14vh;
+    }
+    .cmd-overlay.hidden { display: none; }
+
+    .cmd-modal {
+      width: 580px;
+      max-width: calc(100vw - 40px);
+      background: var(--bg-surface);
+      border: 1px solid #45475a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7);
+    }
+
+    .cmd-search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cmd-search-icon { color: var(--text-muted); font-size: 15px; flex-shrink: 0; }
+    .cmd-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 14px;
+    }
+    .cmd-input::placeholder { color: var(--text-muted); }
+    .cmd-esc-key {
+      font-family: inherit;
+      font-size: 10px;
+      color: var(--text-muted);
+      background: var(--bg-hover);
+      border: 1px solid #45475a;
+      border-radius: 3px;
+      padding: 2px 6px;
+      flex-shrink: 0;
+    }
+
+    .cmd-results {
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 6px 0 8px;
+    }
+    .cmd-hint {
+      padding: 20px 18px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .cmd-result {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 8px 14px;
+      margin: 2px 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.07s;
+    }
+    .cmd-result:hover, .cmd-result.focused { background: var(--bg-hover); }
+
+    .cmd-result-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cmd-match-word { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .cmd-match-word mark {
+      background: rgba(137, 180, 250, 0.2);
+      color: var(--accent);
+      border-radius: 2px;
+      font-weight: inherit;
+    }
+    .cmd-in-tag {
+      font-size: 10px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: auto;
+    }
+    .cmd-path {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cmd-path-arrow { opacity: 0.4; margin: 0 3px; }
+    .cmd-path-match { color: var(--text-secondary); font-weight: 500; }
+    .cmd-meaning {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cmd-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 8px 20px 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Command palette -->
+<div id="cmdPalette" class="cmd-overlay hidden">
+  <div class="cmd-modal">
+    <div class="cmd-search-row">
+      <span class="cmd-search-icon">⌕</span>
+      <input id="cmdInput" class="cmd-input" placeholder="Search roots, languages, meanings…" autocomplete="off" spellcheck="false" />
+      <kbd class="cmd-esc-key">esc</kbd>
+    </div>
+    <div class="cmd-results" id="cmdResults">
+      <div class="cmd-hint">search across all etymology trees</div>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="sidebar-title">Etymology Map</div>
+  <div class="word-list" id="wordList"></div>
+</div>
+
+<div class="main">
+  <div class="main-header">
+    <div class="header-left">
+      <div class="header-title" id="headerTitle">Select a word</div>
+      <div class="header-meta"  id="headerMeta">Choose a word from the sidebar</div>
+    </div>
+    <div class="header-controls">
+      <button class="btn" onclick="setAllNodes(false)">expand all</button>
+      <button class="btn" onclick="setAllNodes(true)">collapse all</button>
+    </div>
+  </div>
+  <div class="tree-area" id="treeArea">
+    <div class="empty-state">← select a word to trace its roots</div>
+  </div>
+  <div class="hint-bar">
+    <span><kbd class="hk">⌘K</kbd> search roots</span>
+    <span><kbd class="hk">j</kbd><kbd class="hk">k</kbd> navigate</span>
+    <span><kbd class="hk">h</kbd><kbd class="hk">l</kbd> collapse / expand</span>
+    <span><kbd class="hk">gg</kbd> top &nbsp;<kbd class="hk">G</kbd> bottom</span>
+    <span><kbd class="hk">enter</kbd> toggle</span>
+    <span><kbd class="hk">1</kbd>–<kbd class="hk">9</kbd> select word</span>
+  </div>
+</div>
+
+<script>
+// ── DATA ────────────────────────────────────────────────────────────────────
+// Each node: { word, lang, meaning, roots: [...] }
+// "roots" are the etymological sources the word was built from.
+
+const WORDS = {
+
+  philosophy: {
+    word: "philosophy", lang: "English", date: "c. 1300",
+    meaning: "love of wisdom; rational inquiry into the nature of things",
+    roots: [{
+      word: "philosophia", lang: "Ancient Greek", date: "c. 380 BCE",
+      meaning: "love of wisdom",
+      roots: [
+        {
+          word: "philos", lang: "Ancient Greek", date: "c. 800 BCE",
+          meaning: "loving, fond of",
+          roots: [{
+            word: "*bʰel-", lang: "Proto-Indo-European",
+            meaning: "to thrive, bloom, flourish", roots: []
+          }]
+        },
+        {
+          word: "sophia", lang: "Ancient Greek", date: "c. 700 BCE",
+          meaning: "wisdom, skill, knowledge",
+          roots: [{
+            word: "*sap-", lang: "Proto-Indo-European",
+            meaning: "to taste, perceive, be wise", roots: []
+          }]
+        }
+      ]
+    }]
+  },
+
+  democracy: {
+    word: "democracy", lang: "English", date: "1570s",
+    meaning: "government by the people",
+    roots: [{
+      word: "dēmokratia", lang: "Ancient Greek", date: "c. 507 BCE",
+      meaning: "popular government, rule of the people",
+      roots: [
+        {
+          word: "dēmos", lang: "Ancient Greek", date: "c. 800 BCE",
+          meaning: "the people; a district",
+          roots: [{
+            word: "*deh₂-", lang: "Proto-Indo-European",
+            meaning: "to divide, distribute", roots: []
+          }]
+        },
+        {
+          word: "kratos", lang: "Ancient Greek", date: "c. 800 BCE",
+          meaning: "strength, power, rule",
+          roots: [{
+            word: "*kratos", lang: "Proto-Indo-European",
+            meaning: "hard, strong, powerful", roots: []
+          }]
+        }
+      ]
+    }]
+  },
+
+  disaster: {
+    word: "disaster", lang: "English", date: "1590s",
+    meaning: "sudden calamity; a catastrophic event",
+    roots: [{
+      word: "disastro", lang: "Italian", date: "c. 1500s",
+      meaning: "ill-starred event; bad luck",
+      roots: [
+        {
+          word: "dis-", lang: "Latin", date: "classical",
+          meaning: "prefix: away, apart — giving a sense of ill fortune",
+          roots: []
+        },
+        {
+          word: "astrum", lang: "Latin", date: "c. 1st c. BCE",
+          meaning: "star, constellation",
+          roots: [{
+            word: "astron (ἄστρον)", lang: "Ancient Greek", date: "c. 800 BCE",
+            meaning: "star",
+            roots: [{
+              word: "*h₂ster-", lang: "Proto-Indo-European",
+              meaning: "star", roots: []
+            }]
+          }]
+        }
+      ]
+    }]
+  },
+
+  salary: {
+    word: "salary", lang: "English", date: "c. 1300",
+    meaning: "fixed regular payment for work",
+    roots: [{
+      word: "salarium", lang: "Latin", date: "c. 1st c. BCE",
+      meaning: "salt allowance; a soldier's pay for purchasing salt",
+      roots: [{
+        word: "sal", lang: "Latin", date: "classical",
+        meaning: "salt",
+        roots: [{
+          word: "*sal-", lang: "Proto-Indo-European",
+          meaning: "salt", roots: []
+        }]
+      }]
+    }]
+  },
+
+  muscle: {
+    word: "muscle", lang: "English", date: "late 14c.",
+    meaning: "contractile tissue in the body that produces movement",
+    roots: [{
+      word: "musculus", lang: "Latin", date: "c. 1st c. BCE",
+      meaning: "a muscle; also 'a little mouse' — the bulging muscle resembles a mouse under skin",
+      roots: [{
+        word: "mus", lang: "Latin", date: "classical",
+        meaning: "mouse",
+        roots: [{
+          word: "*mūs-", lang: "Proto-Indo-European",
+          meaning: "mouse", roots: []
+        }]
+      }]
+    }]
+  },
+
+  window: {
+    word: "window", lang: "English", date: "c. 1200",
+    meaning: "opening in a wall to admit light and air",
+    roots: [{
+      word: "vindauga", lang: "Old Norse", date: "c. 1000",
+      meaning: "wind eye — an opening through which wind could enter",
+      roots: [
+        {
+          word: "vindr", lang: "Old Norse", date: "c. 900",
+          meaning: "wind",
+          roots: [{
+            word: "*h₂weh₁-", lang: "Proto-Indo-European",
+            meaning: "to blow", roots: []
+          }]
+        },
+        {
+          word: "auga", lang: "Old Norse", date: "c. 900",
+          meaning: "eye",
+          roots: [{
+            word: "*h₃okʷ-", lang: "Proto-Indo-European",
+            meaning: "eye; to see", roots: []
+          }]
+        }
+      ]
+    }]
+  },
+
+  carnival: {
+    word: "carnival", lang: "English", date: "1540s",
+    meaning: "festival of merrymaking before Lent",
+    roots: [{
+      word: "carnevale", lang: "Italian", date: "c. 1200s",
+      meaning: "the period before Lent; loosely 'farewell to meat'",
+      roots: [
+        {
+          word: "caro / carnis", lang: "Latin", date: "classical",
+          meaning: "flesh, meat",
+          roots: [{
+            word: "*sker-", lang: "Proto-Indo-European",
+            meaning: "to cut", roots: []
+          }]
+        },
+        {
+          word: "vale", lang: "Latin", date: "classical",
+          meaning: "farewell; be well, be strong",
+          roots: [{
+            word: "*walh-", lang: "Proto-Indo-European",
+            meaning: "to be strong, to be well", roots: []
+          }]
+        }
+      ]
+    }]
+  },
+
+  rival: {
+    word: "rival", lang: "English", date: "1570s",
+    meaning: "one who competes with another for the same goal",
+    roots: [{
+      word: "rivalis", lang: "Latin", date: "c. 1st c. BCE",
+      meaning: "one who uses the same stream as another; a neighbor",
+      roots: [{
+        word: "rivus", lang: "Latin", date: "classical",
+        meaning: "brook, stream, channel",
+        roots: [{
+          word: "*rei-", lang: "Proto-Indo-European",
+          meaning: "to scratch, tear; to flow", roots: []
+        }]
+      }]
+    }]
+  },
+
+  calculate: {
+    word: "calculate", lang: "English", date: "1560s",
+    meaning: "to reckon by mathematical means",
+    roots: [{
+      word: "calculare", lang: "Latin", date: "c. 1st c. BCE",
+      meaning: "to reckon, to compute",
+      roots: [{
+        word: "calculus", lang: "Latin", date: "c. 1st c. BCE",
+        meaning: "small stone used as a counting token on an abacus",
+        roots: [{
+          word: "calx / calcis", lang: "Latin", date: "classical",
+          meaning: "limestone, chalk, heel",
+          roots: [{
+            word: "*kal-", lang: "Proto-Indo-European",
+            meaning: "hard, stone", roots: []
+          }]
+        }]
+      }]
+    }]
+  },
+
+  paradise: {
+    word: "paradise", lang: "English", date: "c. 1175",
+    meaning: "heaven; a place of perfect happiness and beauty",
+    roots: [{
+      word: "paradeisos (παράδεισος)", lang: "Ancient Greek", date: "c. 400 BCE",
+      meaning: "park, pleasure garden of a Persian king",
+      roots: [{
+        word: "pairidaēza", lang: "Old Iranian / Avestan", date: "c. 600 BCE",
+        meaning: "walled enclosure; a royal walled garden",
+        roots: [
+          {
+            word: "pairi", lang: "Old Iranian", date: "c. 600 BCE",
+            meaning: "around, encircling",
+            roots: [{
+              word: "*per-", lang: "Proto-Indo-European",
+              meaning: "around, through, in front of", roots: []
+            }]
+          },
+          {
+            word: "daēza", lang: "Old Iranian", date: "c. 600 BCE",
+            meaning: "wall, enclosure",
+            roots: [{
+              word: "*dʰeigʰ-", lang: "Proto-Indo-European",
+              meaning: "to knead, mold clay; to build a wall", roots: []
+            }]
+          }
+        ]
+      }]
+    }]
+  },
+
+  robot: {
+    word: "robot", lang: "English", date: "1923",
+    meaning: "a machine capable of automatic or autonomous action",
+    roots: [{
+      word: "robota", lang: "Czech", date: "1920",
+      meaning: "drudgery, forced labor, hard work — coined by Karel Čapek in his play R.U.R.",
+      roots: [{
+        word: "rabota", lang: "Old Church Slavonic", date: "c. 900s",
+        meaning: "servitude, work",
+        roots: [{
+          word: "*orbho-", lang: "Proto-Indo-European",
+          meaning: "orphan; one separated from family — came to mean 'slave'", roots: []
+        }]
+      }]
+    }]
+  },
+
+  alphabet: {
+    word: "alphabet", lang: "English", date: "early 16c.",
+    meaning: "the letters of a writing system arranged in a set order",
+    roots: [{
+      word: "alphabētos (ἀλφάβητος)", lang: "Ancient Greek", date: "c. 500 BCE",
+      meaning: "the first two letters of the Greek alphabet",
+      roots: [
+        {
+          word: "alpha (Α α)", lang: "Ancient Greek", date: "c. 800 BCE",
+          meaning: "first letter of the Greek alphabet",
+          roots: [{
+            word: "aleph (𐤀)", lang: "Phoenician", date: "c. 1050 BCE",
+            meaning: "ox — the letter was shaped like an inverted ox head", roots: []
+          }]
+        },
+        {
+          word: "beta (Β β)", lang: "Ancient Greek", date: "c. 800 BCE",
+          meaning: "second letter of the Greek alphabet",
+          roots: [{
+            word: "beth (𐤁)", lang: "Phoenician", date: "c. 1050 BCE",
+            meaning: "house — the letter was shaped like a house floor plan", roots: []
+          }]
+        }
+      ]
+    }]
+  }
+
+};
+
+// ── LANGUAGE → CSS CLASS ────────────────────────────────────────────────────
+
+function langClass(lang) {
+  const l = lang.toLowerCase();
+  if (l.includes('proto-indo') || l === 'pie') return 'lang-pie';
+  if (l.includes('phoenician') || l.includes('semitic')) return 'lang-phoenician';
+  if (l.includes('slavic') || l.includes('czech') || l.includes('polish') || l.includes('russian')) return 'lang-slavic';
+  if (l.includes('iranian') || l.includes('persian') || l.includes('avestan')) return 'lang-iranian';
+  if (l.includes('greek')) return 'lang-greek';
+  if (l.includes('latin') || l.includes('italian') || l.includes('french') || l.includes('spanish') || l.includes('portuguese')) return 'lang-latin';
+  if (l.includes('english')) return 'lang-english';
+  if (l.includes('norse') || l.includes('germanic') || l.includes('german') || l.includes('dutch') || l.includes('nordic') || l.includes('gothic') || l.includes('danish') || l.includes('swedish') || l.includes('icelandic') || l.includes('frisian')) return 'lang-norse';
+  return 'lang-other';
+}
+
+// ── TREE RENDERER ───────────────────────────────────────────────────────────
+// ancestorHasMore[i] = true if the ancestor at that depth still has siblings
+// below the current subtree — drives whether to draw a pass-through │ line.
+
+let _id = 0;
+
+function renderNode(node, isLast, ancestorHasMore, isRoot = false) {
+  const id = 'n' + (++_id);
+  const hasKids = node.roots && node.roots.length > 0;
+
+  // Guide elements (tree branch lines)
+  let guidesHTML = '';
+  if (!isRoot) {
+    for (const hasMore of ancestorHasMore) {
+      guidesHTML += `<span class="guide ${hasMore ? 'pass' : ''}"></span>`;
+    }
+    guidesHTML += `<span class="guide ${isLast ? 'elbow' : 'tee'}"></span>`;
+  }
+
+  const lc = langClass(node.lang);
+  const chevron = hasKids ? 'open' : 'leaf';
+
+  // Recurse: when entering children, track whether the current node
+  // itself has siblings below it (= !isLast) as the new ancestor entry.
+  let kidsHTML = '';
+  if (hasKids) {
+    const childAncestors = isRoot ? [] : [...ancestorHasMore, !isLast];
+    kidsHTML = node.roots
+      .map((child, i) => renderNode(child, i === node.roots.length - 1, childAncestors))
+      .join('');
+  }
+
+  return `<div class="tree-node" id="${id}">
+    <div class="node-row" data-word="${node.word.replace(/"/g,'&quot;')}" onclick="toggle('${id}')">
+      <div class="guides">${guidesHTML}</div>
+      <span class="chevron ${chevron}">▶</span>
+      <div class="node-label">
+        <span class="node-word">${node.word}</span>
+        ${node.date ? `<span class="node-date">${node.date}</span>` : ''}
+        <span class="lang-tag ${lc}">${node.lang}</span>
+        ${node.meaning ? `<span class="node-meaning">"${node.meaning}"</span>` : ''}
+      </div>
+    </div>
+    ${hasKids ? `<div class="node-children" id="${id}-c">${kidsHTML}</div>` : ''}
+  </div>`;
+}
+
+function toggle(id) {
+  const kids = document.getElementById(id + '-c');
+  const row = document.querySelector(`#${id} > .node-row`);
+  selectRow(row);
+  if (!kids) return;
+  kids.classList.toggle('collapsed');
+  row?.querySelector('.chevron')?.classList.toggle('open');
+}
+
+function setAllNodes(collapse) {
+  document.querySelectorAll('.node-children').forEach(el => {
+    el.classList.toggle('collapsed', collapse);
+  });
+  document.querySelectorAll('.chevron:not(.leaf)').forEach(el => {
+    el.classList.toggle('open', !collapse);
+  });
+}
+
+// ── SEARCH ENGINE ───────────────────────────────────────────────────────────
+
+// Aliases so users can type "nordic", "pie", "greek", "viking", etc.
+const LANG_ALIASES = {
+  // PIE
+  'pie':                 ['proto-indo-european'],
+  'proto indo european': ['proto-indo-european'],
+  'root':                ['proto-indo-european'],
+  'roots':               ['proto-indo-european'],
+  'pib':                 ['proto-indo-european'], // common typo
+  // Greek
+  'greek':               ['greek'],
+  'hellenic':            ['greek'],
+  'hellenistic':         ['greek'],
+  'attic':               ['greek'],
+  // Latin & Romance
+  'latin':               ['latin'],
+  'romance':             ['latin', 'italian', 'french', 'spanish', 'portuguese'],
+  'classical':           ['latin', 'classical'],
+  'roman':               ['latin'],
+  // Norse / Germanic
+  'norse':               ['norse'],
+  'nordic':              ['norse'],
+  'viking':              ['norse'],
+  'germanic':            ['germanic', 'norse', 'german'],
+  'german':              ['german', 'germanic'],
+  'dutch':               ['dutch', 'germanic'],
+  'scandinavian':        ['norse'],
+  // Slavic
+  'slavic':              ['slavic', 'church slavonic', 'czech'],
+  'czech':               ['czech'],
+  'russian':             ['russian', 'slavic'],
+  // Iranian / Persian
+  'iranian':             ['iranian'],
+  'persian':             ['persian', 'iranian', 'avestan'],
+  'avestan':             ['avestan', 'iranian'],
+  'zoroastrian':         ['avestan', 'iranian'],
+  // Semitic / Phoenician
+  'phoenician':          ['phoenician'],
+  'semitic':             ['phoenician', 'semitic', 'hebrew', 'aramaic'],
+  'hebrew':              ['hebrew', 'phoenician'],
+  // English branches
+  'english':             ['english'],
+  'old english':         ['old english', 'english'],
+  'middle english':      ['middle english', 'english'],
+  'anglo':               ['english', 'anglo'],
+  // French
+  'french':              ['french'],
+  'old french':          ['old french', 'french'],
+  // Italian
+  'italian':             ['italian'],
+};
+
+// Normalise a string: lowercase, strip PIE special chars, strip diacritics
+function norm(s) {
+  return String(s)
+    .toLowerCase()
+    .replace(/[*]/g, '')
+    .replace(/[₀₁₂₃₄₅₆₇₈₉]/g, d => String(d.codePointAt(0) - 0x2080))
+    .replace(/[ʰʷʸʲ]/g, '')
+    .replace(/[-–—]/g, ' ')
+    .replace(/[()[\]]/g, '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')   // strip diacritics
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Levenshtein distance, bails early past `cap`
+function editDist(a, b, cap = 3) {
+  if (Math.abs(a.length - b.length) > cap) return cap + 1;
+  const row = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let prev = i;
+    for (let j = 1; j <= b.length; j++) {
+      const tmp = a[i - 1] === b[j - 1] ? row[j - 1] : 1 + Math.min(row[j - 1], row[j], prev);
+      row[j - 1] = prev;
+      prev = tmp;
+    }
+    row[b.length] = prev;
+  }
+  return row[b.length];
+}
+
+// Score a single normalised token against a normalised target string.
+// Returns 0 if no match at all.
+function scoreToken(rawToken, rawTarget) {
+  const t = norm(rawToken);
+  const v = norm(rawTarget);
+  if (!t || !v) return 0;
+
+  // Exact field match
+  if (v === t) return 100;
+  // Field starts with token
+  if (v.startsWith(t)) return 80;
+  // Field contains token
+  if (v.includes(t)) return 60;
+
+  // Check alias expansions
+  const aliases = LANG_ALIASES[t] || [];
+  for (const alias of aliases) {
+    if (v.includes(alias)) return 55;
+  }
+
+  // Word-level fuzzy: check each word in the target
+  for (const word of v.split(' ')) {
+    if (word.length < 3 || t.length < 3) continue;
+    const threshold = t.length <= 4 ? 1 : 2;
+    const d = editDist(t, word, threshold);
+    if (d <= threshold) return 35 - d * 8;
+  }
+
+  return 0;
+}
+
+// Walk every node in every word tree and score against the query.
+// Tokens are AND-ed: every token must match at least one field.
+function searchAllNodes(query) {
+  const q = query.trim();
+  if (!q) return [];
+
+  const tokens = q.split(/\s+/).filter(Boolean);
+  const results = [];
+
+  for (const [key, wordData] of Object.entries(WORDS)) {
+    (function walk(node, path) {
+      let total = 0;
+
+      for (const token of tokens) {
+        const best = Math.max(
+          scoreToken(token, node.word),
+          scoreToken(token, node.lang)    * 0.85,
+          scoreToken(token, node.meaning) * 0.55,
+          scoreToken(token, node.date)    * 0.25,
+        );
+        if (best === 0) { total = -1; break; } // AND: all tokens must hit
+        total += best;
+      }
+
+      if (total > 0) results.push({ wordKey: key, wordLabel: wordData.word, node, path: [...path], score: total });
+      for (const root of (node.roots || [])) walk(root, [...path, node.word]);
+    })(wordData, []);
+  }
+
+  return results.sort((a, b) => b.score - a.score);
+}
+
+// HTML escape
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Highlight all token matches inside text, returning safe HTML
+function hlMatch(text, query) {
+  if (!query) return esc(text);
+  const tokens = query.trim().split(/\s+/).filter(Boolean);
+
+  // Collect all match ranges in the original text
+  const lower = text.toLowerCase();
+  const ranges = [];
+  for (const token of tokens) {
+    const t = norm(token);
+    if (!t) continue;
+    let i = 0;
+    while ((i = lower.indexOf(t, i)) !== -1) { ranges.push({ s: i, e: i + t.length }); i++; }
+  }
+  if (!ranges.length) return esc(text);
+
+  // Sort & merge overlapping ranges
+  ranges.sort((a, b) => a.s - b.s);
+  const merged = [];
+  for (const r of ranges) {
+    if (merged.length && r.s <= merged.at(-1).e) merged.at(-1).e = Math.max(merged.at(-1).e, r.e);
+    else merged.push({ ...r });
+  }
+
+  let out = '', pos = 0;
+  for (const { s, e } of merged) {
+    out += esc(text.slice(pos, s)) + `<mark>${esc(text.slice(s, e))}</mark>`;
+    pos = e;
+  }
+  return out + esc(text.slice(pos));
+}
+
+// ── CMD PALETTE ─────────────────────────────────────────────────────────────
+
+let _paletteOpen = false;
+let _searchResults = [];
+let _focusedResult = -1;
+
+function openPalette() {
+  document.getElementById('cmdPalette').classList.remove('hidden');
+  const inp = document.getElementById('cmdInput');
+  inp.value = '';
+  inp.focus();
+  renderPaletteResults('');
+  _paletteOpen = true;
+  _focusedResult = -1;
+}
+
+function closePalette() {
+  document.getElementById('cmdPalette').classList.add('hidden');
+  _paletteOpen = false;
+}
+
+
+function renderPaletteResults(query) {
+  const el = document.getElementById('cmdResults');
+  _searchResults = searchAllNodes(query);
+  _focusedResult = -1;
+
+  if (!query.trim()) {
+    el.innerHTML = '<div class="cmd-hint">search across all etymology trees</div>';
+    return;
+  }
+  if (!_searchResults.length) {
+    el.innerHTML = '<div class="cmd-hint">no results</div>';
+    return;
+  }
+
+  el.innerHTML = _searchResults.map((r, i) => {
+    const lc   = langClass(r.node.lang);
+    const isRoot = r.path.length === 0;
+
+    // Breadcrumb path with the match word highlighted at the end
+    const pathHtml = [...r.path, null].map((seg, pi) => {
+      if (seg === null) {
+        return `<span class="cmd-path-match">${hlMatch(r.node.word, query)}</span>`;
+      }
+      return `<span>${esc(seg)}</span>`;
+    }).join('<span class="cmd-path-arrow">→</span>');
+
+    return `<div class="cmd-result" data-idx="${i}" onmousedown="pickResult(${i})">
+      <div class="cmd-result-top">
+        <span class="cmd-match-word">${hlMatch(r.node.word, query)}</span>
+        <span class="lang-tag ${lc}" style="font-size:10px;padding:1px 5px">${esc(r.node.lang)}</span>
+        ${!isRoot ? `<span class="cmd-in-tag">in ${esc(r.wordLabel)}</span>` : ''}
+      </div>
+      ${!isRoot ? `<div class="cmd-path">${pathHtml}</div>` : ''}
+      ${r.node.meaning ? `<div class="cmd-meaning">${esc(r.node.meaning)}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function movePaletteFocus(dir) {
+  const els = document.querySelectorAll('.cmd-result');
+  if (!els.length) return;
+  _focusedResult = Math.max(0, Math.min(_focusedResult + dir, els.length - 1));
+  els.forEach((el, i) => el.classList.toggle('focused', i === _focusedResult));
+  els[_focusedResult]?.scrollIntoView({ block: 'nearest' });
+}
+
+function pickResult(i) {
+  const r = _searchResults[i];
+  if (!r) return;
+  closePalette();
+  selectWord(r.wordKey);
+  // Expand ancestors and focus the matched node
+  const target = r.node.word;
+  for (const row of document.querySelectorAll('.node-row')) {
+    if (row.dataset.word === target) {
+      let el = row.parentElement;
+      while (el) {
+        if (el.classList.contains('node-children') && el.classList.contains('collapsed')) {
+          el.classList.remove('collapsed');
+          el.parentElement?.querySelector(':scope > .node-row .chevron')?.classList.add('open');
+        }
+        el = el.parentElement;
+      }
+      selectRow(row);
+      break;
+    }
+  }
+}
+
+// Palette keyboard events (cmd+k, esc, arrows, enter)
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    _paletteOpen ? closePalette() : openPalette();
+    return;
+  }
+  if (!_paletteOpen) return;
+  if (e.key === 'Escape')     { e.preventDefault(); closePalette(); }
+  else if (e.key === 'ArrowDown')  { e.preventDefault(); movePaletteFocus(+1); }
+  else if (e.key === 'ArrowUp')    { e.preventDefault(); movePaletteFocus(-1); }
+  else if (e.key === 'Enter' && _focusedResult >= 0) { e.preventDefault(); pickResult(_focusedResult); }
+}, true); // capture phase so it runs before the vim handler
+
+document.getElementById('cmdPalette').addEventListener('mousedown', e => {
+  if (e.target === e.currentTarget) closePalette();
+});
+document.getElementById('cmdInput').addEventListener('input', e => renderPaletteResults(e.target.value));
+
+// ── VIM NAVIGATION ──────────────────────────────────────────────────────────
+
+let _cursor = null; // currently selected .node-row element
+
+function selectRow(row) {
+  if (_cursor) _cursor.classList.remove('selected');
+  _cursor = row || null;
+  if (_cursor) {
+    _cursor.classList.add('selected');
+    _cursor.scrollIntoView({ block: 'nearest' });
+  }
+}
+
+// Only rows that aren't inside a collapsed subtree
+function visibleRows() {
+  return [...document.querySelectorAll('.node-row')].filter(row => {
+    let el = row.parentElement;
+    while (el) {
+      if (el.classList.contains('node-children') && el.classList.contains('collapsed')) return false;
+      el = el.parentElement;
+    }
+    return true;
+  });
+}
+
+function parentRow(row) {
+  const nc = row.closest('.tree-node')?.parentElement;
+  if (!nc?.classList.contains('node-children')) return null;
+  return nc.parentElement?.querySelector(':scope > .node-row') || null;
+}
+
+function firstChildRow(row) {
+  const id = row.closest('.tree-node')?.id;
+  const kids = id ? document.getElementById(id + '-c') : null;
+  if (!kids || kids.classList.contains('collapsed')) return null;
+  return kids.querySelector(':scope > .tree-node > .node-row') || null;
+}
+
+let _pendingG = false, _gTimer = null;
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.metaKey || e.ctrlKey) return;
+
+  const rows = visibleRows();
+  const idx  = _cursor ? rows.indexOf(_cursor) : -1;
+
+  // number keys → pick word
+  if (e.key >= '1' && e.key <= '9') {
+    const keys = Object.keys(WORDS);
+    const i = parseInt(e.key) - 1;
+    if (i < keys.length) selectWord(keys[i]);
+    return;
+  }
+
+  switch (e.key) {
+
+    case 'j': case 'ArrowDown':
+      e.preventDefault();
+      if (!rows.length) break;
+      selectRow(rows[idx < 0 ? 0 : Math.min(idx + 1, rows.length - 1)]);
+      break;
+
+    case 'k': case 'ArrowUp':
+      e.preventDefault();
+      if (!rows.length) break;
+      selectRow(rows[idx <= 0 ? 0 : idx - 1]);
+      break;
+
+    case 'l': case 'ArrowRight': {
+      e.preventDefault();
+      if (!_cursor) break;
+      const id   = _cursor.closest('.tree-node')?.id;
+      const kids = id ? document.getElementById(id + '-c') : null;
+      if (!kids) break;
+      if (kids.classList.contains('collapsed')) {
+        kids.classList.remove('collapsed');
+        _cursor.querySelector('.chevron')?.classList.add('open');
+      } else {
+        const child = firstChildRow(_cursor);
+        if (child) selectRow(child);
+      }
+      break;
+    }
+
+    case 'h': case 'ArrowLeft': {
+      e.preventDefault();
+      if (!_cursor) break;
+      const id   = _cursor.closest('.tree-node')?.id;
+      const kids = id ? document.getElementById(id + '-c') : null;
+      if (kids && !kids.classList.contains('collapsed')) {
+        kids.classList.add('collapsed');
+        _cursor.querySelector('.chevron')?.classList.remove('open');
+      } else {
+        const p = parentRow(_cursor);
+        if (p) selectRow(p);
+      }
+      break;
+    }
+
+    case 'g':
+      if (_pendingG) {
+        clearTimeout(_gTimer); _pendingG = false;
+        if (rows.length) selectRow(rows[0]);
+      } else {
+        _pendingG = true;
+        _gTimer = setTimeout(() => { _pendingG = false; }, 400);
+      }
+      break;
+
+    case 'G':
+      e.preventDefault();
+      if (rows.length) selectRow(rows[rows.length - 1]);
+      break;
+
+    case 'Enter': case ' ':
+      e.preventDefault();
+      if (_cursor) toggle(_cursor.closest('.tree-node')?.id);
+      break;
+  }
+});
+
+// ── WORD SELECTION ──────────────────────────────────────────────────────────
+
+function selectWord(key) {
+  document.querySelectorAll('.word-item').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.word-item[data-key="${key}"]`)?.classList.add('active');
+
+  const w = WORDS[key];
+  document.getElementById('headerTitle').textContent = w.word;
+  document.getElementById('headerMeta').textContent =
+    [w.date, w.lang].filter(Boolean).join(' · ') +
+    (w.meaning ? ' — ' + w.meaning : '');
+
+  _id = 0;
+  document.getElementById('treeArea').innerHTML = renderNode(w, true, [], true);
+  // place cursor on root node
+  selectRow(document.querySelector('#treeArea .node-row'));
+}
+
+// ── INIT ────────────────────────────────────────────────────────────────────
+
+const listEl = document.getElementById('wordList');
+for (const key of Object.keys(WORDS)) {
+  const el = document.createElement('div');
+  el.className = 'word-item';
+  el.dataset.key = key;
+  el.innerHTML = `<span class="dot">◆</span>${key}`;
+  el.addEventListener('click', () => selectWord(key));
+  listEl.appendChild(el);
+}
+
+selectWord('philosophy'); // default
+</script>
+</body>
+</html>
