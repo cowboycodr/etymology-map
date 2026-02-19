@@ -29,3 +29,13 @@ export interface WordsData {
   nodes: NodesMap;
   words: string[]; // ordered list of top-level word node IDs
 }
+
+/** Pre-normalized search entry — computed once at init, reused on every keystroke */
+export interface SearchIndexEntry {
+  normWord: string;
+  normLang: string;
+  normMeaning: string;
+  normDate: string;
+}
+
+export type SearchIndex = Record<string, SearchIndexEntry>;

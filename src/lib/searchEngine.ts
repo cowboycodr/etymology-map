@@ -1,4 +1,4 @@
-import type { NodesMap, ContainedInMap, SearchResult } from './types.js';
+import type { NodesMap, ContainedInMap, SearchResult, SearchIndex } from './types.js';
 
 // Aliases so users can type "nordic", "pie", "greek", "viking", etc.
 const LANG_ALIASES: Record<string, string[]> = {
@@ -73,8 +73,14 @@ export function editDist(a: string, b: string, cap = 3): number {
 
 /** Score a single normalised token against a normalised target. Returns 0 if no match. */
 export function scoreToken(rawToken: string, rawTarget: string): number {
-  const t = norm(rawToken);
-  const v = norm(rawTarget);
+  return scoreNorm(norm(rawToken), norm(rawTarget), true);
+}
+
+/**
+ * Score a pre-normalised token against a pre-normalised target.
+ * Pass fuzzy=false to skip Levenshtein (for short/early queries).
+ */
+function scoreNorm(t: string, v: string, fuzzy: boolean): number {
   if (!t || !v) return 0;
 
   if (v === t) return 100;
@@ -85,6 +91,8 @@ export function scoreToken(rawToken: string, rawTarget: string): number {
   for (const alias of aliases) {
     if (v.includes(alias)) return 55;
   }
+
+  if (!fuzzy) return 0;
 
   for (const word of v.split(' ')) {
     if (word.length < 3 || t.length < 3) continue;
@@ -97,40 +105,61 @@ export function scoreToken(rawToken: string, rawTarget: string): number {
 }
 
 /**
- * Score every node in NODES against the query (flat iteration, no tree walk).
+ * Pre-compute normalised strings for all searchable nodes.
+ * Call once at startup; pass the result to searchAllNodes on every keystroke.
+ */
+export function buildSearchIndex(nodes: NodesMap, containedIn: ContainedInMap): SearchIndex {
+  const idx: SearchIndex = {};
+  for (const [id, node] of Object.entries(nodes)) {
+    if (!containedIn[id]?.length) continue; // only index reachable nodes
+    idx[id] = {
+      normWord:    norm(node.word),
+      normLang:    norm(node.lang),
+      normMeaning: norm(node.meaning ?? ''),
+      normDate:    norm(node.date ?? ''),
+    };
+  }
+  return idx;
+}
+
+/**
+ * Score every node against the query using the pre-built index.
  * Tokens are AND-ed: every token must match at least one field.
+ * Fuzzy (Levenshtein) is skipped when any token is shorter than 3 chars.
+ * Results are capped at 50.
  */
 export function searchAllNodes(
   query: string,
   nodes: NodesMap,
-  containedIn: ContainedInMap
+  containedIn: ContainedInMap,
+  index: SearchIndex
 ): SearchResult[] {
   const q = query.trim();
   if (!q) return [];
 
   const tokens = q.split(/\s+/).filter(Boolean);
+  const normTokens = tokens.map(norm); // normalise once per keystroke, not per node
+  const fuzzy = normTokens.every(t => t.length >= 3);
+
   const results: SearchResult[] = [];
 
-  for (const [nodeId, node] of Object.entries(nodes)) {
-    const inWords = containedIn[nodeId];
-    if (!inWords || !inWords.length) continue;
-
+  for (const [nodeId, entry] of Object.entries(index)) {
     let total = 0;
-    for (const token of tokens) {
+    for (const t of normTokens) {
       const best = Math.max(
-        scoreToken(token, node.word),
-        scoreToken(token, node.lang)    * 0.85,
-        scoreToken(token, node.meaning ?? '') * 0.55,
-        scoreToken(token, node.date ?? '')    * 0.25,
+        scoreNorm(t, entry.normWord,    fuzzy),
+        scoreNorm(t, entry.normLang,    fuzzy) * 0.85,
+        scoreNorm(t, entry.normMeaning, fuzzy) * 0.55,
+        scoreNorm(t, entry.normDate,    fuzzy) * 0.25,
       );
       if (best === 0) { total = -1; break; }
       total += best;
     }
-
-    if (total > 0) results.push({ nodeId, node, inWords, score: total });
+    if (total > 0) results.push({ nodeId, node: nodes[nodeId], inWords: containedIn[nodeId], score: total });
   }
 
-  return results.sort((a, b) => b.score - a.score);
+  results.sort((a, b) => b.score - a.score);
+  return results.slice(0, 50);
 }
 
 /** Highlight all token matches inside text, returning safe HTML */

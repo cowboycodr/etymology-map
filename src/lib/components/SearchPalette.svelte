@@ -11,6 +11,7 @@
   let results = $state<SearchResult[]>([]);
   let focusedIndex = $state(-1);
   let inputEl = $state<HTMLInputElement | undefined>(undefined);
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
   $effect(() => {
     if (open && inputEl) {
@@ -22,8 +23,11 @@
   });
 
   function handleInput() {
-    results = searchAllNodes(query, data.nodes, data.containedIn);
-    focusedIndex = -1;
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      results = searchAllNodes(query, data.nodes, data.containedIn, data.searchIndex);
+      focusedIndex = -1;
+    }, 80);
   }
 
   function moveFocus(dir: 1 | -1) {
