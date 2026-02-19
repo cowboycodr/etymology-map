@@ -284,9 +284,9 @@
     .hk {
       display: inline-block;
       font-size: 10px;
-      color: var(--text-secondary);
-      background: var(--bg-hover);
-      border: 1px solid #45475a;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
       border-radius: 3px;
       padding: 0 4px;
       line-height: 1.5;
@@ -552,6 +552,11 @@
     }
     .hidden { display: none !important; }
     #hintContent { display: contents; }
+
+    /* graph node text labels — filled via CSS so light/dark theming works */
+    .glt-focused { fill: var(--accent); }
+    .glt-word    { fill: var(--text-primary); }
+    .glt-muted   { fill: var(--text-muted); }
 
     .graph-tooltip {
       position: absolute;
@@ -1634,14 +1639,13 @@ function renderGraph(data, opts = {}) {
   // Labels (word text)
   nodeG.append('text')
     .text(d => d.word)
+    .attr('class', d => `glt-${d.isFocused ? 'focused' : d.isWord ? 'word' : 'muted'}`)
     .attr('font-family', "'SF Mono','Cascadia Code',Menlo,Consolas,monospace")
     .attr('font-size', d => d.isFocused ? 13 : d.isWord ? 11 : 9)
     .attr('font-weight', d => (d.isFocused || d.isWord) ? 500 : 400)
-    .attr('fill', d => d.isFocused ? cssVar('--accent') : d.isWord ? cssVar('--text-primary') : cssVar('--text-muted'))
     .attr('fill-opacity', d => (!d.isWord && mode === 'global') ? 0 : 1)
     .attr('dx', d => (d.isFocused ? 11 : d.isWord ? 9 : 6))
     .attr('dy', '0.35em')
-    .attr('pointer-events', 'none')
     .attr('user-select', 'none');
 
   // Tooltip
