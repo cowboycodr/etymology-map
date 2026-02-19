@@ -291,7 +291,18 @@
     "en.focus":      { "word": "focus",     "lang": "English", "date": "1640s",     "meaning": "centre of attention or activity — Kepler adopted Latin 'hearth' for the focal point of a conic", "roots": ["la.focus"] },
     "en.trauma":     { "word": "trauma",    "lang": "English", "date": "1690s",     "meaning": "a deeply distressing experience; a physical or psychological wound",     "roots": ["grc.trauma"] },
     "en.energy":     { "word": "energy",    "lang": "English", "date": "1590s",     "meaning": "the capacity to do work — from Aristotle's energeia, the actuality of being", "roots": ["grc.energeia"] },
-    "en.silk":       { "word": "silk",      "lang": "English", "date": "c. 900",    "meaning": "a fine lustrous fibre from silkworm cocoons — named after the Seres, the people who traded it", "roots": ["ang.seoloc"] }
+    "en.silk":       { "word": "silk",      "lang": "English", "date": "c. 900",    "meaning": "a fine lustrous fibre from silkworm cocoons — named after the Seres, the people who traded it", "roots": ["ang.seoloc"] },
+
+    "grc.gignoskein": { "word": "gignṓskein (γιγνώσκειν)", "lang": "Ancient Greek", "date": "c. 700 BCE", "meaning": "to know, come to know, perceive", "roots": ["pie.gno"] },
+    "grc.gnosis":     { "word": "gnōsis (γνῶσις)",          "lang": "Ancient Greek", "date": "c. 500 BCE", "meaning": "knowledge, a means of knowing — especially secret or mystical knowledge", "roots": ["grc.gignoskein"] },
+    "grc.gnostikos":  { "word": "gnōstikós (γνωστικός)",    "lang": "Ancient Greek", "date": "c. 400 BCE", "meaning": "good at knowing, capable of discernment", "roots": ["grc.gnosis"] },
+    "la.gnosticus":   { "word": "gnosticus",                 "lang": "Late Latin",    "date": "c. 200s",   "meaning": "of or relating to knowledge — used by early Christian writers for certain sects", "roots": ["grc.gnostikos"] },
+    "en.gnosticism":  { "word": "gnosticism", "lang": "English", "date": "1660s", "meaning": "mystical religious belief system holding that secret knowledge (gnōsis) of the divine is the path to salvation — the material world was created by a lesser god", "roots": ["la.gnosticus"] },
+
+    "grc.demios":     { "word": "dḗmios (δήμιος)", "lang": "Ancient Greek", "date": "c. 700 BCE", "meaning": "of the people, belonging to the public", "roots": ["grc.demos"] },
+    "grc.demiourgos": { "word": "dēmiourgós (δημιουργός)", "lang": "Ancient Greek", "date": "c. 500 BCE", "meaning": "skilled craftsman, artisan; one who works for the people — Plato's divine creator of the cosmos", "roots": ["grc.demios", "grc.ergon"] },
+    "la.demiurgus":   { "word": "demiurgus",  "lang": "Late Latin",    "date": "c. 300s", "meaning": "the divine craftsman who fashioned the material world from formless matter", "roots": ["grc.demiourgos"] },
+    "en.demiurge":    { "word": "demiurge",   "lang": "English",       "date": "1670s",   "meaning": "a divine artisan who created the material world — in Gnostic belief, a lesser deity distinct from the supreme God", "roots": ["la.demiurgus"] }
   },
 
   "words": [
@@ -366,6 +377,8 @@
     "en.focus",
     "en.trauma",
     "en.energy",
-    "en.silk"
+    "en.silk",
+    "en.gnosticism",
+    "en.demiurge"
   ]
 }
