@@ -1778,7 +1778,12 @@ function renderGraph(data, opts = {}) {
   nodeG.on('click', (e, d) => {
     e.stopPropagation();
     tip.classList.remove('visible');
-    if (!WORD_IDS.includes(d.id)) return;
+    if (!WORD_IDS.includes(d.id)) {
+      switchTab('tree');
+      _history.length = 0; _currentView = null;
+      showRootPage(d.id, false);
+      return;
+    }
     if (mode === 'global') {
       showLocalGraph(d.id);
       showGraphPanel(d.id);
