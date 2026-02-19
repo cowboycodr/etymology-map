@@ -5706,6 +5706,1450 @@
       "roots": [
         "la.symposium"
       ]
+    },
+    "pie.wekw": {
+      "word": "*wekʷ-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to speak, utter — voice, word",
+      "roots": []
+    },
+    "la.verbum": {
+      "word": "verbum",
+      "lang": "Latin",
+      "date": "c. 200 BCE",
+      "meaning": "word, verb — a spoken utterance",
+      "roots": [
+        "pie.wekw"
+      ]
+    },
+    "la.verbosus": {
+      "word": "verbōsus",
+      "lang": "Latin",
+      "date": "c. 100 CE",
+      "meaning": "full of words, wordy, talkative",
+      "roots": [
+        "la.verbum"
+      ]
+    },
+    "en.verbose": {
+      "word": "verbose",
+      "lang": "English",
+      "date": "1650s",
+      "meaning": "using more words than necessary; long-winded",
+      "roots": [
+        "la.verbosus"
+      ]
+    },
+    "la.verbatim": {
+      "word": "verbatim",
+      "lang": "Latin",
+      "date": "c. 1200",
+      "meaning": "word for word, exactly as spoken or written",
+      "roots": [
+        "la.verbum"
+      ]
+    },
+    "en.verbatim": {
+      "word": "verbatim",
+      "lang": "English",
+      "date": "1481",
+      "meaning": "in exactly the same words as were used originally",
+      "roots": [
+        "la.verbatim"
+      ]
+    },
+    "la.prodigium": {
+      "word": "prodigium",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "omen, portent, marvel — literally 'that which speaks before'",
+      "roots": [
+        "pie.ag"
+      ]
+    },
+    "la.prodigiosus": {
+      "word": "prodigiosus",
+      "lang": "Latin",
+      "date": "c. 50 BCE",
+      "meaning": "marvellous, extraordinary, ominous",
+      "roots": [
+        "la.prodigium"
+      ]
+    },
+    "en.prodigy": {
+      "word": "prodigy",
+      "lang": "English",
+      "date": "1490s",
+      "meaning": "a person with extraordinary abilities; something marvellous or extraordinary",
+      "roots": [
+        "la.prodigiosus"
+      ]
+    },
+    "grc.onoma": {
+      "word": "ónoma",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "name — what a thing is called",
+      "roots": [
+        "pie.h1nomen"
+      ]
+    },
+    "grc.synonymon": {
+      "word": "synonymon",
+      "lang": "Ancient Greek",
+      "date": "c. 350 BCE",
+      "meaning": "having the same name; a word with the same meaning",
+      "roots": [
+        "grc.onoma"
+      ]
+    },
+    "en.synonym": {
+      "word": "synonym",
+      "lang": "English",
+      "date": "1610s",
+      "meaning": "a word having the same or nearly the same meaning as another word",
+      "roots": [
+        "grc.synonymon"
+      ]
+    },
+    "grc.antonymia": {
+      "word": "antōnymía",
+      "lang": "Ancient Greek",
+      "date": "c. 350 BCE",
+      "meaning": "a word used in place of another; an opposing name",
+      "roots": [
+        "grc.onoma"
+      ]
+    },
+    "en.antonym": {
+      "word": "antonym",
+      "lang": "English",
+      "date": "1867",
+      "meaning": "a word opposite in meaning to another word",
+      "roots": [
+        "grc.antonymia"
+      ]
+    },
+    "grc.nemesis_word": {
+      "word": "nemesis",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "righteous indignation; just retribution — the goddess of divine retribution who allots what is due",
+      "roots": [
+        "pie.nem"
+      ]
+    },
+    "en.nemesis": {
+      "word": "nemesis",
+      "lang": "English",
+      "date": "1570s",
+      "meaning": "a relentless, formidable opponent; deserved punishment; one's downfall",
+      "roots": [
+        "grc.nemesis_word"
+      ]
+    },
+    "pie.wiek": {
+      "word": "*weik-",
+      "lang": "Proto-Indo-European",
+      "meaning": "clan, settlement — a group of dwellings forming a community",
+      "roots": []
+    },
+    "grc.oikos": {
+      "word": "oîkos",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "house, household — the basic unit of society",
+      "roots": [
+        "pie.wiek"
+      ]
+    },
+    "grc.oikonomia": {
+      "word": "oikonomía",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "household management; the management of a household's resources",
+      "roots": [
+        "grc.oikos",
+        "grc.nomos"
+      ]
+    },
+    "la.oeconomia": {
+      "word": "oeconomia",
+      "lang": "Latin",
+      "date": "c. 50 BCE",
+      "meaning": "orderly arrangement; management of resources",
+      "roots": [
+        "grc.oikonomia"
+      ]
+    },
+    "en.economy": {
+      "word": "economy",
+      "lang": "English",
+      "date": "1530s",
+      "meaning": "management of resources; the wealth and resources of a community; careful use of something",
+      "roots": [
+        "la.oeconomia"
+      ]
+    },
+    "grc.topos": {
+      "word": "tópos",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "place, region — a location",
+      "roots": []
+    },
+    "grc.utopia_word": {
+      "word": "Outopía",
+      "lang": "Ancient Greek / Neologism",
+      "date": "1516",
+      "meaning": "no-place; coined by Thomas More from ou (not) + topos (place)",
+      "roots": [
+        "grc.topos"
+      ]
+    },
+    "en.utopia": {
+      "word": "utopia",
+      "lang": "English",
+      "date": "1516",
+      "meaning": "an imagined perfect society; an ideal but impractical scheme — from Thomas More's 1516 work",
+      "roots": [
+        "grc.utopia_word"
+      ]
+    },
+    "grc.topographia": {
+      "word": "topographía",
+      "lang": "Ancient Greek",
+      "date": "c. 100 CE",
+      "meaning": "description of a place — the writing down of local features",
+      "roots": [
+        "grc.topos",
+        "grc.graphein"
+      ]
+    },
+    "en.topography": {
+      "word": "topography",
+      "lang": "English",
+      "date": "1530s",
+      "meaning": "the arrangement of physical features of a landscape; the detailed description of a place",
+      "roots": [
+        "grc.topographia"
+      ]
+    },
+    "grc.nomas": {
+      "word": "nomás",
+      "lang": "Ancient Greek",
+      "date": "c. 450 BCE",
+      "meaning": "one who roams for pasture; a roaming herdsman — from nemein (to allot, to pasture)",
+      "roots": [
+        "pie.nem"
+      ]
+    },
+    "la.nomas": {
+      "word": "nomas",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "wandering pastoral people; nomadic tribe",
+      "roots": [
+        "grc.nomas"
+      ]
+    },
+    "en.nomad": {
+      "word": "nomad",
+      "lang": "English",
+      "date": "1550s",
+      "meaning": "a member of a people who move seasonally; a person with no fixed residence",
+      "roots": [
+        "la.nomas"
+      ]
+    },
+    "pie.strebh": {
+      "word": "*strebh-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to wind, turn, twist",
+      "roots": []
+    },
+    "grc.strophe": {
+      "word": "strophḗ",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "a turning; the first part of an ode, sung while the chorus turns",
+      "roots": [
+        "pie.strebh"
+      ]
+    },
+    "grc.katastrophe": {
+      "word": "katastrophḗ",
+      "lang": "Ancient Greek",
+      "date": "c. 350 BCE",
+      "meaning": "an overturning; a sudden end; a dramatic conclusion",
+      "roots": [
+        "grc.strophe"
+      ]
+    },
+    "en.catastrophe": {
+      "word": "catastrophe",
+      "lang": "English",
+      "date": "1540s",
+      "meaning": "a sudden disaster or calamity; the final resolution of a dramatic plot",
+      "roots": [
+        "grc.katastrophe"
+      ]
+    },
+    "grc.apostrophos": {
+      "word": "apóstrophos",
+      "lang": "Ancient Greek",
+      "date": "c. 300 BCE",
+      "meaning": "a turning away; the mark showing a letter has been omitted or turned away",
+      "roots": [
+        "grc.strophe"
+      ]
+    },
+    "en.apostrophe": {
+      "word": "apostrophe",
+      "lang": "English",
+      "date": "1580s",
+      "meaning": "the punctuation mark ('); a rhetorical figure addressing an absent or imaginary person",
+      "roots": [
+        "grc.apostrophos"
+      ]
+    },
+    "la.meridies": {
+      "word": "meridies",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "midday, noon — from medius (middle) + dies (day)",
+      "roots": []
+    },
+    "la.meridianus": {
+      "word": "merīdiānus",
+      "lang": "Latin",
+      "date": "c. 50 BCE",
+      "meaning": "of midday; relating to the highest point of the sun",
+      "roots": [
+        "la.meridies"
+      ]
+    },
+    "en.meridian": {
+      "word": "meridian",
+      "lang": "English",
+      "date": "c. 1380",
+      "meaning": "a circle of longitude passing through the poles; the highest point; relating to noon",
+      "roots": [
+        "la.meridianus"
+      ]
+    },
+    "la.matrix": {
+      "word": "matrix",
+      "lang": "Latin",
+      "date": "c. 50 BCE",
+      "meaning": "womb; a breeding animal; a register, list — from mater (mother)",
+      "roots": [
+        "la.mater"
+      ]
+    },
+    "en.matrix": {
+      "word": "matrix",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "a womb; a framework within which something develops; a rectangular array of numbers",
+      "roots": [
+        "la.matrix"
+      ]
+    },
+    "pie.men": {
+      "word": "*men-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to think, mind — cognitive activity, mental process",
+      "roots": []
+    },
+    "grc.menos": {
+      "word": "ménos",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "spirit, mind, force — the mental strength of a hero",
+      "roots": [
+        "pie.men"
+      ]
+    },
+    "grc.mentor": {
+      "word": "Méntōr",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "wise counsellor — the name of Odysseus's trusted advisor in Homer's Odyssey, from ménos (mind, intent)",
+      "roots": [
+        "grc.menos"
+      ]
+    },
+    "en.mentor": {
+      "word": "mentor",
+      "lang": "English",
+      "date": "1750",
+      "meaning": "an experienced and trusted adviser or guide — from the character Mentor in Homer's Odyssey",
+      "roots": [
+        "grc.mentor"
+      ]
+    },
+    "grc.mousa": {
+      "word": "Moûsa",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "a Muse — one of the nine goddesses of the arts and sciences; from *mont-ya 'she who makes one think'",
+      "roots": [
+        "pie.men"
+      ]
+    },
+    "grc.mousike": {
+      "word": "mousikḗ",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "art of the Muses; music, poetry, culture — any art presided over by a Muse",
+      "roots": [
+        "grc.mousa"
+      ]
+    },
+    "la.musica": {
+      "word": "mūsica",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "music; the art of music",
+      "roots": [
+        "grc.mousike"
+      ]
+    },
+    "en.music": {
+      "word": "music",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "the art of arranging sounds in time; vocal or instrumental sounds combined to produce beauty of form",
+      "roots": [
+        "la.musica"
+      ]
+    },
+    "la.monstrum": {
+      "word": "monstrum",
+      "lang": "Latin",
+      "date": "c. 200 BCE",
+      "meaning": "an omen, portent; a monster — something shown by the gods as a warning (from monere, to warn)",
+      "roots": [
+        "pie.men"
+      ]
+    },
+    "en.monster": {
+      "word": "monster",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a large, frightening imaginary creature; a cruel or wicked person; anything unnaturally large",
+      "roots": [
+        "la.monstrum"
+      ]
+    },
+    "skt.mantra": {
+      "word": "mantra (मन्त्र)",
+      "lang": "Sanskrit",
+      "date": "c. 1500 BCE",
+      "meaning": "a sacred utterance, a sound with spiritual power — literally 'instrument of thought'",
+      "roots": [
+        "pie.men"
+      ]
+    },
+    "en.mantra": {
+      "word": "mantra",
+      "lang": "English",
+      "date": "1808",
+      "meaning": "a word or phrase repeated in meditation; a slogan or motto frequently repeated",
+      "roots": [
+        "skt.mantra"
+      ]
+    },
+    "grc.mneme": {
+      "word": "mnḗmē",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "memory, remembrance — one of the Muses was Mneme",
+      "roots": [
+        "pie.men"
+      ]
+    },
+    "grc.amnesia_word": {
+      "word": "amnēsía",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "forgetfulness — a- (without) + mnesia (memory)",
+      "roots": [
+        "grc.mneme"
+      ]
+    },
+    "en.amnesia": {
+      "word": "amnesia",
+      "lang": "English",
+      "date": "1786",
+      "meaning": "a partial or total loss of memory, especially when caused by brain injury or illness",
+      "roots": [
+        "grc.amnesia_word"
+      ]
+    },
+    "grc.abyssos": {
+      "word": "ábyssos",
+      "lang": "Ancient Greek",
+      "date": "c. 300 BCE",
+      "meaning": "bottomless — a- (without) + byssos (bottom), from *buthos",
+      "roots": [
+        "pie.bhudh"
+      ]
+    },
+    "la.abyssus": {
+      "word": "abyssus",
+      "lang": "Latin",
+      "date": "c. 400 CE",
+      "meaning": "a bottomless gulf; the primordial deep",
+      "roots": [
+        "grc.abyssos"
+      ]
+    },
+    "en.abyss": {
+      "word": "abyss",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "a bottomless chasm; a profound depth; a vast immeasurable space",
+      "roots": [
+        "la.abyssus"
+      ]
+    },
+    "pie.kwon": {
+      "word": "*ḱwon-",
+      "lang": "Proto-Indo-European",
+      "meaning": "dog",
+      "roots": []
+    },
+    "grc.kyon": {
+      "word": "kýōn",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "dog — also used as an insult for shameless people",
+      "roots": [
+        "pie.kwon"
+      ]
+    },
+    "grc.kynikos": {
+      "word": "kynikós",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "dog-like; of the Cynics — philosophers who lived simply and openly scorned convention like dogs",
+      "roots": [
+        "grc.kyon"
+      ]
+    },
+    "la.cynicus": {
+      "word": "cynicus",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "a Cynic philosopher; one who sneers at conventions",
+      "roots": [
+        "grc.kynikos"
+      ]
+    },
+    "en.cynic": {
+      "word": "cynic",
+      "lang": "English",
+      "date": "1540s",
+      "meaning": "a person who believes people are motivated purely by self-interest; one who scorns accepted norms",
+      "roots": [
+        "la.cynicus"
+      ]
+    },
+    "la.canis": {
+      "word": "canis",
+      "lang": "Latin",
+      "date": "c. 200 BCE",
+      "meaning": "dog — the domestic animal; also a constellation",
+      "roots": [
+        "pie.kwon"
+      ]
+    },
+    "la.caninus": {
+      "word": "canīnus",
+      "lang": "Latin",
+      "date": "c. 100 CE",
+      "meaning": "of or pertaining to a dog; dog-like",
+      "roots": [
+        "la.canis"
+      ]
+    },
+    "en.canine": {
+      "word": "canine",
+      "lang": "English",
+      "date": "1620s",
+      "meaning": "of or relating to a dog; a dog's pointed tooth",
+      "roots": [
+        "la.caninus"
+      ]
+    },
+    "grc.atlas": {
+      "word": "Atlās",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "the Titan who holds up the heavens — from tlaein 'to bear, endure'",
+      "roots": []
+    },
+    "en.atlas": {
+      "word": "atlas",
+      "lang": "English",
+      "date": "1636",
+      "meaning": "a book of maps — from the image of Atlas bearing the globe on the frontispiece of early atlases; the top vertebra of the neck",
+      "roots": [
+        "grc.atlas"
+      ]
+    },
+    "grc.pan_god": {
+      "word": "Pán",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "the god of the wild, shepherds, and flocks — who could cause sudden irrational fear",
+      "roots": []
+    },
+    "grc.panikon": {
+      "word": "panikón",
+      "lang": "Ancient Greek",
+      "date": "c. 300 BCE",
+      "meaning": "of Pan; sudden groundless fear — as if inspired by the god Pan",
+      "roots": [
+        "grc.pan_god"
+      ]
+    },
+    "en.panic": {
+      "word": "panic",
+      "lang": "English",
+      "date": "1610s",
+      "meaning": "sudden uncontrollable fear or anxiety; wild, irrational terror — originally from stories of Pan causing armies to flee",
+      "roots": [
+        "grc.panikon"
+      ]
+    },
+    "grc.tantalos": {
+      "word": "Tántalos",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "Tantalus — the mythological king condemned to stand in water that recedes when he drinks, beneath fruit that recedes when he reaches",
+      "roots": []
+    },
+    "en.tantalize": {
+      "word": "tantalize",
+      "lang": "English",
+      "date": "1590s",
+      "meaning": "to torment by presenting something desirable but keeping it out of reach — from the myth of Tantalus",
+      "roots": [
+        "grc.tantalos"
+      ]
+    },
+    "grc.labyrinthos": {
+      "word": "labýrinthos",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "the maze beneath the palace of Minos at Knossos — possibly from Lydian labrys (double-headed axe) + -inthos",
+      "roots": []
+    },
+    "la.labyrinthus": {
+      "word": "labyrinthus",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "a maze; an intricate structure with many passages",
+      "roots": [
+        "grc.labyrinthos"
+      ]
+    },
+    "en.labyrinth": {
+      "word": "labyrinth",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "a complicated irregular network of passages; a maze; the inner ear",
+      "roots": [
+        "la.labyrinthus"
+      ]
+    },
+    "zh.penzai": {
+      "word": "盆栽 (pénzāi)",
+      "lang": "Chinese",
+      "date": "c. 700 CE",
+      "meaning": "planted in a container — pén (pot, tray) + zāi (to plant)",
+      "roots": []
+    },
+    "ja.bonsai": {
+      "word": "盆栽 (bonsai)",
+      "lang": "Japanese",
+      "date": "c. 1200",
+      "meaning": "the art of growing miniature ornamental trees in containers — borrowed from Chinese pénzāi",
+      "roots": [
+        "zh.penzai"
+      ]
+    },
+    "en.bonsai": {
+      "word": "bonsai",
+      "lang": "English",
+      "date": "1950",
+      "meaning": "a miniature tree grown in a container by pruning; the art of cultivating such trees",
+      "roots": [
+        "ja.bonsai"
+      ]
+    },
+    "ja.e_moji": {
+      "word": "絵文字 (emoji)",
+      "lang": "Japanese",
+      "date": "1999",
+      "meaning": "pictograph — e (絵, picture) + moji (文字, character, letter)",
+      "roots": []
+    },
+    "en.emoji": {
+      "word": "emoji",
+      "lang": "English",
+      "date": "2011",
+      "meaning": "a small digital image used to express an emotion or idea in electronic communication",
+      "roots": [
+        "ja.e_moji"
+      ]
+    },
+    "ja.origami": {
+      "word": "折り紙 (origami)",
+      "lang": "Japanese",
+      "date": "c. 1880",
+      "meaning": "paper folding — ori (折り, folding) + kami (紙, paper)",
+      "roots": []
+    },
+    "en.origami": {
+      "word": "origami",
+      "lang": "English",
+      "date": "1956",
+      "meaning": "the Japanese art of folding paper into decorative shapes and figures",
+      "roots": [
+        "ja.origami"
+      ]
+    },
+    "ja.saburau": {
+      "word": "侍ふ (saburau)",
+      "lang": "Old Japanese",
+      "date": "c. 900",
+      "meaning": "to serve the nobility; to attend on a lord — from saberu (to serve)",
+      "roots": []
+    },
+    "ja.saburai": {
+      "word": "侍 (saburai)",
+      "lang": "Middle Japanese",
+      "date": "c. 1100",
+      "meaning": "a retainer, a warrior who serves a lord",
+      "roots": [
+        "ja.saburau"
+      ]
+    },
+    "en.samurai": {
+      "word": "samurai",
+      "lang": "English",
+      "date": "1727",
+      "meaning": "a member of the Japanese warrior caste; a military retainer of the feudal Japanese nobility",
+      "roots": [
+        "ja.saburai"
+      ]
+    },
+    "nguni.ubuntu_word": {
+      "word": "ubuntu",
+      "lang": "Nguni Bantu",
+      "date": "c. 1800",
+      "meaning": "a quality of compassion and humanity — from ubu- (abstract prefix) + ntu (person, human being)",
+      "roots": []
+    },
+    "en.ubuntu": {
+      "word": "ubuntu",
+      "lang": "English",
+      "date": "1950s",
+      "meaning": "the African philosophy of shared humanity; I am because we are — also a Linux distribution name",
+      "roots": [
+        "nguni.ubuntu_word"
+      ]
+    },
+    "de.kiebitzen": {
+      "word": "kiebitzen",
+      "lang": "German",
+      "date": "c. 1850",
+      "meaning": "to look on at a card game; to offer unwanted advice — from Kiebitz (lapwing bird, known for noisy meddling)",
+      "roots": []
+    },
+    "yi.kibitzen": {
+      "word": "kibitsn",
+      "lang": "Yiddish",
+      "date": "c. 1880",
+      "meaning": "to look on and make unwanted comments; to offer unsolicited advice",
+      "roots": [
+        "de.kiebitzen"
+      ]
+    },
+    "en.kibitz": {
+      "word": "kibitz",
+      "lang": "English",
+      "date": "1927",
+      "meaning": "to offer unwanted advice to someone; to chatter; to look on at a card game and make comments",
+      "roots": [
+        "yi.kibitzen"
+      ]
+    },
+    "heb.hutzpah": {
+      "word": "חֻצְפָּה (hutzpah)",
+      "lang": "Hebrew",
+      "date": "c. 500 CE",
+      "meaning": "impudence, insolence, audacity — shameless boldness",
+      "roots": []
+    },
+    "yi.khutspe": {
+      "word": "khutspe",
+      "lang": "Yiddish",
+      "date": "c. 1700",
+      "meaning": "brazen impudence; gall; audacious nerve",
+      "roots": [
+        "heb.hutzpah"
+      ]
+    },
+    "en.chutzpah": {
+      "word": "chutzpah",
+      "lang": "English",
+      "date": "1883",
+      "meaning": "extreme self-confidence or audacity; shameless boldness",
+      "roots": [
+        "yi.khutspe"
+      ]
+    },
+    "grc.alkyon": {
+      "word": "alkyōn",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "the kingfisher — said to nest on the sea during a period of calm weather around the winter solstice",
+      "roots": []
+    },
+    "la.alcyon": {
+      "word": "alcyon",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "kingfisher; a period of calm and happiness",
+      "roots": [
+        "grc.alkyon"
+      ]
+    },
+    "en.halcyon": {
+      "word": "halcyon",
+      "lang": "English",
+      "date": "c. 1540",
+      "meaning": "calm and peaceful; denoting a period of happiness; a genus of kingfisher",
+      "roots": [
+        "la.alcyon"
+      ]
+    },
+    "heb.shibboleth": {
+      "word": "shibboleth (שִׁבֹּלֶת)",
+      "lang": "Hebrew",
+      "date": "c. 1200 BCE",
+      "meaning": "ear of grain; stream in flood — used in Judges 12 as a password; Ephraimites who said 'sibboleth' were identified as enemies",
+      "roots": []
+    },
+    "en.shibboleth": {
+      "word": "shibboleth",
+      "lang": "English",
+      "date": "1638",
+      "meaning": "a custom, phrase, or word that distinguishes members of a group; an outdated belief stubbornly held",
+      "roots": [
+        "heb.shibboleth"
+      ]
+    },
+    "fr.sabot": {
+      "word": "sabot",
+      "lang": "Old French",
+      "date": "c. 1200",
+      "meaning": "a wooden shoe; a clog — worn by peasants and workers",
+      "roots": []
+    },
+    "fr.saboter": {
+      "word": "saboter",
+      "lang": "French",
+      "date": "c. 1830",
+      "meaning": "to walk noisily in sabots; to bungle; to deliberately damage machinery — workers allegedly threw sabots into machines",
+      "roots": [
+        "fr.sabot"
+      ]
+    },
+    "en.sabotage": {
+      "word": "sabotage",
+      "lang": "English",
+      "date": "1910",
+      "meaning": "deliberate destruction of machinery or materials; actions aimed at hindering an opponent's efforts",
+      "roots": [
+        "fr.saboter"
+      ]
+    },
+    "grc.therion": {
+      "word": "thēríon",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "a wild animal; a beast — especially a venomous one",
+      "roots": []
+    },
+    "grc.theriake": {
+      "word": "thēriakē",
+      "lang": "Ancient Greek",
+      "date": "c. 200 BCE",
+      "meaning": "antidote against venomous bites; a medicinal compound — from therion (wild beast)",
+      "roots": [
+        "grc.therion"
+      ]
+    },
+    "la.triaca": {
+      "word": "triaca",
+      "lang": "Medieval Latin",
+      "date": "c. 1100",
+      "meaning": "antidote; a medicinal compound used against poison",
+      "roots": [
+        "grc.theriake"
+      ]
+    },
+    "ofr.triacle": {
+      "word": "triacle",
+      "lang": "Old French",
+      "date": "c. 1200",
+      "meaning": "an antidote; a healing medicine; later applied to molasses as a soothing syrup",
+      "roots": [
+        "la.triaca"
+      ]
+    },
+    "en.treacle": {
+      "word": "treacle",
+      "lang": "English",
+      "date": "c. 1350",
+      "meaning": "a thick, dark syrup; molasses — originally a medicinal antidote, the word was transferred to any thick sweet syrup",
+      "roots": [
+        "ofr.triacle"
+      ]
+    },
+    "la.bonus": {
+      "word": "bonus",
+      "lang": "Latin",
+      "date": "c. 200 BCE",
+      "meaning": "good — the basic adjective for goodness; from duenos (archaic)",
+      "roots": []
+    },
+    "es.bonanza": {
+      "word": "bonanza",
+      "lang": "Spanish",
+      "date": "c. 1820",
+      "meaning": "prosperity, good fortune; a rich vein of ore in a mine — from buena (good) via Vulgar Latin *bonacia (fair weather at sea)",
+      "roots": [
+        "la.bonus"
+      ]
+    },
+    "en.bonanza": {
+      "word": "bonanza",
+      "lang": "English",
+      "date": "1844",
+      "meaning": "a situation giving great wealth or good fortune; a large and valuable ore deposit",
+      "roots": [
+        "es.bonanza"
+      ]
+    },
+    "it.fiasco": {
+      "word": "fiasco",
+      "lang": "Italian",
+      "date": "c. 1600",
+      "meaning": "a flask, a bottle; a complete and embarrassing failure — the phrase far fiasco ('to make a bottle') arose in Italian theatre",
+      "roots": []
+    },
+    "fr.fiasco_fr": {
+      "word": "fiasco",
+      "lang": "French",
+      "date": "1825",
+      "meaning": "a complete failure; a ludicrous breakdown — borrowed from Italian theatrical slang",
+      "roots": [
+        "it.fiasco"
+      ]
+    },
+    "en.fiasco": {
+      "word": "fiasco",
+      "lang": "English",
+      "date": "1855",
+      "meaning": "a thing that is a complete failure, especially in a ludicrous or humiliating way",
+      "roots": [
+        "fr.fiasco_fr"
+      ]
+    },
+    "grc.ekdidonai": {
+      "word": "ekdidónai",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "to give out, publish — ek (out) + didonai (to give)",
+      "roots": []
+    },
+    "grc.anekdota": {
+      "word": "anékdota",
+      "lang": "Ancient Greek",
+      "date": "c. 550 CE",
+      "meaning": "things unpublished — an- (not) + ekdotos (published); the title of Procopius's secret history of Justinian",
+      "roots": [
+        "grc.ekdidonai"
+      ]
+    },
+    "en.anecdote": {
+      "word": "anecdote",
+      "lang": "English",
+      "date": "1676",
+      "meaning": "a short, amusing or interesting account of an incident; secret or unpublished narratives",
+      "roots": [
+        "grc.anekdota"
+      ]
+    },
+    "grc.lakonikos": {
+      "word": "Lakōnikós",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "of or from Laconia (Sparta) — Spartans were famous for brief, blunt speech",
+      "roots": []
+    },
+    "la.laconicus": {
+      "word": "Laconicus",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "of Laconia; using few words; brief and pithy",
+      "roots": [
+        "grc.lakonikos"
+      ]
+    },
+    "en.laconic": {
+      "word": "laconic",
+      "lang": "English",
+      "date": "1580s",
+      "meaning": "using very few words; brief and concise to the point of seeming rude",
+      "roots": [
+        "la.laconicus"
+      ]
+    },
+    "en.boycott": {
+      "word": "boycott",
+      "lang": "English",
+      "date": "1880",
+      "meaning": "to refuse to buy from or deal with a person or organisation as a form of protest — from Captain Charles Boycott, a land agent in County Mayo ostracised by his community in 1880",
+      "roots": []
+    },
+    "en.maverick": {
+      "word": "maverick",
+      "lang": "English",
+      "date": "1867",
+      "meaning": "an unorthodox or independent-minded person; an unbranded calf — from Samuel Maverick, a Texas rancher who left his cattle unbranded",
+      "roots": []
+    },
+    "heb.saraph": {
+      "word": "saraph (שָׂרָף)",
+      "lang": "Hebrew",
+      "date": "c. 700 BCE",
+      "meaning": "a fiery serpent; later a type of celestial being — from saraf (to burn)",
+      "roots": []
+    },
+    "la.seraphim": {
+      "word": "seraphim",
+      "lang": "Latin",
+      "date": "c. 400 CE",
+      "meaning": "the highest order of angels — six-winged beings described in Isaiah 6",
+      "roots": [
+        "heb.saraph"
+      ]
+    },
+    "en.seraph": {
+      "word": "seraph",
+      "lang": "English",
+      "date": "1667",
+      "meaning": "a seraphim; an angelic being of the highest order; a beautiful or angelic person",
+      "roots": [
+        "la.seraphim"
+      ]
+    },
+    "en.duns": {
+      "word": "Duns",
+      "lang": "English",
+      "date": "c. 1530",
+      "meaning": "a follower of John Duns Scotus (c. 1266-1308), the Scottish philosopher — his followers were mocked as hair-splitting pedants resistant to Renaissance learning",
+      "roots": []
+    },
+    "en.dunce": {
+      "word": "dunce",
+      "lang": "English",
+      "date": "1530s",
+      "meaning": "a person slow at learning; a stupid person — originally applied mockingly to Duns Scotus's followers",
+      "roots": [
+        "en.duns"
+      ]
+    },
+    "grc.gorillai": {
+      "word": "gorillai",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "a tribe of hairy women — the name recorded by the Carthaginian explorer Hanno the Navigator during his voyage to West Africa; probably from a West African language",
+      "roots": []
+    },
+    "en.gorilla": {
+      "word": "gorilla",
+      "lang": "English",
+      "date": "1847",
+      "meaning": "the largest living primate, native to the forests of central Africa — the name was applied by Thomas Savage from Hanno's ancient report",
+      "roots": [
+        "grc.gorillai"
+      ]
+    },
+    "it.mala_aria": {
+      "word": "mala aria",
+      "lang": "Italian",
+      "date": "c. 1740",
+      "meaning": "bad air — mala (bad, from Latin malus) + aria (air) — believed to cause the disease in marshy areas",
+      "roots": []
+    },
+    "en.malaria": {
+      "word": "malaria",
+      "lang": "English",
+      "date": "1740",
+      "meaning": "an infectious disease caused by Plasmodium parasites transmitted by mosquitoes; originally attributed to the bad air of swamps",
+      "roots": [
+        "it.mala_aria"
+      ]
+    },
+    "it.quarantina": {
+      "word": "quarantina",
+      "lang": "Italian",
+      "date": "c. 1400",
+      "meaning": "a period of forty days — from quaranta (forty), the period Venetian ships had to wait before entering port during plague",
+      "roots": []
+    },
+    "en.quarantine": {
+      "word": "quarantine",
+      "lang": "English",
+      "date": "1609",
+      "meaning": "a state of isolation imposed to prevent disease spreading; the period of such isolation — originally 40 days",
+      "roots": [
+        "it.quarantina"
+      ]
+    },
+    "fr.deja_vu": {
+      "word": "déjà vu",
+      "lang": "French",
+      "date": "c. 1900",
+      "meaning": "already seen — déjà (already) + vu (seen), coined by philosopher Emile Boirac",
+      "roots": []
+    },
+    "en.deja_vu": {
+      "word": "déjà vu",
+      "lang": "English",
+      "date": "1903",
+      "meaning": "the sensation of having already experienced something currently happening; an unsettling feeling of familiarity",
+      "roots": [
+        "fr.deja_vu"
+      ]
+    },
+    "ja.kaizen": {
+      "word": "改善 (kaizen)",
+      "lang": "Japanese",
+      "date": "c. 1950",
+      "meaning": "continuous improvement — kai (改, change, reform) + zen (善, good, virtue)",
+      "roots": []
+    },
+    "en.kaizen": {
+      "word": "kaizen",
+      "lang": "English",
+      "date": "1985",
+      "meaning": "a Japanese business philosophy of continuous improvement of working practices and efficiency",
+      "roots": [
+        "ja.kaizen"
+      ]
+    },
+    "skt.nirvana": {
+      "word": "nirvana (निर्वाण)",
+      "lang": "Sanskrit",
+      "date": "c. 500 BCE",
+      "meaning": "blown out, extinguished — nir (out) + vana (blowing, from va 'to blow'); the cessation of desire and suffering",
+      "roots": []
+    },
+    "en.nirvana": {
+      "word": "nirvana",
+      "lang": "English",
+      "date": "1836",
+      "meaning": "the Buddhist state of perfect happiness and freedom from suffering; any state of perfect bliss",
+      "roots": [
+        "skt.nirvana"
+      ]
+    },
+    "skt.panca": {
+      "word": "panca (पञ्च)",
+      "lang": "Sanskrit",
+      "date": "c. 1500 BCE",
+      "meaning": "five — the five ingredients of the drink: alcohol, sugar, lemon, water, tea or spices",
+      "roots": []
+    },
+    "hi.panch": {
+      "word": "panch (पाँच)",
+      "lang": "Hindi",
+      "date": "c. 1600",
+      "meaning": "five — the number of original ingredients in the drink",
+      "roots": [
+        "skt.panca"
+      ]
+    },
+    "en.punch_drink": {
+      "word": "punch",
+      "lang": "English",
+      "date": "1632",
+      "meaning": "a drink made from a mixture of ingredients (originally five); any mixed drink",
+      "roots": [
+        "hi.panch"
+      ]
+    },
+    "skt.lunt": {
+      "word": "luntati",
+      "lang": "Sanskrit",
+      "date": "c. 500 BCE",
+      "meaning": "he plunders, robs — to take by force",
+      "roots": []
+    },
+    "hi.lut": {
+      "word": "lut (लूट)",
+      "lang": "Hindi",
+      "date": "c. 1700",
+      "meaning": "plunder, spoils — goods seized in war or robbery",
+      "roots": [
+        "skt.lunt"
+      ]
+    },
+    "en.loot": {
+      "word": "loot",
+      "lang": "English",
+      "date": "1788",
+      "meaning": "goods stolen in war or robbery; to steal goods; informal: money",
+      "roots": [
+        "hi.lut"
+      ]
+    },
+    "tam.paraiyar": {
+      "word": "paraiyar",
+      "lang": "Tamil",
+      "date": "c. 1000 CE",
+      "meaning": "drummers — members of a caste who played the parai drum at festivals; later used by the British as a general term for low-caste people",
+      "roots": []
+    },
+    "en.pariah": {
+      "word": "pariah",
+      "lang": "English",
+      "date": "1613",
+      "meaning": "a social outcast; a person despised or rejected by others — originally a member of a low caste in South India",
+      "roots": [
+        "tam.paraiyar"
+      ]
+    },
+    "ms.amuk": {
+      "word": "amuk",
+      "lang": "Malay",
+      "date": "c. 1500",
+      "meaning": "a frenzied, uncontrollable attack; engaging furiously in battle — a state of murderous rage",
+      "roots": []
+    },
+    "en.amok": {
+      "word": "amok",
+      "lang": "English",
+      "date": "1663",
+      "meaning": "in a frenzied and uncontrolled manner; behaving disruptively — in 'run amok'",
+      "roots": [
+        "ms.amuk"
+      ]
+    },
+    "ms.bambu": {
+      "word": "bambu",
+      "lang": "Malay",
+      "date": "c. 1400",
+      "meaning": "the bamboo plant — a large woody grass native to tropical Asia",
+      "roots": []
+    },
+    "en.bamboo": {
+      "word": "bamboo",
+      "lang": "English",
+      "date": "1590s",
+      "meaning": "a giant woody grass with hollow stems; used for construction and craft",
+      "roots": [
+        "ms.bambu"
+      ]
+    },
+    "per.dulband": {
+      "word": "dulband",
+      "lang": "Persian",
+      "date": "c. 1400",
+      "meaning": "turban — from dul (twisted) + band (band, binding); the tulip was named for its resemblance to a turban",
+      "roots": []
+    },
+    "tr.tulbend": {
+      "word": "tulbent",
+      "lang": "Ottoman Turkish",
+      "date": "c. 1500",
+      "meaning": "muslin; a turban cloth — borrowed from Persian dulband",
+      "roots": [
+        "per.dulband"
+      ]
+    },
+    "en.tulip": {
+      "word": "tulip",
+      "lang": "English",
+      "date": "1578",
+      "meaning": "a bulbous spring-flowering plant with large cup-shaped flowers — named for the flower's resemblance to a turban",
+      "roots": [
+        "tr.tulbend"
+      ]
+    },
+    "ar.qisma": {
+      "word": "qisma",
+      "lang": "Arabic",
+      "date": "c. 900 CE",
+      "meaning": "portion, lot, fate — division, what is apportioned to a person by God",
+      "roots": []
+    },
+    "tr.kismet": {
+      "word": "kismet",
+      "lang": "Ottoman Turkish",
+      "date": "c. 1400",
+      "meaning": "fate, destiny, fortune — what has been assigned to one by God",
+      "roots": [
+        "ar.qisma"
+      ]
+    },
+    "en.kismet": {
+      "word": "kismet",
+      "lang": "English",
+      "date": "1849",
+      "meaning": "fate, destiny — the idea that events are determined by a higher power",
+      "roots": [
+        "tr.kismet"
+      ]
+    },
+    "evk.saman": {
+      "word": "saman",
+      "lang": "Evenki",
+      "date": "c. 1600",
+      "meaning": "one who knows — a spiritual practitioner who enters altered states of consciousness to interact with the spirit world",
+      "roots": []
+    },
+    "ru.shaman_ru": {
+      "word": "shaman",
+      "lang": "Russian",
+      "date": "c. 1670",
+      "meaning": "a person regarded as having access to the spirit world through trance; a medicine man",
+      "roots": [
+        "evk.saman"
+      ]
+    },
+    "en.shaman": {
+      "word": "shaman",
+      "lang": "English",
+      "date": "1698",
+      "meaning": "a person who acts as an intermediary between the natural and spirit worlds; a medicine man or healer",
+      "roots": [
+        "ru.shaman_ru"
+      ]
+    },
+    "sami.tundar": {
+      "word": "tundar",
+      "lang": "Kildin Sami",
+      "date": "c. 1500",
+      "meaning": "a treeless upland plateau — the high, barren fells of the north",
+      "roots": []
+    },
+    "ru.tundra_ru": {
+      "word": "tundra",
+      "lang": "Russian",
+      "date": "c. 1600",
+      "meaning": "a vast, flat, treeless Arctic plain with permafrost beneath the surface",
+      "roots": [
+        "sami.tundar"
+      ]
+    },
+    "en.tundra": {
+      "word": "tundra",
+      "lang": "English",
+      "date": "1841",
+      "meaning": "a vast, flat Arctic region with permanently frozen subsoil; treeless terrain in subarctic or alpine zones",
+      "roots": [
+        "ru.tundra_ru"
+      ]
+    },
+    "ohg.balko": {
+      "word": "balko",
+      "lang": "Old High German",
+      "date": "c. 800",
+      "meaning": "a beam, a plank — a horizontal structural timber",
+      "roots": []
+    },
+    "it.balcone": {
+      "word": "balcone",
+      "lang": "Italian",
+      "date": "c. 1500",
+      "meaning": "a large window; later, a platform projecting from a wall — from Germanic balko (beam)",
+      "roots": [
+        "ohg.balko"
+      ]
+    },
+    "en.balcony": {
+      "word": "balcony",
+      "lang": "English",
+      "date": "1610s",
+      "meaning": "a platform projecting from the wall of a building; an upper tier of seats in a theatre",
+      "roots": [
+        "it.balcone"
+      ]
+    },
+    "grc.agon": {
+      "word": "agon",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "a contest, a struggle — the gathering for athletic games; any conflict or competition",
+      "roots": [
+        "pie.ag"
+      ]
+    },
+    "grc.agonia": {
+      "word": "agonia",
+      "lang": "Ancient Greek",
+      "date": "c. 350 BCE",
+      "meaning": "struggle, anguish — the conflict and distress of competition; mental or physical suffering",
+      "roots": [
+        "grc.agon"
+      ]
+    },
+    "la.agonia": {
+      "word": "agonia",
+      "lang": "Latin",
+      "date": "c. 100 CE",
+      "meaning": "anguish; the death struggle; the suffering of dying",
+      "roots": [
+        "grc.agonia"
+      ]
+    },
+    "en.agony": {
+      "word": "agony",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "extreme physical or mental suffering; the final stages of death",
+      "roots": [
+        "la.agonia"
+      ]
+    },
+    "grc.antagonizesthai": {
+      "word": "antagonizesthai",
+      "lang": "Ancient Greek",
+      "date": "c. 350 BCE",
+      "meaning": "to contend against — anti (against) + agonizesthai (to contest, from agon)",
+      "roots": [
+        "grc.agon"
+      ]
+    },
+    "en.antagonist": {
+      "word": "antagonist",
+      "lang": "English",
+      "date": "1590s",
+      "meaning": "a person who opposes and actively contends with another; the chief opponent in a narrative",
+      "roots": [
+        "grc.antagonizesthai"
+      ]
     }
   },
   "words": [
@@ -5896,6 +7340,69 @@
     "en.chaos",
     "en.panorama",
     "en.encyclopedia",
-    "en.symposium"
+    "en.symposium",
+    "en.verbose",
+    "en.verbatim",
+    "en.prodigy",
+    "en.synonym",
+    "en.antonym",
+    "en.nemesis",
+    "en.economy",
+    "en.utopia",
+    "en.topography",
+    "en.nomad",
+    "en.catastrophe",
+    "en.apostrophe",
+    "en.meridian",
+    "en.matrix",
+    "en.mentor",
+    "en.music",
+    "en.monster",
+    "en.mantra",
+    "en.amnesia",
+    "en.abyss",
+    "en.cynic",
+    "en.canine",
+    "en.atlas",
+    "en.panic",
+    "en.tantalize",
+    "en.labyrinth",
+    "en.bonsai",
+    "en.emoji",
+    "en.origami",
+    "en.samurai",
+    "en.ubuntu",
+    "en.kibitz",
+    "en.chutzpah",
+    "en.halcyon",
+    "en.shibboleth",
+    "en.sabotage",
+    "en.treacle",
+    "en.bonanza",
+    "en.fiasco",
+    "en.anecdote",
+    "en.laconic",
+    "en.boycott",
+    "en.maverick",
+    "en.seraph",
+    "en.dunce",
+    "en.gorilla",
+    "en.malaria",
+    "en.quarantine",
+    "en.deja_vu",
+    "en.kaizen",
+    "en.nirvana",
+    "en.punch_drink",
+    "en.loot",
+    "en.pariah",
+    "en.amok",
+    "en.bamboo",
+    "en.tulip",
+    "en.kismet",
+    "en.shaman",
+    "en.tundra",
+    "en.balcony",
+    "en.agony",
+    "en.antagonist"
   ]
 }
