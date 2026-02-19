@@ -34,6 +34,39 @@
 
       --row-h: 26px;
       --guide-w: 20px;
+
+      --graph-link:     #585b70;
+      --graph-link-dim: #45475a;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-base:    #eff1f5;
+        --bg-surface: #e6e9ef;
+        --bg-hover:   #dce0e8;
+        --border:     #ccd0da;
+        --tree-line:  #ccd0da;
+
+        --text-primary:   #4c4f69;
+        --text-secondary: #5c5f77;
+        --text-muted:     #9ca0b0;
+
+        --accent:     #1e66f5;
+        --accent-bg:  #d4e0f7;
+
+        --c-pie:        #d20f39; --c-pie-bg:        #f7d3da;
+        --c-latin:      #fe640b; --c-latin-bg:      #fde8d0;
+        --c-greek:      #40a02b; --c-greek-bg:      #d2efca;
+        --c-english:    #1e66f5; --c-english-bg:    #d4e0f7;
+        --c-norse:      #04a5e5; --c-norse-bg:      #cdedf7;
+        --c-slavic:     #179299; --c-slavic-bg:     #c4e8e9;
+        --c-iranian:    #df8e1d; --c-iranian-bg:    #f5e3b6;
+        --c-phoenician: #e64553; --c-phoenician-bg: #f9d3d6;
+        --c-other:      #8839ef; --c-other-bg:      #e8d8f9;
+
+        --graph-link:     #b8bfd6;
+        --graph-link-dim: #ccd0da;
+      }
     }
 
     body {
@@ -649,6 +682,67 @@
       border-radius: 50%;
       flex-shrink: 0;
     }
+
+    /* ── DRAWER / MOBILE ─────────────────────────────────────── */
+
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.52);
+      z-index: 40;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    .drawer-overlay.open { display: block; }
+
+    .menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 17px;
+      cursor: pointer;
+      padding: 0 10px 0 4px;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: color 0.1s;
+    }
+    .menu-btn:hover { color: var(--text-primary); }
+
+    @media (max-width: 640px) {
+      .menu-btn { display: flex; }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100dvh;
+        z-index: 50;
+        transform: translateX(-100%);
+        transition: transform 0.22s ease;
+        width: 220px;
+        border-right: 1px solid var(--border);
+      }
+      .sidebar.open { transform: translateX(0); }
+
+      /* full-width panel on mobile */
+      .graph-panel {
+        width: calc(100vw - 28px);
+        max-height: 42vh;
+      }
+
+      /* hide legend to save space */
+      .graph-key { display: none; }
+
+      /* simplify hint bar */
+      .hint-bar span:not(:first-child) { display: none; }
+
+      /* graph back button: bigger tap target */
+      .graph-back { padding: 6px 14px; font-size: 12px; }
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 </head>
@@ -668,12 +762,15 @@
   </div>
 </div>
 
-<div class="sidebar">
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+<div class="sidebar" id="sidebar">
   <div class="word-list" id="wordList"></div>
 </div>
 
 <div class="main">
   <div class="view-tabs">
+    <button class="menu-btn" id="menuBtn" onclick="toggleDrawer()" aria-label="words">☰</button>
     <button class="view-tab" id="tabTree" onclick="switchTab('tree')">tree</button>
     <button class="view-tab active" id="tabGraph" onclick="switchTab('graph')">graph</button>
   </div>
@@ -694,14 +791,14 @@
     </div>
     <div class="graph-key">
       <div class="graph-key-title">origin</div>
-      <div class="graph-key-item"><span class="graph-key-dot" style="background:#f38ba8"></span>Proto-Indo-European</div>
-      <div class="graph-key-item"><span class="graph-key-dot" style="background:#a6e3a1"></span>Greek</div>
-      <div class="graph-key-item"><span class="graph-key-dot" style="background:#fab387"></span>Latin / Romance</div>
-      <div class="graph-key-item"><span class="graph-key-dot" style="background:#89dceb"></span>Germanic</div>
-      <div class="graph-key-item"><span class="graph-key-dot" style="background:#89b4fa"></span>English</div>
-      <div class="graph-key-item"><span class="graph-key-dot" style="background:#94e2d5"></span>Slavic</div>
-      <div class="graph-key-item"><span class="graph-key-dot" style="background:#f9e2af"></span>Iranian / Semitic</div>
-      <div class="graph-key-item"><span class="graph-key-dot" style="background:#cba6f7"></span>Other</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:var(--c-pie)"></span>Proto-Indo-European</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:var(--c-greek)"></span>Greek</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:var(--c-latin)"></span>Latin / Romance</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:var(--c-norse)"></span>Germanic</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:var(--c-english)"></span>English</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:var(--c-slavic)"></span>Slavic</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:var(--c-iranian)"></span>Iranian / Semitic</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:var(--c-other)"></span>Other</div>
     </div>
   </div>
   <div class="hint-bar">
@@ -1065,6 +1162,7 @@ function pickResult(i) {
   if (!r) return;
   closePalette();
   if (WORD_IDS.includes(r.nodeId)) {
+    if (_currentTab === 'graph') switchTab('tree');
     selectWord(r.nodeId);
     // Expand ancestors and focus the matched node
     for (const span of document.querySelectorAll('.node-word[data-nav-id]')) {
@@ -1307,17 +1405,21 @@ let _graphNodes       = null;
 const HINT_TREE = `<span><kbd class="hk">⌘K</kbd> search roots</span><span><kbd class="hk">j</kbd><kbd class="hk">k</kbd> navigate</span><span><kbd class="hk">h</kbd><kbd class="hk">l</kbd> parent / child</span><span><kbd class="hk">gg</kbd> top&nbsp;<kbd class="hk">G</kbd> bottom</span><span><kbd class="hk">enter</kbd> open</span>`;
 const HINT_GRAPH = `<span>drag to pan &nbsp;·&nbsp; scroll to zoom</span><span>click word to inspect</span><span><kbd class="hk">esc</kbd> close panel</span>`;
 
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
 function langFillColor(lang) {
   const l = lang.toLowerCase();
-  if (l.includes('proto-indo') || l === 'pie') return '#f38ba8';
-  if (l.includes('phoenician') || l.includes('semitic') || l.includes('hebrew')) return '#f9e2af';
-  if (l.includes('slavic') || l.includes('czech') || l.includes('polish') || l.includes('russian')) return '#94e2d5';
-  if (l.includes('iranian') || l.includes('persian') || l.includes('avestan')) return '#f9e2af';
-  if (l.includes('greek')) return '#a6e3a1';
-  if (l.includes('latin') || l.includes('italian') || l.includes('french') || l.includes('spanish') || l.includes('portuguese') || l.includes('medieval')) return '#fab387';
-  if (l.includes('english')) return '#89b4fa';
-  if (l.includes('norse') || l.includes('germanic') || l.includes('german') || l.includes('dutch') || l.includes('gothic') || l.includes('danish') || l.includes('swedish') || l.includes('icelandic') || l.includes('frisian')) return '#89dceb';
-  return '#cba6f7';
+  if (l.includes('proto-indo') || l === 'pie') return cssVar('--c-pie');
+  if (l.includes('phoenician') || l.includes('semitic') || l.includes('hebrew')) return cssVar('--c-phoenician');
+  if (l.includes('slavic') || l.includes('czech') || l.includes('polish') || l.includes('russian')) return cssVar('--c-slavic');
+  if (l.includes('iranian') || l.includes('persian') || l.includes('avestan')) return cssVar('--c-iranian');
+  if (l.includes('greek')) return cssVar('--c-greek');
+  if (l.includes('latin') || l.includes('italian') || l.includes('french') || l.includes('spanish') || l.includes('portuguese') || l.includes('medieval')) return cssVar('--c-latin');
+  if (l.includes('english')) return cssVar('--c-english');
+  if (l.includes('norse') || l.includes('germanic') || l.includes('german') || l.includes('dutch') || l.includes('gothic') || l.includes('danish') || l.includes('swedish') || l.includes('icelandic') || l.includes('frisian')) return cssVar('--c-norse');
+  return cssVar('--c-other');
 }
 
 function switchTab(tab) {
@@ -1448,12 +1550,13 @@ function closeGraphPanel() {
 
 function highlightGraphNode(wordId) {
   if (!_graphNodeG) return;
+  const ac = cssVar('--accent');
   _graphNodeG.select('circle')
-    .attr('stroke', d => d.id === wordId ? '#89b4fa' : (d.isFocused ? '#89b4fa' : 'none'))
+    .attr('stroke', d => (d.id === wordId || d.isFocused) ? ac : 'none')
     .attr('stroke-width', d => d.id === wordId ? 3 : (d.isFocused ? 2 : 0))
     .style('filter', d => d.id === wordId
-      ? 'drop-shadow(0 0 8px rgba(137,180,250,.75))'
-      : (d.isFocused ? 'drop-shadow(0 0 6px rgba(137,180,250,.6))' : null));
+      ? `drop-shadow(0 0 8px ${ac}bf)`
+      : (d.isFocused ? `drop-shadow(0 0 6px ${ac}99)` : null));
 }
 
 function focusGraphNode(wordId) {
@@ -1499,7 +1602,7 @@ function renderGraph(data, opts = {}) {
 
   // Links
   const link = g.append('g').selectAll('line').data(edges).join('line')
-    .attr('stroke', e => e.isTreeEdge === false ? '#45475a' : '#585b70')
+    .attr('stroke', e => e.isTreeEdge === false ? cssVar('--graph-link-dim') : cssVar('--graph-link'))
     .attr('stroke-opacity', e => e.isTreeEdge === false ? 0.5 : 0.5)
     .attr('stroke-width', e => e.count ? Math.min(1 + e.count * 0.35, 3.5) : 1.2)
     .attr('stroke-dasharray', e => e.isTreeEdge === false ? '4,3' : null);
@@ -1524,9 +1627,9 @@ function renderGraph(data, opts = {}) {
     })
     .attr('fill', d => langFillColor(d.originLang || d.lang))
     .attr('fill-opacity', d => d.isNeighbor ? 0.6 : 1)
-    .attr('stroke', d => d.isFocused ? '#89b4fa' : 'none')
+    .attr('stroke', d => d.isFocused ? cssVar('--accent') : 'none')
     .attr('stroke-width', 2)
-    .style('filter', d => d.isFocused ? 'drop-shadow(0 0 6px rgba(137,180,250,.6))' : null);
+    .style('filter', d => d.isFocused ? `drop-shadow(0 0 6px ${cssVar('--accent')}99)` : null);
 
   // Labels (word text)
   nodeG.append('text')
@@ -1534,7 +1637,7 @@ function renderGraph(data, opts = {}) {
     .attr('font-family', "'SF Mono','Cascadia Code',Menlo,Consolas,monospace")
     .attr('font-size', d => d.isFocused ? 13 : d.isWord ? 11 : 9)
     .attr('font-weight', d => (d.isFocused || d.isWord) ? 500 : 400)
-    .attr('fill', d => d.isFocused ? '#89b4fa' : d.isWord ? '#cdd6f4' : '#6c7086')
+    .attr('fill', d => d.isFocused ? cssVar('--accent') : d.isWord ? cssVar('--text-primary') : cssVar('--text-muted'))
     .attr('fill-opacity', d => (!d.isWord && mode === 'global') ? 0 : 1)
     .attr('dx', d => (d.isFocused ? 11 : d.isWord ? 9 : 6))
     .attr('dy', '0.35em')
@@ -1558,6 +1661,7 @@ function renderGraph(data, opts = {}) {
   // Clicks
   nodeG.on('click', (e, d) => {
     e.stopPropagation();
+    tip.classList.remove('visible');
     if (!WORD_IDS.includes(d.id)) return;
     if (mode === 'global') {
       showLocalGraph(d.id);
@@ -1610,6 +1714,22 @@ function showLocalGraph(wordId) {
   document.querySelector(`.word-item[data-key="${wordId}"]`)?.classList.add('active');
 }
 
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  // Re-render graph so D3-painted colors pick up new CSS variables
+  if (_currentTab === 'graph') {
+    if (_graphMode === 'local' && _graphFocusedWord) showLocalGraph(_graphFocusedWord);
+    else showGlobalGraph(_graphFocusedWord || (_currentView?.type === 'word' ? _currentView.key : null));
+  }
+  // Re-paint sidebar dot colors
+  document.querySelectorAll('.word-item[data-key]').forEach(el => {
+    const nodeId = el.dataset.key;
+    const n = NODES[nodeId]; if (!n) return;
+    const parentId = (n.roots || [])[0];
+    const dotColor = langFillColor(NODES[parentId]?.lang || n.lang);
+    el.querySelector('.dot')?.style.setProperty('--dot-color', dotColor);
+  });
+});
+
 let _resizeTimer;
 window.addEventListener('resize', () => {
   if (_currentTab !== 'graph') return;
@@ -1619,6 +1739,20 @@ window.addEventListener('resize', () => {
     else showGlobalGraph();
   }, 250);
 });
+
+// ── DRAWER ──────────────────────────────────────────────────────────────────
+
+function openDrawer() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+function closeDrawer() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+function toggleDrawer() {
+  document.getElementById('sidebar').classList.contains('open') ? closeDrawer() : openDrawer();
+}
 
 // ── INIT ────────────────────────────────────────────────────────────────────
 
@@ -1638,6 +1772,7 @@ async function init() {
     const dotColor = langFillColor(NODES[parentId]?.lang || n.lang);
     el.innerHTML = `<span class="dot" style="--dot-color:${dotColor}">◆</span><span>${esc(n.word)}</span>`;
     el.addEventListener('click', () => {
+      closeDrawer();
       if (_currentTab === 'graph') switchTab('tree');
       _history.length = 0;
       _currentView = null;
