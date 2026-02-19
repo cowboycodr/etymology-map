@@ -7150,6 +7150,1766 @@
       "roots": [
         "grc.antagonizesthai"
       ]
+    },
+    "pie.dekm": {
+      "word": "*deḱm̥",
+      "lang": "Proto-Indo-European",
+      "meaning": "ten",
+      "roots": []
+    },
+    "pie.bhreg": {
+      "word": "*bhreg-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to break, shatter",
+      "roots": []
+    },
+    "pie.gwerh2": {
+      "word": "*gʷerH-",
+      "lang": "Proto-Indo-European",
+      "meaning": "heavy, weighty",
+      "roots": []
+    },
+    "pie.ters": {
+      "word": "*ters-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to dry, parch",
+      "roots": []
+    },
+    "pie.mer": {
+      "word": "*mer-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to die; to rub away",
+      "roots": []
+    },
+    "pie.leikw": {
+      "word": "*leikʷ-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to leave, abandon",
+      "roots": []
+    },
+    "pie.tolkw": {
+      "word": "*tolkʷ-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to speak",
+      "roots": []
+    },
+    "pie.dhwer": {
+      "word": "*dʰwer-",
+      "lang": "Proto-Indo-European",
+      "meaning": "door, doorway, gate",
+      "roots": []
+    },
+    "pie.gel": {
+      "word": "*gel-",
+      "lang": "Proto-Indo-European",
+      "meaning": "cold; to freeze",
+      "roots": []
+    },
+    "pie.smei": {
+      "word": "*smei-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to laugh, smile; to be amazed",
+      "roots": []
+    },
+    "pie.terkw": {
+      "word": "*terkʷ-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to twist, turn",
+      "roots": []
+    },
+    "pie.ker": {
+      "word": "*ker-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to grow, nourish; to ripen",
+      "roots": []
+    },
+    "pie.prek": {
+      "word": "*prek-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to ask, request, pray",
+      "roots": []
+    },
+    "pie.dyeu": {
+      "word": "*dyeu-",
+      "lang": "Proto-Indo-European",
+      "meaning": "sky, heaven; the daylit sky; god of the bright sky",
+      "roots": []
+    },
+    "pie.dheh1": {
+      "word": "*dʰeh₁-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to put, place, set; to do, make",
+      "roots": []
+    },
+    "pie.tag": {
+      "word": "*tag-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to touch, grasp, handle",
+      "roots": []
+    },
+    "pie.telh2": {
+      "word": "*telh₂-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to lift, carry, bear weight",
+      "roots": []
+    },
+    "pie.man": {
+      "word": "*man-",
+      "lang": "Proto-Indo-European",
+      "meaning": "hand",
+      "roots": []
+    },
+    "pie.pek": {
+      "word": "*pek-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to protect; flock, cattle",
+      "roots": []
+    },
+    "pie.gleu": {
+      "word": "*gleu-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to form a ball; to stick together",
+      "roots": []
+    },
+    "pie.reg": {
+      "word": "*h₃reg-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to move in a straight line; to rule, direct",
+      "roots": []
+    },
+    "grc.asteriskos": {
+      "word": "ἀστερίσκος",
+      "lang": "Ancient Greek",
+      "date": "c. 200 BCE",
+      "meaning": "small star; the asterisk mark (*)",
+      "roots": [
+        "grc.astron"
+      ]
+    },
+    "en.asterisk": {
+      "word": "asterisk",
+      "lang": "English",
+      "date": "c. 1400",
+      "meaning": "the star-shaped symbol (*) used as a reference mark or footnote indicator",
+      "roots": [
+        "grc.asteriskos"
+      ]
+    },
+    "grc.automatos": {
+      "word": "αὐτόματος",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "self-acting, acting of one's own will; spontaneous",
+      "roots": [
+        "grc.autos",
+        "pie.men"
+      ]
+    },
+    "en.automaton": {
+      "word": "automaton",
+      "lang": "English",
+      "date": "1610s",
+      "meaning": "a self-operating machine; a person acting mechanically without thought",
+      "roots": [
+        "grc.automatos"
+      ]
+    },
+    "la.ceres": {
+      "word": "Cerēs",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "goddess of grain and agriculture; grain, bread",
+      "roots": [
+        "pie.ker"
+      ]
+    },
+    "la.cerealis": {
+      "word": "cereālis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "of or relating to Ceres; of grain or crops",
+      "roots": [
+        "la.ceres"
+      ]
+    },
+    "en.cereal": {
+      "word": "cereal",
+      "lang": "English",
+      "date": "1818",
+      "meaning": "a grass (wheat, oats, corn, rice) grown for its edible grain; breakfast food made from grains",
+      "roots": [
+        "la.cerealis"
+      ]
+    },
+    "grc.kharis": {
+      "word": "χάρις",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "grace, beauty, goodwill; a freely given favor or gift",
+      "roots": []
+    },
+    "grc.kharisma": {
+      "word": "χάρισμα",
+      "lang": "Ancient Greek",
+      "date": "c. 1st century CE",
+      "meaning": "a gift of grace; a divinely granted talent; a special favor",
+      "roots": [
+        "grc.kharis"
+      ]
+    },
+    "en.charisma": {
+      "word": "charisma",
+      "lang": "English",
+      "date": "1875 (theology); 1930s (personal magnetism)",
+      "meaning": "compelling personal charm and magnetism; a divinely conferred gift or talent",
+      "roots": [
+        "grc.kharisma"
+      ]
+    },
+    "grc.khronos": {
+      "word": "Χρόνος",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "time; the personification of time as an eternal god",
+      "roots": []
+    },
+    "grc.khronikos": {
+      "word": "χρονικός",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "of or relating to time; chronological",
+      "roots": [
+        "grc.khronos"
+      ]
+    },
+    "la.chronica": {
+      "word": "chronica",
+      "lang": "Medieval Latin",
+      "date": "c. 800",
+      "meaning": "a record of events in order of time; a chronicle",
+      "roots": [
+        "grc.khronikos"
+      ]
+    },
+    "en.chronicle": {
+      "word": "chronicle",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a factual written account of events in chronological order",
+      "roots": [
+        "la.chronica"
+      ]
+    },
+    "ang.cleowen": {
+      "word": "cleowen",
+      "lang": "Old English",
+      "date": "c. 800",
+      "meaning": "a ball of yarn or thread — used to mark one's path through a maze (like Ariadne's thread)",
+      "roots": [
+        "pie.gleu"
+      ]
+    },
+    "en.clue": {
+      "word": "clue",
+      "lang": "English",
+      "date": "c. 1500 (ball of yarn); 1620s (guiding evidence)",
+      "meaning": "a piece of evidence that guides one toward the solution of a mystery — originally a ball of thread used to find one's way through a labyrinth",
+      "roots": [
+        "ang.cleowen"
+      ]
+    },
+    "la.scire": {
+      "word": "scīre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to know, understand; to be skilled in",
+      "roots": [
+        "pie.skei"
+      ]
+    },
+    "la.conscius": {
+      "word": "cōnscius",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "knowing together with others; aware, privy to; having inner knowledge",
+      "roots": [
+        "la.scire"
+      ]
+    },
+    "en.conscious": {
+      "word": "conscious",
+      "lang": "English",
+      "date": "1630s",
+      "meaning": "aware of one's own existence, thoughts, and surroundings; mentally awake",
+      "roots": [
+        "la.conscius"
+      ]
+    },
+    "ofr.corage": {
+      "word": "corage",
+      "lang": "Old French",
+      "date": "c. 1200",
+      "meaning": "heart as the seat of feelings; spirit, will; bravery",
+      "roots": [
+        "la.cor"
+      ]
+    },
+    "en.courage": {
+      "word": "courage",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "the strength to face danger or difficulty; bravery — literally 'what is in one's heart'",
+      "roots": [
+        "ofr.corage"
+      ]
+    },
+    "la.cura": {
+      "word": "cūra",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "care, concern, attention; anxiety; management, administration",
+      "roots": []
+    },
+    "la.curiosus": {
+      "word": "curiōsus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "careful, diligent; inquisitive; troublesome; meddlesome",
+      "roots": [
+        "la.cura"
+      ]
+    },
+    "en.curious": {
+      "word": "curious",
+      "lang": "English",
+      "date": "c. 1380",
+      "meaning": "eager to know or learn; strange or unusual",
+      "roots": [
+        "la.curiosus"
+      ]
+    },
+    "grc.deka": {
+      "word": "δέκα",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "ten",
+      "roots": [
+        "pie.dekm"
+      ]
+    },
+    "grc.dekas": {
+      "word": "δεκάς",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "a group of ten; a decade",
+      "roots": [
+        "grc.deka"
+      ]
+    },
+    "la.decas_word": {
+      "word": "decas",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a group or set of ten",
+      "roots": [
+        "grc.dekas"
+      ]
+    },
+    "en.decade": {
+      "word": "decade",
+      "lang": "English",
+      "date": "c. 1600",
+      "meaning": "a period of ten years; any group of ten",
+      "roots": [
+        "la.decas_word"
+      ]
+    },
+    "la.decem": {
+      "word": "decem",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "ten",
+      "roots": [
+        "pie.dekm"
+      ]
+    },
+    "la.decimus": {
+      "word": "decimus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "tenth; the tenth part",
+      "roots": [
+        "la.decem"
+      ]
+    },
+    "la.decimare": {
+      "word": "decimāre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to select every tenth man for execution as collective punishment for mutiny",
+      "roots": [
+        "la.decimus"
+      ]
+    },
+    "en.decimate": {
+      "word": "decimate",
+      "lang": "English",
+      "date": "1660s",
+      "meaning": "to kill or destroy a large portion of; originally: to execute every tenth soldier by lot as punishment",
+      "roots": [
+        "la.decimare"
+      ]
+    },
+    "la.digitus": {
+      "word": "digitus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "finger or toe; a unit of measure equal to one finger-width",
+      "roots": [
+        "pie.dek"
+      ]
+    },
+    "la.digitalis": {
+      "word": "digitālis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "of or belonging to a finger; finger-wide; fitting on a finger",
+      "roots": [
+        "la.digitus"
+      ]
+    },
+    "en.digital": {
+      "word": "digital",
+      "lang": "English",
+      "date": "1650s (of fingers); 1938 (computing)",
+      "meaning": "of or relating to fingers; using numerical digits; representing data as discrete binary values",
+      "roots": [
+        "la.digitalis"
+      ]
+    },
+    "grc.leipein": {
+      "word": "λείπειν",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "to leave, abandon; to fall short; to fail",
+      "roots": [
+        "pie.leikw"
+      ]
+    },
+    "grc.ekleipein": {
+      "word": "ἐκλείπειν",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "to fail to appear; to leave out; to be eclipsed or darkened",
+      "roots": [
+        "grc.leipein"
+      ]
+    },
+    "grc.ekleipsis": {
+      "word": "ἔκλειψις",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "a failing, abandonment; the obscuring of a heavenly body",
+      "roots": [
+        "grc.ekleipein"
+      ]
+    },
+    "la.eclipsis": {
+      "word": "eclipsis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "an eclipse; the omission of words in a sentence",
+      "roots": [
+        "grc.ekleipsis"
+      ]
+    },
+    "en.eclipse": {
+      "word": "eclipse",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "the blocking of one celestial body by another; a loss of power, fame, or significance",
+      "roots": [
+        "la.eclipsis"
+      ]
+    },
+    "la.elegans": {
+      "word": "elegāns",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "fastidious in taste; refined; tasteful; elegant",
+      "roots": [
+        "la.eligere"
+      ]
+    },
+    "en.elegant": {
+      "word": "elegant",
+      "lang": "English",
+      "date": "c. 1485",
+      "meaning": "pleasingly graceful in style or appearance; showing refined taste and sophistication",
+      "roots": [
+        "la.elegans"
+      ]
+    },
+    "la.loqui": {
+      "word": "loquī",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to speak, talk; to express in words",
+      "roots": [
+        "pie.tolkw"
+      ]
+    },
+    "la.eloquens": {
+      "word": "ēloquēns",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "speaking out; fluent and persuasive in speech; eloquent",
+      "roots": [
+        "la.loqui"
+      ]
+    },
+    "en.eloquent": {
+      "word": "eloquent",
+      "lang": "English",
+      "date": "c. 1430",
+      "meaning": "fluent and persuasive in speaking or writing; vividly or movingly expressive",
+      "roots": [
+        "la.eloquens"
+      ]
+    },
+    "la.imperare": {
+      "word": "imperāre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to command, order; to rule over; to be master of",
+      "roots": [
+        "pie.per"
+      ]
+    },
+    "la.imperator": {
+      "word": "imperātor",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "commander, general; supreme ruler; later used as title of Emperor",
+      "roots": [
+        "la.imperare"
+      ]
+    },
+    "en.emperor": {
+      "word": "emperor",
+      "lang": "English",
+      "date": "c. 1200",
+      "meaning": "the sovereign ruler of an empire; a ruler of the highest rank",
+      "roots": [
+        "la.imperator"
+      ]
+    },
+    "grc.entheos": {
+      "word": "ἔνθεος",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "full of a god; divinely inspired; possessed by a deity",
+      "roots": [
+        "grc.theos"
+      ]
+    },
+    "grc.enthousiasmos": {
+      "word": "ἐνθουσιασμός",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "divine inspiration; frenzy caused by possession by a god",
+      "roots": [
+        "grc.entheos"
+      ]
+    },
+    "en.enthusiasm": {
+      "word": "enthusiasm",
+      "lang": "English",
+      "date": "1600s",
+      "meaning": "intense and eager interest or enjoyment; originally: divine inspiration or religious frenzy",
+      "roots": [
+        "grc.enthousiasmos"
+      ]
+    },
+    "grc.epidemios": {
+      "word": "ἐπιδήμιος",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "among the people; prevalent in a community; epidemic",
+      "roots": [
+        "grc.demos"
+      ]
+    },
+    "en.epidemic": {
+      "word": "epidemic",
+      "lang": "English",
+      "date": "c. 1600",
+      "meaning": "a widespread outbreak of an infectious disease; anything widely prevalent in a community",
+      "roots": [
+        "grc.epidemios"
+      ]
+    },
+    "grc.eu": {
+      "word": "εὖ",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "well; good; finely; rightly",
+      "roots": []
+    },
+    "grc.eulogia": {
+      "word": "εὐλογία",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "praise, blessing; fine language; good words",
+      "roots": [
+        "grc.eu",
+        "grc.logos"
+      ]
+    },
+    "en.eulogy": {
+      "word": "eulogy",
+      "lang": "English",
+      "date": "c. 1425",
+      "meaning": "a speech or writing in high praise of someone, especially for someone recently deceased",
+      "roots": [
+        "grc.eulogia"
+      ]
+    },
+    "la.fari": {
+      "word": "fārī",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to speak, say; to prophesy; to tell",
+      "roots": [
+        "pie.bha"
+      ]
+    },
+    "la.fabula": {
+      "word": "fābula",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a story, tale; a fable; a play; common talk",
+      "roots": [
+        "la.fari"
+      ]
+    },
+    "en.fable": {
+      "word": "fable",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a short moral story, usually with animals as characters; a legend; a false story",
+      "roots": [
+        "la.fabula"
+      ]
+    },
+    "la.foris": {
+      "word": "forīs",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "outside (the doors); out of doors; abroad",
+      "roots": [
+        "pie.dhwer"
+      ]
+    },
+    "ml.foresta": {
+      "word": "foresta",
+      "lang": "Medieval Latin",
+      "date": "c. 700",
+      "meaning": "an unenclosed wooded area; a royal hunting ground outside settled land",
+      "roots": [
+        "la.foris"
+      ]
+    },
+    "en.forest": {
+      "word": "forest",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a large area covered chiefly with trees; formerly: an unenclosed royal hunting ground",
+      "roots": [
+        "ml.foresta"
+      ]
+    },
+    "la.frangere": {
+      "word": "frangere",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to break, shatter; to weaken, crush; to subdue",
+      "roots": [
+        "pie.bhreg"
+      ]
+    },
+    "la.fragilis": {
+      "word": "fragilis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "easily broken, brittle; weak, frail",
+      "roots": [
+        "la.frangere"
+      ]
+    },
+    "en.fragile": {
+      "word": "fragile",
+      "lang": "English",
+      "date": "c. 1510",
+      "meaning": "easily broken or damaged; delicate; not strong or sturdy",
+      "roots": [
+        "la.fragilis"
+      ]
+    },
+    "la.gignere": {
+      "word": "gignere",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to beget, produce, bring into being; to give birth to",
+      "roots": [
+        "pie.gen"
+      ]
+    },
+    "la.genius_word": {
+      "word": "genius",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "the guardian spirit of a person or place; one's innate nature; a talent or spirit",
+      "roots": [
+        "la.gignere"
+      ]
+    },
+    "en.genius": {
+      "word": "genius",
+      "lang": "English",
+      "date": "1510s",
+      "meaning": "exceptional intellectual or creative ability; a very intelligent person; originally: one's guardian spirit",
+      "roots": [
+        "la.genius_word"
+      ]
+    },
+    "la.glacies": {
+      "word": "glaciēs",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "ice; frozen water; a glassy surface",
+      "roots": [
+        "pie.gel"
+      ]
+    },
+    "fr.glace": {
+      "word": "glace",
+      "lang": "French",
+      "date": "c. 1200",
+      "meaning": "ice; ice cream; a smooth reflective surface",
+      "roots": [
+        "la.glacies"
+      ]
+    },
+    "fr.glacier_word": {
+      "word": "glacier",
+      "lang": "French",
+      "date": "1740s",
+      "meaning": "a large body of slowly moving ice that persists from year to year",
+      "roots": [
+        "fr.glace"
+      ]
+    },
+    "en.glacier": {
+      "word": "glacier",
+      "lang": "English",
+      "date": "1744",
+      "meaning": "a large persistent mass of ice formed by compacted snow that moves slowly down a slope or valley",
+      "roots": [
+        "fr.glacier_word"
+      ]
+    },
+    "grc.grammatike": {
+      "word": "γραμματική",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "of or relating to letters; the art of reading and writing; grammar",
+      "roots": [
+        "grc.gramma"
+      ]
+    },
+    "la.grammatica": {
+      "word": "grammatica",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "the art of letters; grammar; the study of language and literature",
+      "roots": [
+        "grc.grammatike"
+      ]
+    },
+    "en.grammar": {
+      "word": "grammar",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "the rules governing language; in the Middle Ages, Latin grammar was associated with occult learning and magic",
+      "roots": [
+        "la.grammatica"
+      ]
+    },
+    "sco.glamour": {
+      "word": "glamour",
+      "lang": "Scottish English",
+      "date": "c. 1720",
+      "meaning": "a magic spell; enchantment — a Scottish corruption of 'grammar,' as Latin scholarship was linked to magic",
+      "roots": [
+        "en.grammar"
+      ]
+    },
+    "en.glamour": {
+      "word": "glamour",
+      "lang": "English",
+      "date": "1840s",
+      "meaning": "an attractive and exciting quality; beauty combined with mystery and allure — originally: a magical spell",
+      "roots": [
+        "sco.glamour"
+      ]
+    },
+    "la.gravis": {
+      "word": "gravis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "heavy, weighty; serious, important; oppressive; grave",
+      "roots": [
+        "pie.gwerh2"
+      ]
+    },
+    "la.gravitas": {
+      "word": "gravitās",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "heaviness, weight; seriousness, dignity; importance",
+      "roots": [
+        "la.gravis"
+      ]
+    },
+    "en.gravity": {
+      "word": "gravity",
+      "lang": "English",
+      "date": "c. 1500 (seriousness); 1641 (physics)",
+      "meaning": "seriousness; the fundamental force of attraction between bodies with mass",
+      "roots": [
+        "la.gravitas"
+      ]
+    },
+    "la.humus": {
+      "word": "humus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "earth, soil, ground; the surface of the ground",
+      "roots": [
+        "pie.dhghem"
+      ]
+    },
+    "la.humilis": {
+      "word": "humilis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "low, near the ground; lowly, base; modest, unassuming",
+      "roots": [
+        "la.humus"
+      ]
+    },
+    "en.humble": {
+      "word": "humble",
+      "lang": "English",
+      "date": "c. 1250",
+      "meaning": "having a modest opinion of oneself; low in social rank; unpretentious",
+      "roots": [
+        "la.humilis"
+      ]
+    },
+    "grc.hystera": {
+      "word": "ὑστέρα",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "womb, uterus — ancient doctors believed hysteria originated in the uterus",
+      "roots": []
+    },
+    "grc.hysterikos": {
+      "word": "ὑστερικός",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "of the womb; suffering in the womb; emotionally uncontrolled",
+      "roots": [
+        "grc.hystera"
+      ]
+    },
+    "en.hysteria": {
+      "word": "hysteria",
+      "lang": "English",
+      "date": "1801",
+      "meaning": "exaggerated or uncontrollable emotion or excitement; a psychological condition — wrongly attributed by ancient doctors to the uterus",
+      "roots": [
+        "grc.hysterikos"
+      ]
+    },
+    "grc.idios": {
+      "word": "ἴδιος",
+      "lang": "Ancient Greek",
+      "date": "c. 600 BCE",
+      "meaning": "one's own; private; personal; not belonging to the state",
+      "roots": []
+    },
+    "grc.idiotes": {
+      "word": "ἰδιώτης",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "a private person; one not in public life; a layman; an unskilled or ignorant person",
+      "roots": [
+        "grc.idios"
+      ]
+    },
+    "en.idiot": {
+      "word": "idiot",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a foolish or stupid person; originally: a private person or one without professional knowledge",
+      "roots": [
+        "grc.idiotes"
+      ]
+    },
+    "la.infernus": {
+      "word": "infernus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "underground, of the lower regions; infernal; of the underworld",
+      "roots": []
+    },
+    "it.inferno_word": {
+      "word": "inferno",
+      "lang": "Italian",
+      "date": "c. 1300",
+      "meaning": "hell, the underworld; a place of torment and fire; Dante's Inferno",
+      "roots": [
+        "la.infernus"
+      ]
+    },
+    "en.inferno": {
+      "word": "inferno",
+      "lang": "English",
+      "date": "1834",
+      "meaning": "a large fierce fire; a place or situation resembling hell; from Dante's Divine Comedy",
+      "roots": [
+        "it.inferno_word"
+      ]
+    },
+    "la.dies": {
+      "word": "diēs",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "day; daytime; a day's length",
+      "roots": [
+        "pie.dyeu"
+      ]
+    },
+    "la.diurnalis": {
+      "word": "diurnālis",
+      "lang": "Latin",
+      "date": "c. 600",
+      "meaning": "of each day; daily",
+      "roots": [
+        "la.dies"
+      ]
+    },
+    "ofr.jornal": {
+      "word": "jornal",
+      "lang": "Old French",
+      "date": "c. 1100",
+      "meaning": "daily; of each day; a day's travel; a daily record",
+      "roots": [
+        "la.diurnalis"
+      ]
+    },
+    "en.journal": {
+      "word": "journal",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a daily record of events; a diary; a newspaper or periodical publication",
+      "roots": [
+        "ofr.jornal"
+      ]
+    },
+    "la.jovis": {
+      "word": "Jovis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "of Jupiter; the god of the bright sky and thunder; king of the gods",
+      "roots": [
+        "pie.dyeu"
+      ]
+    },
+    "la.jovialis": {
+      "word": "Joviālis",
+      "lang": "Latin",
+      "date": "medieval",
+      "meaning": "of Jupiter; born under the influence of Jupiter, believed to make one cheerful",
+      "roots": [
+        "la.jovis"
+      ]
+    },
+    "en.jovial": {
+      "word": "jovial",
+      "lang": "English",
+      "date": "1580s",
+      "meaning": "cheerful, friendly, and good-humored — those born under Jupiter were believed to be merry and convivial",
+      "roots": [
+        "la.jovialis"
+      ]
+    },
+    "la.legenda": {
+      "word": "legenda",
+      "lang": "Medieval Latin",
+      "date": "c. 1200",
+      "meaning": "things to be read; a saint's biography read on feast days",
+      "roots": [
+        "la.legere"
+      ]
+    },
+    "en.legend": {
+      "word": "legend",
+      "lang": "English",
+      "date": "c. 1375",
+      "meaning": "a traditional story; an inscription on a map or image; an extremely famous person",
+      "roots": [
+        "la.legenda"
+      ]
+    },
+    "la.lucidus": {
+      "word": "lūcidus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "shining, bright, clear; transparent; easy to understand",
+      "roots": [
+        "la.lux"
+      ]
+    },
+    "en.lucid": {
+      "word": "lucid",
+      "lang": "English",
+      "date": "1590s",
+      "meaning": "clearly expressed and easy to understand; mentally clear; shining or luminous",
+      "roots": [
+        "la.lucidus"
+      ]
+    },
+    "la.lunaticus": {
+      "word": "lūnāticus",
+      "lang": "Latin",
+      "date": "late Latin",
+      "meaning": "moon-struck; afflicted with a periodic madness thought to be caused by the moon's phases",
+      "roots": [
+        "la.luna"
+      ]
+    },
+    "en.lunatic": {
+      "word": "lunatic",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a mentally ill person; a wildly foolish person — once believed that madness waxed and waned with the moon",
+      "roots": [
+        "la.lunaticus"
+      ]
+    },
+    "la.malignus": {
+      "word": "malignus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "born of evil stock; malicious; of bad nature; ill-disposed",
+      "roots": [
+        "la.genus"
+      ]
+    },
+    "en.malign": {
+      "word": "malign",
+      "lang": "English",
+      "date": "c. 1400",
+      "meaning": "to speak ill of; to slander; evil in nature or effect",
+      "roots": [
+        "la.malignus"
+      ]
+    },
+    "la.manus": {
+      "word": "manus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "hand; power, control; handwriting; a band of soldiers",
+      "roots": [
+        "pie.man"
+      ]
+    },
+    "la.manualis": {
+      "word": "manuālis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "of or belonging to the hand; that can be held in the hand",
+      "roots": [
+        "la.manus"
+      ]
+    },
+    "en.manual": {
+      "word": "manual",
+      "lang": "English",
+      "date": "c. 1400",
+      "meaning": "done or operated by hand; a handbook or reference guide",
+      "roots": [
+        "la.manualis"
+      ]
+    },
+    "la.mirari": {
+      "word": "mīrārī",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to wonder at, be amazed by; to admire",
+      "roots": [
+        "pie.smei"
+      ]
+    },
+    "la.miraculum": {
+      "word": "mīrāculum",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a wonderful thing; a marvel; an extraordinary event",
+      "roots": [
+        "la.mirari"
+      ]
+    },
+    "en.miracle": {
+      "word": "miracle",
+      "lang": "English",
+      "date": "c. 1175",
+      "meaning": "an extraordinary event believed to be supernatural; any remarkable achievement",
+      "roots": [
+        "la.miraculum"
+      ]
+    },
+    "la.mors": {
+      "word": "mors",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "death; cause of death; mortality",
+      "roots": [
+        "pie.mer"
+      ]
+    },
+    "la.mortalis": {
+      "word": "mortālis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "subject to death; of or belonging to mortal beings; human",
+      "roots": [
+        "la.mors"
+      ]
+    },
+    "en.mortal": {
+      "word": "mortal",
+      "lang": "English",
+      "date": "c. 1380",
+      "meaning": "subject to death; causing death; deadly; a human being",
+      "roots": [
+        "la.mortalis"
+      ]
+    },
+    "la.mundus": {
+      "word": "mundus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "clean, elegant; the universe, the world; womankind",
+      "roots": []
+    },
+    "la.mundanus": {
+      "word": "mundānus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "of the world; worldly; a citizen of the world",
+      "roots": [
+        "la.mundus"
+      ]
+    },
+    "en.mundane": {
+      "word": "mundane",
+      "lang": "English",
+      "date": "c. 1450",
+      "meaning": "lacking interest or excitement; dull and ordinary; of this earthly world rather than spiritual",
+      "roots": [
+        "la.mundanus"
+      ]
+    },
+    "la.narrare": {
+      "word": "narrāre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to tell, relate, narrate; to give an account of",
+      "roots": [
+        "pie.gno"
+      ]
+    },
+    "la.narrativus": {
+      "word": "nārrātīvus",
+      "lang": "Latin",
+      "date": "c. 500",
+      "meaning": "of or suited to narration; narrative",
+      "roots": [
+        "la.narrare"
+      ]
+    },
+    "en.narrative": {
+      "word": "narrative",
+      "lang": "English",
+      "date": "c. 1540",
+      "meaning": "an account or story; the art of storytelling; a constructed account of events",
+      "roots": [
+        "la.narrativus"
+      ]
+    },
+    "la.noscere": {
+      "word": "nōscere",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to get to know; to become acquainted with; to learn",
+      "roots": [
+        "pie.gno"
+      ]
+    },
+    "la.nobilis": {
+      "word": "nōbilis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "well-known, famous; of high birth; excellent; noble",
+      "roots": [
+        "la.noscere"
+      ]
+    },
+    "en.noble": {
+      "word": "noble",
+      "lang": "English",
+      "date": "c. 1200",
+      "meaning": "having high moral qualities; of distinguished birth; impressive in appearance",
+      "roots": [
+        "la.nobilis"
+      ]
+    },
+    "grc.okeanos": {
+      "word": "Ὠκεανός",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "the great river encircling the earth; the Titan god of the sea; the ocean",
+      "roots": []
+    },
+    "la.oceanus": {
+      "word": "oceānus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "the ocean; the great sea encircling the known land",
+      "roots": [
+        "grc.okeanos"
+      ]
+    },
+    "en.ocean": {
+      "word": "ocean",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "the vast body of salt water that covers most of Earth; any of the major divisions of this body",
+      "roots": [
+        "la.oceanus"
+      ]
+    },
+    "la.pecus": {
+      "word": "pecus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "cattle, livestock; a flock; a single head of cattle",
+      "roots": [
+        "pie.pek"
+      ]
+    },
+    "la.pecunia": {
+      "word": "pecūnia",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "money, wealth, property — originally: wealth in cattle, the earliest currency",
+      "roots": [
+        "la.pecus"
+      ]
+    },
+    "la.pecuniarius": {
+      "word": "pecūniārius",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "of or relating to money; concerning financial matters",
+      "roots": [
+        "la.pecunia"
+      ]
+    },
+    "en.pecuniary": {
+      "word": "pecuniary",
+      "lang": "English",
+      "date": "c. 1500",
+      "meaning": "of, relating to, or consisting of money — from the time cattle were the primary form of wealth",
+      "roots": [
+        "la.pecuniarius"
+      ]
+    },
+    "etr.phersu": {
+      "word": "phersu",
+      "lang": "Etruscan",
+      "date": "c. 700 BCE",
+      "meaning": "a masked figure in ritual theater; a character in performance",
+      "roots": []
+    },
+    "la.persona": {
+      "word": "persōna",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "an actor's mask; a character in a play; a role; an individual human being",
+      "roots": [
+        "etr.phersu"
+      ]
+    },
+    "en.person": {
+      "word": "person",
+      "lang": "English",
+      "date": "c. 1200",
+      "meaning": "an individual human being; a role or character; oneself as a distinct individual",
+      "roots": [
+        "la.persona"
+      ]
+    },
+    "la.precari": {
+      "word": "precārī",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to pray, entreat, beg; to ask earnestly",
+      "roots": [
+        "pie.prek"
+      ]
+    },
+    "la.precarius": {
+      "word": "precārius",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "obtained by entreaty; depending on another's favor; uncertain, insecure",
+      "roots": [
+        "la.precari"
+      ]
+    },
+    "en.precarious": {
+      "word": "precarious",
+      "lang": "English",
+      "date": "1640s",
+      "meaning": "not securely held; dangerously uncertain; dependent on chance or the will of another",
+      "roots": [
+        "la.precarius"
+      ]
+    },
+    "la.privus": {
+      "word": "prīvus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "single, individual; one's own; private; deprived of something",
+      "roots": []
+    },
+    "la.privilegium": {
+      "word": "prīvilēgium",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a law applying to a single individual; a special right or exemption; a privilege",
+      "roots": [
+        "la.privus",
+        "la.legere"
+      ]
+    },
+    "en.privilege": {
+      "word": "privilege",
+      "lang": "English",
+      "date": "c. 1150",
+      "meaning": "a special right or advantage not available to everyone; an honor; an exemption",
+      "roots": [
+        "la.privilegium"
+      ]
+    },
+    "la.unda": {
+      "word": "unda",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a wave; a billow; water in motion",
+      "roots": [
+        "pie.wed"
+      ]
+    },
+    "la.redundare": {
+      "word": "redundāre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to overflow, surge back; to be in excess; to be superfluous",
+      "roots": [
+        "la.unda"
+      ]
+    },
+    "en.redundant": {
+      "word": "redundant",
+      "lang": "English",
+      "date": "c. 1600",
+      "meaning": "no longer needed or useful; superfluous; needlessly repetitive — originally: overflowing",
+      "roots": [
+        "la.redundare"
+      ]
+    },
+    "la.sincerus": {
+      "word": "sincērus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "whole, pure, genuine; unadulterated; honest — possibly 'of one growth,' or by folk etymology sine cera ('without wax,' as sculptors used wax to hide flaws)",
+      "roots": []
+    },
+    "en.sincere": {
+      "word": "sincere",
+      "lang": "English",
+      "date": "1530s",
+      "meaning": "free from pretense or deceit; genuine; honestly expressed",
+      "roots": [
+        "la.sincerus"
+      ]
+    },
+    "ml.sclavus": {
+      "word": "Sclavus",
+      "lang": "Medieval Latin",
+      "date": "c. 900",
+      "meaning": "a Slav; a slave — Slavic peoples were so frequently enslaved in early medieval Europe that their ethnic name became the word for 'slave'",
+      "roots": []
+    },
+    "en.slave": {
+      "word": "slave",
+      "lang": "English",
+      "date": "c. 1290",
+      "meaning": "a person legally owned by another and forced to work without pay — derived from the Slavic people",
+      "roots": [
+        "ml.sclavus"
+      ]
+    },
+    "ofr.soudier": {
+      "word": "soudier",
+      "lang": "Old French",
+      "date": "c. 1100",
+      "meaning": "one who fights for pay; a person paid a 'sou' (coin); a soldier",
+      "roots": [
+        "la.solidus"
+      ]
+    },
+    "en.soldier": {
+      "word": "soldier",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a person who serves in an army; a military person; one who fights for a cause",
+      "roots": [
+        "ofr.soudier"
+      ]
+    },
+    "la.spondere": {
+      "word": "spondēre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to pledge, promise solemnly; to make a formal guarantee; to betroth",
+      "roots": [
+        "pie.spend"
+      ]
+    },
+    "la.sponsus": {
+      "word": "spōnsus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "one who has been pledged; a betrothed man; a guarantor",
+      "roots": [
+        "la.spondere"
+      ]
+    },
+    "en.spouse": {
+      "word": "spouse",
+      "lang": "English",
+      "date": "c. 1200",
+      "meaning": "a husband or wife; a married partner — from the marriage pledge or betrothal promise",
+      "roots": [
+        "la.sponsus"
+      ]
+    },
+    "grc.historia": {
+      "word": "ἱστορία",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "inquiry, investigation; knowledge gained by inquiry; a narrative of past events",
+      "roots": [
+        "pie.weid"
+      ]
+    },
+    "la.historia_word": {
+      "word": "historia",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a narrative, account, history; a story; a tale",
+      "roots": [
+        "grc.historia"
+      ]
+    },
+    "en.story": {
+      "word": "story",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "an account of events; a narrative; a news report; a floor of a building; informally: a lie",
+      "roots": [
+        "la.historia_word"
+      ]
+    },
+    "la.stupere": {
+      "word": "stupēre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to be stunned, numbed; to be struck senseless with amazement",
+      "roots": []
+    },
+    "la.stupidus": {
+      "word": "stupidus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "struck senseless; dazed; dull-witted; confounded",
+      "roots": [
+        "la.stupere"
+      ]
+    },
+    "en.stupid": {
+      "word": "stupid",
+      "lang": "English",
+      "date": "1540s",
+      "meaning": "lacking intelligence or common sense; dazed; originally: struck dumb with astonishment",
+      "roots": [
+        "la.stupidus"
+      ]
+    },
+    "grc.talanton": {
+      "word": "τάλαντον",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "a balance, pair of scales; a weight; a large sum of money; that which is weighed out",
+      "roots": [
+        "pie.telh2"
+      ]
+    },
+    "la.talentum": {
+      "word": "talentum",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a weight (about 60 lbs); a large sum of money; in the Parable of Talents: a gift from God",
+      "roots": [
+        "grc.talanton"
+      ]
+    },
+    "en.talent": {
+      "word": "talent",
+      "lang": "English",
+      "date": "c. 1200 (money); c. 1430 (ability)",
+      "meaning": "a natural aptitude or skill; a gifted person — the monetary meaning came first, then extended via the biblical Parable of Talents",
+      "roots": [
+        "la.talentum"
+      ]
+    },
+    "la.tangere": {
+      "word": "tangere",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to touch; to handle; to reach; to affect; to taste",
+      "roots": [
+        "pie.tag"
+      ]
+    },
+    "la.taxare": {
+      "word": "taxāre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to touch repeatedly; to evaluate, assess; to rate; to censure",
+      "roots": [
+        "la.tangere"
+      ]
+    },
+    "en.tax": {
+      "word": "tax",
+      "lang": "English",
+      "date": "c. 1290",
+      "meaning": "a compulsory financial contribution levied by a government; a burden or strain",
+      "roots": [
+        "la.taxare"
+      ]
+    },
+    "la.terra": {
+      "word": "terra",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "earth, soil, land; a country or region; the ground",
+      "roots": [
+        "pie.ters"
+      ]
+    },
+    "la.territorium": {
+      "word": "territōrium",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "the land around and belonging to a town; land under jurisdiction; territory",
+      "roots": [
+        "la.terra"
+      ]
+    },
+    "en.territory": {
+      "word": "territory",
+      "lang": "English",
+      "date": "c. 1400",
+      "meaning": "an area of land under the control of a ruler or state; a domain; a region",
+      "roots": [
+        "la.territorium"
+      ]
+    },
+    "grc.tithenai": {
+      "word": "τιθέναι",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "to put, place; to set; to establish; to lay down",
+      "roots": [
+        "pie.dheh1"
+      ]
+    },
+    "grc.thesauros": {
+      "word": "θησαυρός",
+      "lang": "Ancient Greek",
+      "date": "c. 600 BCE",
+      "meaning": "a storehouse, treasury; a store of valuables; accumulated knowledge",
+      "roots": [
+        "grc.tithenai"
+      ]
+    },
+    "la.thesaurus_word": {
+      "word": "thesaurus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a treasure, treasury; a storehouse of knowledge or language",
+      "roots": [
+        "grc.thesauros"
+      ]
+    },
+    "en.thesaurus": {
+      "word": "thesaurus",
+      "lang": "English",
+      "date": "1823 (Roget's)",
+      "meaning": "a reference book of synonyms and related words; originally: a treasury of language",
+      "roots": [
+        "la.thesaurus_word"
+      ]
+    },
+    "grc.toxon": {
+      "word": "τόξον",
+      "lang": "Ancient Greek",
+      "date": "c. 600 BCE",
+      "meaning": "a bow (for shooting arrows); archery",
+      "roots": []
+    },
+    "grc.toxikon": {
+      "word": "τοξικόν",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "poison for arrows; a substance smeared on arrowheads to make them lethal",
+      "roots": [
+        "grc.toxon"
+      ]
+    },
+    "la.toxicum": {
+      "word": "toxicum",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "arrow poison; any poison",
+      "roots": [
+        "grc.toxikon"
+      ]
+    },
+    "en.toxic": {
+      "word": "toxic",
+      "lang": "English",
+      "date": "1664",
+      "meaning": "poisonous; harmful to living organisms; relating to or caused by poison",
+      "roots": [
+        "la.toxicum"
+      ]
+    },
+    "la.trivium": {
+      "word": "trivium",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a place where three roads meet; a public crossroads; the three foundational arts (grammar, logic, rhetoric)",
+      "roots": []
+    },
+    "la.trivialis": {
+      "word": "triviālis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "of or found at the crossroads; commonplace, ordinary; of little value",
+      "roots": [
+        "la.trivium"
+      ]
+    },
+    "en.trivial": {
+      "word": "trivial",
+      "lang": "English",
+      "date": "c. 1540",
+      "meaning": "of little importance or value; ordinary and commonplace — from the open crossroads where anyone could hear anything",
+      "roots": [
+        "la.trivialis"
+      ]
+    },
+    "la.torquere": {
+      "word": "torquēre",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "to twist, wind, turn; to rack, torture; to distort",
+      "roots": [
+        "pie.terkw"
+      ]
+    },
+    "la.tortura": {
+      "word": "tortūra",
+      "lang": "Latin",
+      "date": "late Latin",
+      "meaning": "a twisting, writhing; the act of torturing; torment",
+      "roots": [
+        "la.torquere"
+      ]
+    },
+    "en.torture": {
+      "word": "torture",
+      "lang": "English",
+      "date": "c. 1540",
+      "meaning": "the infliction of severe physical pain as punishment or coercion; extreme suffering",
+      "roots": [
+        "la.tortura"
+      ]
+    },
+    "la.villa": {
+      "word": "villa",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "a country house or estate; a farm",
+      "roots": []
+    },
+    "ml.villanus": {
+      "word": "villānus",
+      "lang": "Medieval Latin",
+      "date": "c. 1000",
+      "meaning": "a farmhand; a serf attached to a villa; a feudal peasant — later: a low-born scoundrel",
+      "roots": [
+        "la.villa"
+      ]
+    },
+    "en.villain": {
+      "word": "villain",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "a wicked or evil person; the antagonist in a story — originally a serf or feudal tenant regarded as base",
+      "roots": [
+        "ml.villanus"
+      ]
     }
   },
   "words": [
@@ -7403,6 +9163,69 @@
     "en.tundra",
     "en.balcony",
     "en.agony",
-    "en.antagonist"
+    "en.antagonist",
+    "en.asterisk",
+    "en.automaton",
+    "en.cereal",
+    "en.charisma",
+    "en.chronicle",
+    "en.clue",
+    "en.conscious",
+    "en.courage",
+    "en.curious",
+    "en.decade",
+    "en.decimate",
+    "en.digital",
+    "en.eclipse",
+    "en.elegant",
+    "en.eloquent",
+    "en.emperor",
+    "en.enthusiasm",
+    "en.epidemic",
+    "en.eulogy",
+    "en.fable",
+    "en.forest",
+    "en.fragile",
+    "en.genius",
+    "en.glacier",
+    "en.glamour",
+    "en.grammar",
+    "en.gravity",
+    "en.humble",
+    "en.hysteria",
+    "en.idiot",
+    "en.inferno",
+    "en.journal",
+    "en.jovial",
+    "en.legend",
+    "en.lucid",
+    "en.lunatic",
+    "en.malign",
+    "en.manual",
+    "en.miracle",
+    "en.mortal",
+    "en.mundane",
+    "en.narrative",
+    "en.noble",
+    "en.ocean",
+    "en.pecuniary",
+    "en.person",
+    "en.precarious",
+    "en.privilege",
+    "en.redundant",
+    "en.sincere",
+    "en.slave",
+    "en.soldier",
+    "en.spouse",
+    "en.story",
+    "en.stupid",
+    "en.talent",
+    "en.tax",
+    "en.territory",
+    "en.thesaurus",
+    "en.toxic",
+    "en.trivial",
+    "en.torture",
+    "en.villain"
   ]
 }
