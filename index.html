@@ -317,6 +317,88 @@
     .lang-phoenician { background: var(--c-phoenician-bg); color: var(--c-phoenician); }
     .lang-other      { background: var(--c-other-bg);      color: var(--c-other);      }
 
+    /* clickable word labels */
+    .node-word { cursor: pointer; transition: color 0.1s; }
+    .node-word:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* highlighted node on root pages */
+    .node-row.root-hl { background: rgba(137, 180, 250, 0.07); }
+    .node-row.root-hl .node-word { color: var(--accent); }
+
+    /* search button */
+    .btn-search {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 130px;
+      color: var(--text-muted);
+      justify-content: space-between;
+    }
+    .btn-search:hover { color: var(--text-secondary); border-color: #6c7086; }
+
+    /* ── ROOT PAGE ───────────────────────────────────────────── */
+
+    .root-page { padding: 2px 0 24px; }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: inherit;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0 12px;
+      transition: color 0.1s;
+    }
+    .back-btn:hover { color: var(--accent); }
+
+    .root-hero {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+    .root-hero-word { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+    .root-hero-meaning {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+    .root-found-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .root-section {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .root-section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-bg);
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: opacity 0.1s;
+      user-select: none;
+    }
+    .root-section-title:hover { opacity: 0.75; }
+    .root-section-arrow { color: var(--text-muted); font-weight: 400; margin-left: auto; font-size: 11px; }
+    .root-section-tree { padding: 6px 0; }
+
     /* scrollbar */
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -479,6 +561,9 @@
       <div class="header-meta"  id="headerMeta">Choose a word from the sidebar</div>
     </div>
     <div class="header-controls">
+      <button class="btn btn-search" onclick="openPalette()">
+        <span>⌕ search roots</span><kbd class="hk">⌘K</kbd>
+      </button>
       <button class="btn" onclick="setAllNodes(false)">expand all</button>
       <button class="btn" onclick="setAllNodes(true)">collapse all</button>
     </div>
@@ -497,296 +582,9 @@
 </div>
 
 <script>
-// ── DATA ────────────────────────────────────────────────────────────────────
-// Each node: { word, lang, meaning, roots: [...] }
-// "roots" are the etymological sources the word was built from.
-
-const WORDS = {
-
-  philosophy: {
-    word: "philosophy", lang: "English", date: "c. 1300",
-    meaning: "love of wisdom; rational inquiry into the nature of things",
-    roots: [{
-      word: "philosophia", lang: "Ancient Greek", date: "c. 380 BCE",
-      meaning: "love of wisdom",
-      roots: [
-        {
-          word: "philos", lang: "Ancient Greek", date: "c. 800 BCE",
-          meaning: "loving, fond of",
-          roots: [{
-            word: "*bʰel-", lang: "Proto-Indo-European",
-            meaning: "to thrive, bloom, flourish", roots: []
-          }]
-        },
-        {
-          word: "sophia", lang: "Ancient Greek", date: "c. 700 BCE",
-          meaning: "wisdom, skill, knowledge",
-          roots: [{
-            word: "*sap-", lang: "Proto-Indo-European",
-            meaning: "to taste, perceive, be wise", roots: []
-          }]
-        }
-      ]
-    }]
-  },
-
-  democracy: {
-    word: "democracy", lang: "English", date: "1570s",
-    meaning: "government by the people",
-    roots: [{
-      word: "dēmokratia", lang: "Ancient Greek", date: "c. 507 BCE",
-      meaning: "popular government, rule of the people",
-      roots: [
-        {
-          word: "dēmos", lang: "Ancient Greek", date: "c. 800 BCE",
-          meaning: "the people; a district",
-          roots: [{
-            word: "*deh₂-", lang: "Proto-Indo-European",
-            meaning: "to divide, distribute", roots: []
-          }]
-        },
-        {
-          word: "kratos", lang: "Ancient Greek", date: "c. 800 BCE",
-          meaning: "strength, power, rule",
-          roots: [{
-            word: "*kratos", lang: "Proto-Indo-European",
-            meaning: "hard, strong, powerful", roots: []
-          }]
-        }
-      ]
-    }]
-  },
-
-  disaster: {
-    word: "disaster", lang: "English", date: "1590s",
-    meaning: "sudden calamity; a catastrophic event",
-    roots: [{
-      word: "disastro", lang: "Italian", date: "c. 1500s",
-      meaning: "ill-starred event; bad luck",
-      roots: [
-        {
-          word: "dis-", lang: "Latin", date: "classical",
-          meaning: "prefix: away, apart — giving a sense of ill fortune",
-          roots: []
-        },
-        {
-          word: "astrum", lang: "Latin", date: "c. 1st c. BCE",
-          meaning: "star, constellation",
-          roots: [{
-            word: "astron (ἄστρον)", lang: "Ancient Greek", date: "c. 800 BCE",
-            meaning: "star",
-            roots: [{
-              word: "*h₂ster-", lang: "Proto-Indo-European",
-              meaning: "star", roots: []
-            }]
-          }]
-        }
-      ]
-    }]
-  },
-
-  salary: {
-    word: "salary", lang: "English", date: "c. 1300",
-    meaning: "fixed regular payment for work",
-    roots: [{
-      word: "salarium", lang: "Latin", date: "c. 1st c. BCE",
-      meaning: "salt allowance; a soldier's pay for purchasing salt",
-      roots: [{
-        word: "sal", lang: "Latin", date: "classical",
-        meaning: "salt",
-        roots: [{
-          word: "*sal-", lang: "Proto-Indo-European",
-          meaning: "salt", roots: []
-        }]
-      }]
-    }]
-  },
-
-  muscle: {
-    word: "muscle", lang: "English", date: "late 14c.",
-    meaning: "contractile tissue in the body that produces movement",
-    roots: [{
-      word: "musculus", lang: "Latin", date: "c. 1st c. BCE",
-      meaning: "a muscle; also 'a little mouse' — the bulging muscle resembles a mouse under skin",
-      roots: [{
-        word: "mus", lang: "Latin", date: "classical",
-        meaning: "mouse",
-        roots: [{
-          word: "*mūs-", lang: "Proto-Indo-European",
-          meaning: "mouse", roots: []
-        }]
-      }]
-    }]
-  },
-
-  window: {
-    word: "window", lang: "English", date: "c. 1200",
-    meaning: "opening in a wall to admit light and air",
-    roots: [{
-      word: "vindauga", lang: "Old Norse", date: "c. 1000",
-      meaning: "wind eye — an opening through which wind could enter",
-      roots: [
-        {
-          word: "vindr", lang: "Old Norse", date: "c. 900",
-          meaning: "wind",
-          roots: [{
-            word: "*h₂weh₁-", lang: "Proto-Indo-European",
-            meaning: "to blow", roots: []
-          }]
-        },
-        {
-          word: "auga", lang: "Old Norse", date: "c. 900",
-          meaning: "eye",
-          roots: [{
-            word: "*h₃okʷ-", lang: "Proto-Indo-European",
-            meaning: "eye; to see", roots: []
-          }]
-        }
-      ]
-    }]
-  },
-
-  carnival: {
-    word: "carnival", lang: "English", date: "1540s",
-    meaning: "festival of merrymaking before Lent",
-    roots: [{
-      word: "carnevale", lang: "Italian", date: "c. 1200s",
-      meaning: "the period before Lent; loosely 'farewell to meat'",
-      roots: [
-        {
-          word: "caro / carnis", lang: "Latin", date: "classical",
-          meaning: "flesh, meat",
-          roots: [{
-            word: "*sker-", lang: "Proto-Indo-European",
-            meaning: "to cut", roots: []
-          }]
-        },
-        {
-          word: "vale", lang: "Latin", date: "classical",
-          meaning: "farewell; be well, be strong",
-          roots: [{
-            word: "*walh-", lang: "Proto-Indo-European",
-            meaning: "to be strong, to be well", roots: []
-          }]
-        }
-      ]
-    }]
-  },
-
-  rival: {
-    word: "rival", lang: "English", date: "1570s",
-    meaning: "one who competes with another for the same goal",
-    roots: [{
-      word: "rivalis", lang: "Latin", date: "c. 1st c. BCE",
-      meaning: "one who uses the same stream as another; a neighbor",
-      roots: [{
-        word: "rivus", lang: "Latin", date: "classical",
-        meaning: "brook, stream, channel",
-        roots: [{
-          word: "*rei-", lang: "Proto-Indo-European",
-          meaning: "to scratch, tear; to flow", roots: []
-        }]
-      }]
-    }]
-  },
-
-  calculate: {
-    word: "calculate", lang: "English", date: "1560s",
-    meaning: "to reckon by mathematical means",
-    roots: [{
-      word: "calculare", lang: "Latin", date: "c. 1st c. BCE",
-      meaning: "to reckon, to compute",
-      roots: [{
-        word: "calculus", lang: "Latin", date: "c. 1st c. BCE",
-        meaning: "small stone used as a counting token on an abacus",
-        roots: [{
-          word: "calx / calcis", lang: "Latin", date: "classical",
-          meaning: "limestone, chalk, heel",
-          roots: [{
-            word: "*kal-", lang: "Proto-Indo-European",
-            meaning: "hard, stone", roots: []
-          }]
-        }]
-      }]
-    }]
-  },
-
-  paradise: {
-    word: "paradise", lang: "English", date: "c. 1175",
-    meaning: "heaven; a place of perfect happiness and beauty",
-    roots: [{
-      word: "paradeisos (παράδεισος)", lang: "Ancient Greek", date: "c. 400 BCE",
-      meaning: "park, pleasure garden of a Persian king",
-      roots: [{
-        word: "pairidaēza", lang: "Old Iranian / Avestan", date: "c. 600 BCE",
-        meaning: "walled enclosure; a royal walled garden",
-        roots: [
-          {
-            word: "pairi", lang: "Old Iranian", date: "c. 600 BCE",
-            meaning: "around, encircling",
-            roots: [{
-              word: "*per-", lang: "Proto-Indo-European",
-              meaning: "around, through, in front of", roots: []
-            }]
-          },
-          {
-            word: "daēza", lang: "Old Iranian", date: "c. 600 BCE",
-            meaning: "wall, enclosure",
-            roots: [{
-              word: "*dʰeigʰ-", lang: "Proto-Indo-European",
-              meaning: "to knead, mold clay; to build a wall", roots: []
-            }]
-          }
-        ]
-      }]
-    }]
-  },
-
-  robot: {
-    word: "robot", lang: "English", date: "1923",
-    meaning: "a machine capable of automatic or autonomous action",
-    roots: [{
-      word: "robota", lang: "Czech", date: "1920",
-      meaning: "drudgery, forced labor, hard work — coined by Karel Čapek in his play R.U.R.",
-      roots: [{
-        word: "rabota", lang: "Old Church Slavonic", date: "c. 900s",
-        meaning: "servitude, work",
-        roots: [{
-          word: "*orbho-", lang: "Proto-Indo-European",
-          meaning: "orphan; one separated from family — came to mean 'slave'", roots: []
-        }]
-      }]
-    }]
-  },
-
-  alphabet: {
-    word: "alphabet", lang: "English", date: "early 16c.",
-    meaning: "the letters of a writing system arranged in a set order",
-    roots: [{
-      word: "alphabētos (ἀλφάβητος)", lang: "Ancient Greek", date: "c. 500 BCE",
-      meaning: "the first two letters of the Greek alphabet",
-      roots: [
-        {
-          word: "alpha (Α α)", lang: "Ancient Greek", date: "c. 800 BCE",
-          meaning: "first letter of the Greek alphabet",
-          roots: [{
-            word: "aleph (𐤀)", lang: "Phoenician", date: "c. 1050 BCE",
-            meaning: "ox — the letter was shaped like an inverted ox head", roots: []
-          }]
-        },
-        {
-          word: "beta (Β β)", lang: "Ancient Greek", date: "c. 800 BCE",
-          meaning: "second letter of the Greek alphabet",
-          roots: [{
-            word: "beth (𐤁)", lang: "Phoenician", date: "c. 1050 BCE",
-            meaning: "house — the letter was shaped like a house floor plan", roots: []
-          }]
-        }
-      ]
-    }]
-  }
-
-};
+let NODES = {};       // id → node object (flat map)
+let WORD_IDS = [];    // ordered list of top-level word node IDs
+let CONTAINED_IN = {}; // precomputed: nodeId → [wordId, ...]
 
 // ── LANGUAGE → CSS CLASS ────────────────────────────────────────────────────
 
@@ -808,6 +606,7 @@ function langClass(lang) {
 // below the current subtree — drives whether to draw a pass-through │ line.
 
 let _id = 0;
+let _renderHighlight = null; // set before rendering to highlight a specific node word
 
 function renderNode(node, isLast, ancestorHasMore, isRoot = false) {
   const id = 'n' + (++_id);
@@ -824,6 +623,7 @@ function renderNode(node, isLast, ancestorHasMore, isRoot = false) {
 
   const lc = langClass(node.lang);
   const chevron = hasKids ? 'open' : 'leaf';
+  const hlClass = (_renderHighlight && node._id === _renderHighlight) ? ' root-hl' : '';
 
   // Recurse: when entering children, track whether the current node
   // itself has siblings below it (= !isLast) as the new ancestor entry.
@@ -836,14 +636,16 @@ function renderNode(node, isLast, ancestorHasMore, isRoot = false) {
   }
 
   return `<div class="tree-node" id="${id}">
-    <div class="node-row" data-word="${node.word.replace(/"/g,'&quot;')}" onclick="toggle('${id}')">
+    <div class="node-row${hlClass}" data-word="${node.word.replace(/"/g,'&quot;')}" onclick="toggle('${id}')">
       <div class="guides">${guidesHTML}</div>
       <span class="chevron ${chevron}">▶</span>
       <div class="node-label">
-        <span class="node-word">${node.word}</span>
+        <span class="node-word"
+          data-nav-id="${esc(node._id||'')}"
+        >${esc(node.word)}</span>
         ${node.date ? `<span class="node-date">${node.date}</span>` : ''}
-        <span class="lang-tag ${lc}">${node.lang}</span>
-        ${node.meaning ? `<span class="node-meaning">"${node.meaning}"</span>` : ''}
+        <span class="lang-tag ${lc}">${esc(node.lang)}</span>
+        ${node.meaning ? `<span class="node-meaning">"${esc(node.meaning)}"</span>` : ''}
       </div>
     </div>
     ${hasKids ? `<div class="node-children" id="${id}-c">${kidsHTML}</div>` : ''}
@@ -866,6 +668,36 @@ function setAllNodes(collapse) {
   document.querySelectorAll('.chevron:not(.leaf)').forEach(el => {
     el.classList.toggle('open', !collapse);
   });
+}
+
+// ── RELATIONAL HELPERS ───────────────────────────────────────────────────────
+
+// Expand flat node references into a nested tree for rendering.
+// Uses depth limit (not visited set) so shared PIE roots can appear
+// under multiple ancestors (it's a DAG, fine to expand into a tree).
+function buildTree(id, depth = 0) {
+  if (depth > 25) return null;
+  const n = NODES[id];
+  if (!n) return null;
+  return {
+    ...n,
+    _id: id,
+    roots: (n.roots || []).map(rid => buildTree(rid, depth + 1)).filter(Boolean)
+  };
+}
+
+// Precompute reverse index: nodeId → [wordId, ...]
+// Run once after NODES and WORD_IDS are loaded.
+function buildContainedIn() {
+  const map = {};
+  function walk(wid, nodeId) {
+    if (!map[nodeId]) map[nodeId] = [];
+    if (map[nodeId].includes(wid)) return; // already visited via this word
+    map[nodeId].push(wid);
+    for (const rid of (NODES[nodeId]?.roots || [])) walk(wid, rid);
+  }
+  for (const wid of WORD_IDS) walk(wid, wid);
+  return map;
 }
 
 // ── SEARCH ENGINE ───────────────────────────────────────────────────────────
@@ -982,7 +814,7 @@ function scoreToken(rawToken, rawTarget) {
   return 0;
 }
 
-// Walk every node in every word tree and score against the query.
+// Score every node in NODES against the query (flat iteration — no tree walk).
 // Tokens are AND-ed: every token must match at least one field.
 function searchAllNodes(query) {
   const q = query.trim();
@@ -991,24 +823,24 @@ function searchAllNodes(query) {
   const tokens = q.split(/\s+/).filter(Boolean);
   const results = [];
 
-  for (const [key, wordData] of Object.entries(WORDS)) {
-    (function walk(node, path) {
-      let total = 0;
+  for (const [nodeId, node] of Object.entries(NODES)) {
+    // Only include nodes reachable from at least one top-level word
+    const inWords = CONTAINED_IN[nodeId];
+    if (!inWords || !inWords.length) continue;
 
-      for (const token of tokens) {
-        const best = Math.max(
-          scoreToken(token, node.word),
-          scoreToken(token, node.lang)    * 0.85,
-          scoreToken(token, node.meaning) * 0.55,
-          scoreToken(token, node.date)    * 0.25,
-        );
-        if (best === 0) { total = -1; break; } // AND: all tokens must hit
-        total += best;
-      }
+    let total = 0;
+    for (const token of tokens) {
+      const best = Math.max(
+        scoreToken(token, node.word),
+        scoreToken(token, node.lang)    * 0.85,
+        scoreToken(token, node.meaning) * 0.55,
+        scoreToken(token, node.date)    * 0.25,
+      );
+      if (best === 0) { total = -1; break; } // AND: all tokens must hit
+      total += best;
+    }
 
-      if (total > 0) results.push({ wordKey: key, wordLabel: wordData.word, node, path: [...path], score: total });
-      for (const root of (node.roots || [])) walk(root, [...path, node.word]);
-    })(wordData, []);
+    if (total > 0) results.push({ nodeId, node, inWords, score: total });
   }
 
   return results.sort((a, b) => b.score - a.score);
@@ -1088,24 +920,18 @@ function renderPaletteResults(query) {
   }
 
   el.innerHTML = _searchResults.map((r, i) => {
-    const lc   = langClass(r.node.lang);
-    const isRoot = r.path.length === 0;
-
-    // Breadcrumb path with the match word highlighted at the end
-    const pathHtml = [...r.path, null].map((seg, pi) => {
-      if (seg === null) {
-        return `<span class="cmd-path-match">${hlMatch(r.node.word, query)}</span>`;
-      }
-      return `<span>${esc(seg)}</span>`;
-    }).join('<span class="cmd-path-arrow">→</span>');
+    const lc = langClass(r.node.lang);
+    const isTopLevel = WORD_IDS.includes(r.nodeId);
+    // Show which top-level words contain this node (up to 3)
+    const inLabels = r.inWords.slice(0, 3).map(wid => esc(NODES[wid]?.word || wid)).join(', ')
+      + (r.inWords.length > 3 ? ` +${r.inWords.length - 3}` : '');
 
     return `<div class="cmd-result" data-idx="${i}" onmousedown="pickResult(${i})">
       <div class="cmd-result-top">
         <span class="cmd-match-word">${hlMatch(r.node.word, query)}</span>
         <span class="lang-tag ${lc}" style="font-size:10px;padding:1px 5px">${esc(r.node.lang)}</span>
-        ${!isRoot ? `<span class="cmd-in-tag">in ${esc(r.wordLabel)}</span>` : ''}
+        ${!isTopLevel && r.inWords.length ? `<span class="cmd-in-tag">in ${inLabels}</span>` : ''}
       </div>
-      ${!isRoot ? `<div class="cmd-path">${pathHtml}</div>` : ''}
       ${r.node.meaning ? `<div class="cmd-meaning">${esc(r.node.meaning)}</div>` : ''}
     </div>`;
   }).join('');
@@ -1123,22 +949,27 @@ function pickResult(i) {
   const r = _searchResults[i];
   if (!r) return;
   closePalette();
-  selectWord(r.wordKey);
-  // Expand ancestors and focus the matched node
-  const target = r.node.word;
-  for (const row of document.querySelectorAll('.node-row')) {
-    if (row.dataset.word === target) {
-      let el = row.parentElement;
-      while (el) {
-        if (el.classList.contains('node-children') && el.classList.contains('collapsed')) {
-          el.classList.remove('collapsed');
-          el.parentElement?.querySelector(':scope > .node-row .chevron')?.classList.add('open');
+  if (WORD_IDS.includes(r.nodeId)) {
+    selectWord(r.nodeId);
+    // Expand ancestors and focus the matched node
+    for (const span of document.querySelectorAll('.node-word[data-nav-id]')) {
+      if (span.dataset.navId === r.nodeId) {
+        const row = span.closest('.node-row');
+        if (!row) break;
+        let el = row.parentElement;
+        while (el) {
+          if (el.classList.contains('node-children') && el.classList.contains('collapsed')) {
+            el.classList.remove('collapsed');
+            el.parentElement?.querySelector(':scope > .node-row .chevron')?.classList.add('open');
+          }
+          el = el.parentElement;
         }
-        el = el.parentElement;
+        selectRow(row);
+        break;
       }
-      selectRow(row);
-      break;
     }
+  } else {
+    showRootPage(r.nodeId);
   }
 }
 
@@ -1210,9 +1041,8 @@ document.addEventListener('keydown', e => {
 
   // number keys → pick word
   if (e.key >= '1' && e.key <= '9') {
-    const keys = Object.keys(WORDS);
     const i = parseInt(e.key) - 1;
-    if (i < keys.length) selectWord(keys[i]);
+    if (i < WORD_IDS.length) selectWord(WORD_IDS[i]);
     return;
   }
 
@@ -1283,37 +1113,118 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// ── ROOT PAGE ────────────────────────────────────────────────────────────────
+
+let _history         = [];   // navigation history stack
+let _currentView     = null; // { type:'word', key } | { type:'root', nodeId }
+
+function showRootPage(nodeId, pushHistory = true) {
+  if (pushHistory && _currentView) _history.push({ ..._currentView });
+  _currentView = { type: 'root', nodeId };
+  selectRow(null);
+
+  const n = NODES[nodeId];
+  if (!n) return;
+
+  // Find all top-level word trees that contain this node
+  const hits = CONTAINED_IN[nodeId] || [];
+
+  // Update header
+  document.getElementById('headerTitle').textContent = n.word;
+  document.getElementById('headerMeta').textContent =
+    n.lang + (n.meaning ? ' — ' + n.meaning : '');
+
+  // Render each containing word tree with the target node highlighted
+  const treeSections = hits.map(wid => {
+    const wordNode = NODES[wid];
+    _renderHighlight = nodeId;
+    _id = 0;
+    const treeHTML = renderNode(buildTree(wid), true, [], true);
+    _renderHighlight = null;
+    return `<div class="root-section">
+      <div class="root-section-title" onclick="_history.length=0;_currentView=null;selectWord('${wid}')">
+        ${esc(wordNode.word)}
+        <span class="root-section-arrow">open word →</span>
+      </div>
+      <div class="root-section-tree">${treeHTML}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('treeArea').innerHTML = `
+    <div class="root-page">
+      <button class="back-btn" onclick="goBack()">← back</button>
+      <div class="root-hero">
+        <span class="root-hero-word">${esc(n.word)}</span>
+        <span class="lang-tag ${langClass(n.lang)}">${esc(n.lang)}</span>
+      </div>
+      ${n.meaning ? `<div class="root-hero-meaning">"${esc(n.meaning)}"</div>` : ''}
+      <div class="root-found-label">found in ${hits.length} word ${hits.length === 1 ? 'hierarchy' : 'hierarchies'}</div>
+      ${treeSections || '<div class="cmd-hint">no hierarchies found</div>'}
+    </div>`;
+}
+
+function goBack() {
+  const prev = _history.pop();
+  if (!prev) return;
+  if (prev.type === 'word') selectWord(prev.key, false);
+  else showRootPage(prev.nodeId, false);
+}
+
+// Click delegation: word labels navigate to root page
+document.addEventListener('click', e => {
+  const span = e.target.closest('.node-word[data-nav-id]');
+  if (!span) return;
+  e.stopPropagation();
+  showRootPage(span.dataset.navId);
+});
+
 // ── WORD SELECTION ──────────────────────────────────────────────────────────
 
-function selectWord(key) {
-  document.querySelectorAll('.word-item').forEach(el => el.classList.remove('active'));
-  document.querySelector(`.word-item[data-key="${key}"]`)?.classList.add('active');
+function selectWord(nodeId, pushHistory = true) {
+  if (pushHistory && _currentView) _history.push({ ..._currentView });
+  _currentView = { type: 'word', key: nodeId };
 
-  const w = WORDS[key];
+  document.querySelectorAll('.word-item').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.word-item[data-key="${nodeId}"]`)?.classList.add('active');
+
+  const w = NODES[nodeId];
   document.getElementById('headerTitle').textContent = w.word;
   document.getElementById('headerMeta').textContent =
     [w.date, w.lang].filter(Boolean).join(' · ') +
     (w.meaning ? ' — ' + w.meaning : '');
 
   _id = 0;
-  document.getElementById('treeArea').innerHTML = renderNode(w, true, [], true);
-  // place cursor on root node
+  document.getElementById('treeArea').innerHTML = renderNode(buildTree(nodeId), true, [], true);
   selectRow(document.querySelector('#treeArea .node-row'));
 }
 
 // ── INIT ────────────────────────────────────────────────────────────────────
 
-const listEl = document.getElementById('wordList');
-for (const key of Object.keys(WORDS)) {
-  const el = document.createElement('div');
-  el.className = 'word-item';
-  el.dataset.key = key;
-  el.innerHTML = `<span class="dot">◆</span>${key}`;
-  el.addEventListener('click', () => selectWord(key));
-  listEl.appendChild(el);
+async function init() {
+  const data = await fetch('./words.json').then(r => r.json());
+  NODES    = data.nodes;
+  WORD_IDS = data.words;
+  CONTAINED_IN = buildContainedIn();
+
+  const listEl = document.getElementById('wordList');
+  for (const nodeId of WORD_IDS) {
+    const n = NODES[nodeId];
+    const el = document.createElement('div');
+    el.className = 'word-item';
+    el.dataset.key = nodeId;
+    el.innerHTML = `<span class="dot">◆</span>${esc(n.word)}`;
+    el.addEventListener('click', () => {
+      _history.length = 0;
+      _currentView = null;
+      selectWord(nodeId, false);
+    });
+    listEl.appendChild(el);
+  }
+
+  selectWord(WORD_IDS[0], false);
 }
 
-selectWord('philosophy'); // default
+init();
 </script>
 </body>
 </html>
