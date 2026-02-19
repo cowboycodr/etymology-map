@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Etymology Map</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -74,7 +74,7 @@
       color: var(--text-primary);
       font-family: 'SF Mono', 'Cascadia Code', 'Menlo', 'Consolas', monospace;
       font-size: 13px;
-      height: 100vh;
+      height: 100dvh;
       display: flex;
       overflow: hidden;
     }
@@ -733,10 +733,16 @@
       }
       .sidebar.open { transform: translateX(0); }
 
-      /* full-width panel on mobile */
+      /* full-width panel on mobile, raised above browser chrome */
       .graph-panel {
         width: calc(100vw - 28px);
         max-height: 42vh;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      }
+
+      /* hint bar above browser chrome */
+      .hint-bar {
+        padding-bottom: calc(5px + env(safe-area-inset-bottom, 0px));
       }
 
       /* hide legend to save space */
