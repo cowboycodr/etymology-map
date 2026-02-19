@@ -1456,7 +1456,18 @@ document.addEventListener('click', e => {
   const span = e.target.closest('.node-word[data-nav-id]');
   if (!span) return;
   e.stopPropagation();
-  showRootPage(span.dataset.navId);
+  const navId = span.dataset.navId;
+  // Clicks from the graph panel overlay → switch to tree tab first
+  if (span.closest('#graphPanel')) {
+    closeGraphPanel();
+    switchTab('tree');
+    _history.length = 0;
+    _currentView = null;
+    if (WORD_IDS.includes(navId)) selectWord(navId, false);
+    else showRootPage(navId, false);
+    return;
+  }
+  showRootPage(navId);
 });
 
 // ── WORD SELECTION ──────────────────────────────────────────────────────────
