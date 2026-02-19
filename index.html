@@ -485,7 +485,88 @@
       color: var(--text-muted);
       padding: 8px 20px 4px;
     }
+    /* ── VIEW TABS ──────────────────────────────────────────────────────────── */
+
+    .view-tabs {
+      display: flex;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .view-tab {
+      font-family: inherit;
+      font-size: 11px;
+      padding: 6px 14px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: color 0.1s, border-color 0.1s;
+      margin-bottom: -1px;
+    }
+    .view-tab:hover  { color: var(--text-primary); }
+    .view-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ── GRAPH AREA ─────────────────────────────────────────────────────────── */
+
+    .graph-area {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-base);
+    }
+    .hidden { display: none !important; }
+    #hintContent { display: contents; }
+
+    .graph-tooltip {
+      position: absolute;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 11px;
+      font-size: 11px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s;
+      max-width: 220px;
+      z-index: 10;
+      line-height: 1.6;
+    }
+    .graph-tooltip.visible { opacity: 1; }
+    .tip-word    { font-weight: 600; font-size: 12px; color: var(--text-primary); }
+    .tip-lang    { color: var(--text-muted); font-size: 10px; }
+    .tip-meaning { color: var(--text-muted); font-style: italic; }
+
+    .graph-back {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      font-family: inherit;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 10px;
+      cursor: pointer;
+      z-index: 5;
+      transition: color 0.1s, border-color 0.1s;
+    }
+    .graph-back:hover { color: var(--accent); border-color: var(--accent); }
+    .graph-label {
+      position: absolute;
+      top: 13px;
+      right: 14px;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      z-index: 5;
+      pointer-events: none;
+    }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 </head>
 <body>
 
@@ -508,15 +589,26 @@
 </div>
 
 <div class="main">
+  <div class="view-tabs">
+    <button class="view-tab active" id="tabTree" onclick="switchTab('tree')">tree</button>
+    <button class="view-tab" id="tabGraph" onclick="switchTab('graph')">graph</button>
+  </div>
   <div class="tree-area" id="treeArea">
     <div class="empty-state">← select a word to trace its roots</div>
   </div>
+  <div class="graph-area hidden" id="graphArea">
+    <button class="graph-back hidden" id="graphBack" onclick="showGlobalGraph()">← all words</button>
+    <div class="graph-label" id="graphLabel"></div>
+    <div class="graph-tooltip" id="graphTooltip"></div>
+  </div>
   <div class="hint-bar">
-    <span><kbd class="hk">⌘K</kbd> search roots</span>
-    <span><kbd class="hk">j</kbd><kbd class="hk">k</kbd> navigate</span>
-    <span><kbd class="hk">h</kbd><kbd class="hk">l</kbd> parent / child</span>
-    <span><kbd class="hk">gg</kbd> top &nbsp;<kbd class="hk">G</kbd> bottom</span>
-    <span><kbd class="hk">enter</kbd> open</span>
+    <span id="hintContent">
+      <span><kbd class="hk">⌘K</kbd> search roots</span>
+      <span><kbd class="hk">j</kbd><kbd class="hk">k</kbd> navigate</span>
+      <span><kbd class="hk">h</kbd><kbd class="hk">l</kbd> parent / child</span>
+      <span><kbd class="hk">gg</kbd> top &nbsp;<kbd class="hk">G</kbd> bottom</span>
+      <span><kbd class="hk">enter</kbd> open</span>
+    </span>
   </div>
 </div>
 
@@ -1003,7 +1095,8 @@ document.addEventListener('keydown', e => {
 
     case 'Escape':
       e.preventDefault();
-      goBack();
+      if (_currentTab === 'graph' && _graphMode === 'local') showGlobalGraph();
+      else goBack();
       break;
   }
 });
@@ -1095,6 +1188,268 @@ function selectWord(nodeId, pushHistory = true) {
   selectRow(document.querySelector('#treeArea .node-row'));
 }
 
+// ── GRAPH VIEW ──────────────────────────────────────────────────────────────
+
+let _currentTab       = 'tree';
+let _graphMode        = 'global'; // 'global' | 'local'
+let _graphFocusedWord = null;
+let _graphSim         = null;
+
+const HINT_TREE = `<span><kbd class="hk">⌘K</kbd> search roots</span><span><kbd class="hk">j</kbd><kbd class="hk">k</kbd> navigate</span><span><kbd class="hk">h</kbd><kbd class="hk">l</kbd> parent / child</span><span><kbd class="hk">gg</kbd> top&nbsp;<kbd class="hk">G</kbd> bottom</span><span><kbd class="hk">enter</kbd> open</span>`;
+const HINT_GRAPH = `<span>drag to pan &nbsp;·&nbsp; scroll to zoom</span><span>click word for local graph</span><span>click focused word to open tree</span><span><kbd class="hk">esc</kbd> global view</span>`;
+
+function langFillColor(lang) {
+  const l = lang.toLowerCase();
+  if (l.includes('proto-indo') || l === 'pie') return '#f38ba8';
+  if (l.includes('phoenician') || l.includes('semitic') || l.includes('hebrew')) return '#f9e2af';
+  if (l.includes('slavic') || l.includes('czech') || l.includes('polish') || l.includes('russian')) return '#94e2d5';
+  if (l.includes('iranian') || l.includes('persian') || l.includes('avestan')) return '#f9e2af';
+  if (l.includes('greek')) return '#a6e3a1';
+  if (l.includes('latin') || l.includes('italian') || l.includes('french') || l.includes('spanish') || l.includes('portuguese') || l.includes('medieval')) return '#fab387';
+  if (l.includes('english')) return '#89b4fa';
+  if (l.includes('norse') || l.includes('germanic') || l.includes('german') || l.includes('dutch') || l.includes('gothic') || l.includes('danish') || l.includes('swedish') || l.includes('icelandic') || l.includes('frisian')) return '#89dceb';
+  return '#cba6f7';
+}
+
+function switchTab(tab) {
+  _currentTab = tab;
+  document.getElementById('tabTree').classList.toggle('active', tab === 'tree');
+  document.getElementById('tabGraph').classList.toggle('active', tab === 'graph');
+  document.getElementById('treeArea').classList.toggle('hidden', tab !== 'tree');
+  document.getElementById('graphArea').classList.toggle('hidden', tab !== 'graph');
+  document.getElementById('hintContent').innerHTML = tab === 'tree' ? HINT_TREE : HINT_GRAPH;
+  if (tab === 'graph' && !document.querySelector('#graphArea svg')) {
+    requestAnimationFrame(() => showGlobalGraph());
+  }
+}
+
+function buildGlobalGraphData() {
+  const nodes = WORD_IDS.map(id => ({
+    id, word: NODES[id].word, lang: NODES[id].lang, meaning: NODES[id].meaning || '', isWord: true
+  }));
+  const pairCount = {};
+  for (const [, inWords] of Object.entries(CONTAINED_IN)) {
+    if (inWords.length < 2) continue;
+    for (let i = 0; i < inWords.length; i++)
+      for (let j = i + 1; j < inWords.length; j++) {
+        const a = inWords[i], b = inWords[j];
+        const key = a < b ? `${a}|${b}` : `${b}|${a}`;
+        pairCount[key] = (pairCount[key] || 0) + 1;
+      }
+  }
+  const edges = Object.entries(pairCount).map(([key, count]) => {
+    const [source, target] = key.split('|');
+    return { source, target, count };
+  });
+  const deg = {};
+  for (const { source: s, target: t } of edges) { deg[s] = (deg[s] || 0) + 1; deg[t] = (deg[t] || 0) + 1; }
+  for (const n of nodes) n.degree = deg[n.id] || 0;
+  return { nodes, edges };
+}
+
+function buildLocalGraphData(focusedId) {
+  // All ancestor nodes of the focused word
+  const myNodes = new Set();
+  function collect(id, d = 0) {
+    if (myNodes.has(id) || d > 25) return;
+    myNodes.add(id);
+    (NODES[id]?.roots || []).forEach(r => collect(r, d + 1));
+  }
+  collect(focusedId);
+
+  // English words that share any ancestor with the focused word
+  const neighbors = new Set();
+  for (const nid of myNodes) {
+    if (nid === focusedId) continue;
+    (CONTAINED_IN[nid] || []).forEach(wid => {
+      if (wid !== focusedId && WORD_IDS.includes(wid)) neighbors.add(wid);
+    });
+  }
+
+  const edgeSeen = new Set(), edges = [];
+  const addEdge = (s, t, isTreeEdge) => {
+    const k = `${s}|${t}`;
+    if (!edgeSeen.has(k)) { edgeSeen.add(k); edges.push({ source: s, target: t, isTreeEdge }); }
+  };
+
+  // Derivation edges within the focused word's ancestor tree
+  for (const nid of myNodes)
+    (NODES[nid]?.roots || []).forEach(rid => { if (myNodes.has(rid)) addEdge(nid, rid, true); });
+
+  // Neighbor → closest shared ancestor (BFS, dashed edge)
+  for (const wid of neighbors) {
+    const vis = new Set([wid]);
+    const q = [wid];
+    let found = false;
+    while (q.length && !found) {
+      const curr = q.shift();
+      for (const rid of (NODES[curr]?.roots || [])) {
+        if (vis.has(rid)) continue;
+        vis.add(rid);
+        if (myNodes.has(rid)) { addEdge(wid, rid, false); found = true; break; }
+        q.push(rid);
+      }
+    }
+  }
+
+  const allIds = new Set([...myNodes, ...neighbors]);
+  const nodes = [...allIds].map(id => ({
+    id,
+    word: NODES[id]?.word || id,
+    lang: NODES[id]?.lang || 'English',
+    meaning: NODES[id]?.meaning || '',
+    isWord: WORD_IDS.includes(id),
+    isFocused: id === focusedId,
+    isNeighbor: neighbors.has(id)
+  }));
+
+  return { nodes, edges };
+}
+
+function destroyGraph() {
+  if (_graphSim) { _graphSim.stop(); _graphSim = null; }
+}
+
+function renderGraph(data, opts = {}) {
+  const { mode = 'global', focusedId = null } = opts;
+  destroyGraph();
+  const container = document.getElementById('graphArea');
+  const old = container.querySelector('svg');
+  if (old) old.remove();
+
+  const W = container.clientWidth, H = container.clientHeight;
+  const svg = d3.select(container).append('svg')
+    .attr('width', W).attr('height', H)
+    .style('position', 'absolute').style('top', 0).style('left', 0);
+
+  const g = svg.append('g');
+
+  const zoomBehavior = d3.zoom().scaleExtent([0.12, 10])
+    .on('zoom', e => g.attr('transform', e.transform));
+  svg.call(zoomBehavior);
+  svg.on('dblclick.zoom', null);
+  svg.on('dblclick', () =>
+    svg.transition().duration(500).call(zoomBehavior.transform, d3.zoomIdentity.translate(W / 2, H / 2).scale(1)));
+
+  const nodes = data.nodes.map(n => ({
+    ...n, x: W / 2 + (Math.random() - .5) * 500, y: H / 2 + (Math.random() - .5) * 400
+  }));
+  const edges = data.edges.map(e => ({ ...e }));
+
+  // Links
+  const link = g.append('g').selectAll('line').data(edges).join('line')
+    .attr('stroke', e => e.isTreeEdge === false ? '#45475a' : '#585b70')
+    .attr('stroke-opacity', e => e.isTreeEdge === false ? 0.5 : 0.5)
+    .attr('stroke-width', e => e.count ? Math.min(1 + e.count * 0.35, 3.5) : 1.2)
+    .attr('stroke-dasharray', e => e.isTreeEdge === false ? '4,3' : null);
+
+  // Node groups
+  const nodeG = g.append('g').selectAll('g').data(nodes).join('g')
+    .attr('cursor', 'pointer')
+    .call(d3.drag()
+      .on('start', (e, d) => { if (!e.active) _graphSim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on('end',   (e, d) => { if (!e.active) _graphSim.alphaTarget(0); d.fx = null; d.fy = null; })
+    );
+
+  // Circles
+  nodeG.append('circle')
+    .attr('r', d => {
+      if (d.isFocused) return 9;
+      if (mode === 'global') return Math.max(4, Math.min(4 + (d.degree || 0) * 1.2, 11));
+      return d.isWord ? 7 : 4;
+    })
+    .attr('fill', d => langFillColor(d.lang))
+    .attr('fill-opacity', d => d.isNeighbor ? 0.6 : 1)
+    .attr('stroke', d => d.isFocused ? '#89b4fa' : 'none')
+    .attr('stroke-width', 2)
+    .style('filter', d => d.isFocused ? 'drop-shadow(0 0 6px rgba(137,180,250,.6))' : null);
+
+  // Labels (word text)
+  nodeG.append('text')
+    .text(d => d.word)
+    .attr('font-family', "'SF Mono','Cascadia Code',Menlo,Consolas,monospace")
+    .attr('font-size', d => d.isFocused ? 13 : d.isWord ? 11 : 9)
+    .attr('font-weight', d => (d.isFocused || d.isWord) ? 500 : 400)
+    .attr('fill', d => d.isFocused ? '#89b4fa' : d.isWord ? '#cdd6f4' : '#6c7086')
+    .attr('fill-opacity', d => (!d.isWord && mode === 'global') ? 0 : 1)
+    .attr('dx', d => (d.isFocused ? 11 : d.isWord ? 9 : 6))
+    .attr('dy', '0.35em')
+    .attr('pointer-events', 'none')
+    .attr('user-select', 'none');
+
+  // Tooltip
+  const tip = document.getElementById('graphTooltip');
+  nodeG
+    .on('mouseenter', (e, d) => {
+      tip.innerHTML = `<div class="tip-word">${esc(d.word)}</div><div class="tip-lang">${esc(d.lang)}</div>${d.meaning ? `<div class="tip-meaning">"${esc(d.meaning)}"</div>` : ''}`;
+      tip.classList.add('visible');
+    })
+    .on('mousemove', e => {
+      const rect = container.getBoundingClientRect();
+      tip.style.left = `${Math.min(e.clientX - rect.left + 14, W - 236)}px`;
+      tip.style.top  = `${Math.max(e.clientY - rect.top  - 40, 4)}px`;
+    })
+    .on('mouseleave', () => tip.classList.remove('visible'));
+
+  // Clicks
+  nodeG.on('click', (e, d) => {
+    e.stopPropagation();
+    if (!WORD_IDS.includes(d.id)) return;
+    if (mode === 'global') {
+      showLocalGraph(d.id);
+    } else if (d.isFocused) {
+      switchTab('tree');
+      _history.length = 0; _currentView = null;
+      selectWord(d.id, false);
+    } else {
+      showLocalGraph(d.id);
+    }
+  });
+
+  // Force simulation
+  _graphSim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(edges).id(d => d.id).distance(mode === 'global' ? 130 : 100))
+    .force('charge', d3.forceManyBody().strength(mode === 'global' ? -220 : -280))
+    .force('center', d3.forceCenter(W / 2, H / 2))
+    .force('collision', d3.forceCollide(d => d.isFocused ? 20 : d.isWord ? 16 : 9));
+
+  _graphSim.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    nodeG.attr('transform', d => `translate(${d.x | 0},${d.y | 0})`);
+  });
+}
+
+function showGlobalGraph() {
+  _graphMode = 'global';
+  _graphFocusedWord = null;
+  document.getElementById('graphBack').classList.add('hidden');
+  document.getElementById('graphLabel').textContent = `${WORD_IDS.length} words`;
+  renderGraph(buildGlobalGraphData(), { mode: 'global' });
+}
+
+function showLocalGraph(wordId) {
+  _graphMode = 'local';
+  _graphFocusedWord = wordId;
+  document.getElementById('graphBack').classList.remove('hidden');
+  document.getElementById('graphLabel').textContent = NODES[wordId]?.word || wordId;
+  renderGraph(buildLocalGraphData(wordId), { mode: 'local', focusedId: wordId });
+  document.querySelectorAll('.word-item').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.word-item[data-key="${wordId}"]`)?.classList.add('active');
+}
+
+let _resizeTimer;
+window.addEventListener('resize', () => {
+  if (_currentTab !== 'graph') return;
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(() => {
+    if (_graphMode === 'local' && _graphFocusedWord) showLocalGraph(_graphFocusedWord);
+    else showGlobalGraph();
+  }, 250);
+});
+
 // ── INIT ────────────────────────────────────────────────────────────────────
 
 async function init() {
@@ -1111,6 +1466,7 @@ async function init() {
     el.dataset.key = nodeId;
     el.innerHTML = `<span class="dot">◆</span>${esc(n.word)}`;
     el.addEventListener('click', () => {
+      if (_currentTab === 'graph') switchTab('tree');
       _history.length = 0;
       _currentView = null;
       selectWord(nodeId, false);
