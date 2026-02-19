@@ -9,7 +9,9 @@
 
   let { data, children }: { data: LayoutData; children: import('svelte').Snippet } = $props();
 
-  $effect(() => { initData(data.nodes, data.wordIds); });
+  // Initialize synchronously so child components see initialized data on first render.
+  // Using $effect would delay until after paint, causing a "loading…" flash.
+  initData(data.nodes, data.wordIds);
 
   let drawerOpen = $state(false);
   let paletteOpen = $state(false);

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import TreeNode from './TreeNode.svelte'; // explicit self-import required for recursion in Svelte 5
   import LangTag from './LangTag.svelte';
 
   let {
