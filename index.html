@@ -666,8 +666,13 @@
     .graph-panel-tree {
       flex: 1;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 6px 8px 10px 4px;
     }
+    /* panel tree is compact — hide meanings, clip labels to prevent overflow */
+    .graph-panel-tree .node-meaning { display: none; }
+    .graph-panel-tree .node-label   { overflow: hidden; }
+    .graph-panel-tree .node-word    { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
     .graph-key {
       position: absolute;
       bottom: 14px;
