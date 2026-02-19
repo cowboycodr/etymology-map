@@ -94,40 +94,6 @@
       overflow: hidden;
     }
 
-    .main-header {
-      padding: 16px 22px 14px;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-base);
-      flex-shrink: 0;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .header-left { min-width: 0; }
-
-    .header-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text-primary);
-      letter-spacing: -0.01em;
-    }
-
-    .header-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 3px;
-      font-style: italic;
-    }
-
-    .header-controls {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
-      padding-top: 2px;
-    }
-
     .btn {
       font-family: inherit;
       font-size: 10px;
@@ -542,17 +508,6 @@
 </div>
 
 <div class="main">
-  <div class="main-header">
-    <div class="header-left">
-      <div class="header-title" id="headerTitle">Select a word</div>
-      <div class="header-meta"  id="headerMeta">Choose a word from the sidebar</div>
-    </div>
-    <div class="header-controls">
-      <button class="btn btn-search" onclick="openPalette()">
-        <span>⌕ search roots</span><kbd class="hk">⌘K</kbd>
-      </button>
-    </div>
-  </div>
   <div class="tree-area" id="treeArea">
     <div class="empty-state">← select a word to trace its roots</div>
   </div>
@@ -1069,9 +1024,6 @@ function showRootPage(nodeId, pushHistory = true) {
   // Find all top-level word trees that contain this node
   const hits = CONTAINED_IN[nodeId] || [];
 
-  document.getElementById('headerTitle').textContent = 'Etymology Map';
-  document.getElementById('headerMeta').textContent = '';
-
   // Render each containing word tree with the target node highlighted
   const treeSections = hits.map(wid => {
     const wordNode = NODES[wid];
@@ -1127,9 +1079,6 @@ function selectWord(nodeId, pushHistory = true) {
 
   const w = NODES[nodeId];
   const lc = langClass(w.lang);
-
-  document.getElementById('headerTitle').textContent = 'Etymology Map';
-  document.getElementById('headerMeta').textContent = '';
 
   _id = 0;
   const treeHTML = renderNode(buildTree(nodeId), true, [], true);
