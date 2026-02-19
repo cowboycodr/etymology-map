@@ -1258,21 +1258,12 @@ function goBack() {
   else showRootPage(prev.nodeId, false);
 }
 
-// Click delegation: word labels navigate to root page (or graph panel context)
+// Click delegation: word labels navigate to root page
 document.addEventListener('click', e => {
   const span = e.target.closest('.node-word[data-nav-id]');
   if (!span) return;
   e.stopPropagation();
-  const navId = span.dataset.navId;
-  if (span.closest('#graphPanel')) {
-    // Inside the graph panel — navigate to that word's panel (if it's a top-level word)
-    if (WORD_IDS.includes(navId)) {
-      showGraphPanel(navId);
-      focusGraphNode(navId);
-    }
-    return;
-  }
-  showRootPage(navId);
+  showRootPage(span.dataset.navId);
 });
 
 // ── WORD SELECTION ──────────────────────────────────────────────────────────
