@@ -637,7 +637,18 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
+      transition: color 0.1s;
     }
+    .graph-panel-word::after {
+      content: ' →';
+      font-weight: 400;
+      opacity: 0;
+      transition: opacity 0.15s;
+      color: var(--accent);
+    }
+    .graph-panel-word:hover { color: var(--accent); }
+    .graph-panel-word:hover::after { opacity: 1; }
     .graph-panel-close {
       background: none;
       border: none;
@@ -817,7 +828,7 @@
     <div class="graph-tooltip" id="graphTooltip"></div>
     <div class="graph-panel hidden" id="graphPanel">
       <div class="graph-panel-header" id="graphPanelHeader">
-        <span class="graph-panel-word" id="graphPanelWord"></span>
+        <span class="graph-panel-word" id="graphPanelWord" onclick="openPanelWordInTree()"></span>
         <span id="graphPanelLang" class="lang-tag" style="font-size:10px;padding:1px 5px;flex-shrink:0"></span>
         <button class="graph-panel-close" onclick="closeGraphPanel()">×</button>
       </div>
@@ -1568,6 +1579,7 @@ function showGraphPanel(wordId) {
   if (!n) return;
   _id = 0;
   document.getElementById('graphPanelTree').innerHTML = renderNode(buildTree(wordId), true, [], true);
+  document.getElementById('graphPanel').dataset.wordId = wordId;
   document.getElementById('graphPanelWord').textContent = n.word;
   const langEl = document.getElementById('graphPanelLang');
   langEl.textContent = n.lang;
@@ -1575,6 +1587,16 @@ function showGraphPanel(wordId) {
   langEl.style.cssText = 'font-size:10px;padding:1px 5px;flex-shrink:0';
   document.getElementById('graphPanel').classList.remove('hidden');
   highlightGraphNode(wordId);
+}
+
+function openPanelWordInTree() {
+  const wordId = document.getElementById('graphPanel').dataset.wordId;
+  if (!wordId) return;
+  closeGraphPanel();
+  switchTab('tree');
+  _history.length = 0;
+  _currentView = null;
+  selectWord(wordId, false);
 }
 
 function closeGraphPanel() {
