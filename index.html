@@ -1560,14 +1560,15 @@ function renderGraph(data, opts = {}) {
     e.stopPropagation();
     if (!WORD_IDS.includes(d.id)) return;
     if (mode === 'global') {
+      showLocalGraph(d.id);
       showGraphPanel(d.id);
-      focusGraphNode(d.id);
     } else if (d.isFocused) {
       switchTab('tree');
       _history.length = 0; _currentView = null;
       selectWord(d.id, false);
     } else {
       showLocalGraph(d.id);
+      showGraphPanel(d.id);
     }
   });
 
