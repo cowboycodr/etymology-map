@@ -780,6 +780,15 @@
       /* bigger tap targets for word list */
       .word-item { padding: 8px 14px; }
 
+      /* ── TREE OVERFLOW ── */
+      /* hide meaning in rows — it's already in the header above */
+      .node-row .node-meaning { display: none; }
+      /* clip the label so deeply-nested rows never overflow */
+      .node-label { overflow: hidden; }
+      .node-word  { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+      /* contain the tree to the viewport width */
+      .tree-area  { overflow-x: hidden; }
+
       /* ── GRAPH AREA ── fill remaining space reliably */
       .graph-area { min-height: 0; }
 
