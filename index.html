@@ -716,6 +716,7 @@
       transition: color 0.1s;
     }
     .menu-btn:hover { color: var(--text-primary); }
+    .search-btn { margin-left: auto; padding: 0 4px 0 10px; font-size: 19px; }
 
     @media (max-width: 640px) {
       .menu-btn { display: flex; }
@@ -753,6 +754,24 @@
 
       /* graph back button: bigger tap target */
       .graph-back { padding: 6px 14px; font-size: 12px; }
+
+      /* search button visible on mobile */
+      .search-btn { display: flex; }
+
+      /* palette slides up as bottom sheet on mobile */
+      .cmd-overlay {
+        align-items: flex-end;
+        padding-top: 0;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      .cmd-modal {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 14px 14px 0 0;
+        border-bottom: none;
+      }
+      .cmd-results { max-height: 52vh; }
+      .cmd-esc-key { display: none; }
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
@@ -764,7 +783,7 @@
   <div class="cmd-modal">
     <div class="cmd-search-row">
       <span class="cmd-search-icon">⌕</span>
-      <input id="cmdInput" class="cmd-input" placeholder="Search roots, languages, meanings…" autocomplete="off" spellcheck="false" />
+      <input id="cmdInput" class="cmd-input" placeholder="Search roots, languages, meanings…" autocomplete="off" spellcheck="false" autocapitalize="none" autocorrect="off" />
       <kbd class="cmd-esc-key">esc</kbd>
     </div>
     <div class="cmd-results" id="cmdResults">
@@ -784,6 +803,7 @@
     <button class="menu-btn" id="menuBtn" onclick="toggleDrawer()" aria-label="words">☰</button>
     <button class="view-tab" id="tabTree" onclick="switchTab('tree')">tree</button>
     <button class="view-tab active" id="tabGraph" onclick="switchTab('graph')">graph</button>
+    <button class="menu-btn search-btn" onclick="openPalette()" aria-label="search">⌕</button>
   </div>
   <div class="tree-area hidden" id="treeArea">
     <div class="empty-state">← select a word to trace its roots</div>
