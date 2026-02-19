@@ -57,16 +57,6 @@
       flex-shrink: 0;
     }
 
-    .sidebar-title {
-      padding: 14px 12px 10px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--border);
-    }
-
     .word-list {
       flex: 1;
       overflow-y: auto;
@@ -239,13 +229,11 @@
       background: var(--tree-line);
     }
 
-    /* chevron */
+    /* chevron (hidden — collapse removed) */
     .chevron {
+      display: none;
       width: 16px;
       height: var(--row-h);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
       color: var(--text-muted);
       font-size: 9px;
@@ -275,7 +263,7 @@
       flex-shrink: 0;
     }
 
-    .node-children.collapsed { display: none; }
+    /* .node-children.collapsed removed — collapse functionality removed */
 
     /* vim cursor */
     .node-row.selected {
@@ -550,7 +538,6 @@
 </div>
 
 <div class="sidebar">
-  <div class="sidebar-title">Etymology Map</div>
   <div class="word-list" id="wordList"></div>
 </div>
 
@@ -564,8 +551,6 @@
       <button class="btn btn-search" onclick="openPalette()">
         <span>⌕ search roots</span><kbd class="hk">⌘K</kbd>
       </button>
-      <button class="btn" onclick="setAllNodes(false)">expand all</button>
-      <button class="btn" onclick="setAllNodes(true)">collapse all</button>
     </div>
   </div>
   <div class="tree-area" id="treeArea">
@@ -574,10 +559,9 @@
   <div class="hint-bar">
     <span><kbd class="hk">⌘K</kbd> search roots</span>
     <span><kbd class="hk">j</kbd><kbd class="hk">k</kbd> navigate</span>
-    <span><kbd class="hk">h</kbd><kbd class="hk">l</kbd> collapse / expand</span>
+    <span><kbd class="hk">h</kbd><kbd class="hk">l</kbd> parent / child</span>
     <span><kbd class="hk">gg</kbd> top &nbsp;<kbd class="hk">G</kbd> bottom</span>
-    <span><kbd class="hk">enter</kbd> toggle</span>
-    <span><kbd class="hk">1</kbd>–<kbd class="hk">9</kbd> select word</span>
+    <span><kbd class="hk">enter</kbd> open</span>
   </div>
 </div>
 
@@ -622,7 +606,6 @@ function renderNode(node, isLast, ancestorHasMore, isRoot = false) {
   }
 
   const lc = langClass(node.lang);
-  const chevron = hasKids ? 'open' : 'leaf';
   const hlClass = (_renderHighlight && node._id === _renderHighlight) ? ' root-hl' : '';
 
   // Recurse: when entering children, track whether the current node
@@ -636,9 +619,8 @@ function renderNode(node, isLast, ancestorHasMore, isRoot = false) {
   }
 
   return `<div class="tree-node" id="${id}">
-    <div class="node-row${hlClass}" data-word="${node.word.replace(/"/g,'&quot;')}" onclick="toggle('${id}')">
+    <div class="node-row${hlClass}" data-word="${node.word.replace(/"/g,'&quot;')}" onclick="selectRow(this)">
       <div class="guides">${guidesHTML}</div>
-      <span class="chevron ${chevron}">▶</span>
       <div class="node-label">
         <span class="node-word"
           data-nav-id="${esc(node._id||'')}"
@@ -652,23 +634,6 @@ function renderNode(node, isLast, ancestorHasMore, isRoot = false) {
   </div>`;
 }
 
-function toggle(id) {
-  const kids = document.getElementById(id + '-c');
-  const row = document.querySelector(`#${id} > .node-row`);
-  selectRow(row);
-  if (!kids) return;
-  kids.classList.toggle('collapsed');
-  row?.querySelector('.chevron')?.classList.toggle('open');
-}
-
-function setAllNodes(collapse) {
-  document.querySelectorAll('.node-children').forEach(el => {
-    el.classList.toggle('collapsed', collapse);
-  });
-  document.querySelectorAll('.chevron:not(.leaf)').forEach(el => {
-    el.classList.toggle('open', !collapse);
-  });
-}
 
 // ── RELATIONAL HELPERS ───────────────────────────────────────────────────────
 
@@ -981,10 +946,14 @@ document.addEventListener('keydown', e => {
     return;
   }
   if (!_paletteOpen) return;
-  if (e.key === 'Escape')     { e.preventDefault(); closePalette(); }
-  else if (e.key === 'ArrowDown')  { e.preventDefault(); movePaletteFocus(+1); }
-  else if (e.key === 'ArrowUp')    { e.preventDefault(); movePaletteFocus(-1); }
-  else if (e.key === 'Enter' && _focusedResult >= 0) { e.preventDefault(); pickResult(_focusedResult); }
+  if (e.key === 'Escape')     { e.preventDefault(); e.stopPropagation(); closePalette(); }
+  else if (e.key === 'ArrowDown' || (e.key === 'j' && e.target.tagName !== 'INPUT')) { e.preventDefault(); movePaletteFocus(+1); }
+  else if (e.key === 'ArrowUp'   || (e.key === 'k' && e.target.tagName !== 'INPUT')) { e.preventDefault(); movePaletteFocus(-1); }
+  else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (_focusedResult >= 0) { pickResult(_focusedResult); }
+    else if (_searchResults.length > 0) { movePaletteFocus(+1); document.getElementById('cmdInput').blur(); }
+  }
 }, true); // capture phase so it runs before the vim handler
 
 document.getElementById('cmdPalette').addEventListener('mousedown', e => {
@@ -1005,16 +974,8 @@ function selectRow(row) {
   }
 }
 
-// Only rows that aren't inside a collapsed subtree
 function visibleRows() {
-  return [...document.querySelectorAll('.node-row')].filter(row => {
-    let el = row.parentElement;
-    while (el) {
-      if (el.classList.contains('node-children') && el.classList.contains('collapsed')) return false;
-      el = el.parentElement;
-    }
-    return true;
-  });
+  return [...document.querySelectorAll('.node-row')];
 }
 
 function parentRow(row) {
@@ -1026,8 +987,7 @@ function parentRow(row) {
 function firstChildRow(row) {
   const id = row.closest('.tree-node')?.id;
   const kids = id ? document.getElementById(id + '-c') : null;
-  if (!kids || kids.classList.contains('collapsed')) return null;
-  return kids.querySelector(':scope > .tree-node > .node-row') || null;
+  return kids?.querySelector(':scope > .tree-node > .node-row') || null;
 }
 
 let _pendingG = false, _gTimer = null;
@@ -1038,13 +998,6 @@ document.addEventListener('keydown', e => {
 
   const rows = visibleRows();
   const idx  = _cursor ? rows.indexOf(_cursor) : -1;
-
-  // number keys → pick word
-  if (e.key >= '1' && e.key <= '9') {
-    const i = parseInt(e.key) - 1;
-    if (i < WORD_IDS.length) selectWord(WORD_IDS[i]);
-    return;
-  }
 
   switch (e.key) {
 
@@ -1060,36 +1013,15 @@ document.addEventListener('keydown', e => {
       selectRow(rows[idx <= 0 ? 0 : idx - 1]);
       break;
 
-    case 'l': case 'ArrowRight': {
+    case 'l': case 'ArrowRight':
       e.preventDefault();
-      if (!_cursor) break;
-      const id   = _cursor.closest('.tree-node')?.id;
-      const kids = id ? document.getElementById(id + '-c') : null;
-      if (!kids) break;
-      if (kids.classList.contains('collapsed')) {
-        kids.classList.remove('collapsed');
-        _cursor.querySelector('.chevron')?.classList.add('open');
-      } else {
-        const child = firstChildRow(_cursor);
-        if (child) selectRow(child);
-      }
+      if (_cursor) { const c = firstChildRow(_cursor); if (c) selectRow(c); }
       break;
-    }
 
-    case 'h': case 'ArrowLeft': {
+    case 'h': case 'ArrowLeft':
       e.preventDefault();
-      if (!_cursor) break;
-      const id   = _cursor.closest('.tree-node')?.id;
-      const kids = id ? document.getElementById(id + '-c') : null;
-      if (kids && !kids.classList.contains('collapsed')) {
-        kids.classList.add('collapsed');
-        _cursor.querySelector('.chevron')?.classList.remove('open');
-      } else {
-        const p = parentRow(_cursor);
-        if (p) selectRow(p);
-      }
+      if (_cursor) { const p = parentRow(_cursor); if (p) selectRow(p); }
       break;
-    }
 
     case 'g':
       if (_pendingG) {
@@ -1106,9 +1038,17 @@ document.addEventListener('keydown', e => {
       if (rows.length) selectRow(rows[rows.length - 1]);
       break;
 
-    case 'Enter': case ' ':
+    case 'Enter':
       e.preventDefault();
-      if (_cursor) toggle(_cursor.closest('.tree-node')?.id);
+      if (_cursor) {
+        const navId = _cursor.querySelector('.node-word[data-nav-id]')?.dataset.navId;
+        if (navId) showRootPage(navId);
+      }
+      break;
+
+    case 'Escape':
+      e.preventDefault();
+      goBack();
       break;
   }
 });
@@ -1129,10 +1069,8 @@ function showRootPage(nodeId, pushHistory = true) {
   // Find all top-level word trees that contain this node
   const hits = CONTAINED_IN[nodeId] || [];
 
-  // Update header
-  document.getElementById('headerTitle').textContent = n.word;
-  document.getElementById('headerMeta').textContent =
-    n.lang + (n.meaning ? ' — ' + n.meaning : '');
+  document.getElementById('headerTitle').textContent = 'Etymology Map';
+  document.getElementById('headerMeta').textContent = '';
 
   // Render each containing word tree with the target node highlighted
   const treeSections = hits.map(wid => {
@@ -1188,13 +1126,23 @@ function selectWord(nodeId, pushHistory = true) {
   document.querySelector(`.word-item[data-key="${nodeId}"]`)?.classList.add('active');
 
   const w = NODES[nodeId];
-  document.getElementById('headerTitle').textContent = w.word;
-  document.getElementById('headerMeta').textContent =
-    [w.date, w.lang].filter(Boolean).join(' · ') +
-    (w.meaning ? ' — ' + w.meaning : '');
+  const lc = langClass(w.lang);
+
+  document.getElementById('headerTitle').textContent = 'Etymology Map';
+  document.getElementById('headerMeta').textContent = '';
 
   _id = 0;
-  document.getElementById('treeArea').innerHTML = renderNode(buildTree(nodeId), true, [], true);
+  const treeHTML = renderNode(buildTree(nodeId), true, [], true);
+  document.getElementById('treeArea').innerHTML = `
+    <div class="root-page">
+      <div class="root-hero">
+        <span class="root-hero-word">${esc(w.word)}</span>
+        <span class="lang-tag ${lc}">${esc(w.lang)}</span>
+        ${w.date ? `<span class="node-date" style="font-size:12px;opacity:1">${esc(w.date)}</span>` : ''}
+      </div>
+      ${w.meaning ? `<div class="root-hero-meaning">"${esc(w.meaning)}"</div>` : ''}
+      <div style="margin-top:10px">${treeHTML}</div>
+    </div>`;
   selectRow(document.querySelector('#treeArea .node-row'));
 }
 
