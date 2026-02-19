@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Menlo', 'Consolas', monospace;
+  --color-bg-base:       var(--bg-base);
+  --color-bg-surface:    var(--bg-surface);
+  --color-bg-hover:      var(--bg-hover);
+  --color-border:        var(--border);
+  --color-accent:        var(--accent);
+  --color-accent-bg:     var(--accent-bg);
+  --color-text-primary:  var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted:    var(--text-muted);
+}
+
+/* ── DESIGN TOKENS ───────────────────────────────────────────── */
+
+:root {
+  --bg-base:    #1e1e2e;
+  --bg-surface: #181825;
+  --bg-hover:   #313244;
+  --border:     #313244;
+  --tree-line:  #313244;
+
+  --text-primary:   #cdd6f4;
+  --text-secondary: #bac2de;
+  --text-muted:     #6c7086;
+
+  --accent:     #89b4fa;
+  --accent-bg:  #1a2a3d;
+
+  /* language tag colours */
+  --c-pie:        #f38ba8; --c-pie-bg:        #3d1a1f;
+  --c-latin:      #fab387; --c-latin-bg:      #3d2a1a;
+  --c-greek:      #a6e3a1; --c-greek-bg:      #1a3020;
+  --c-english:    #89b4fa; --c-english-bg:    #1a2a3d;
+  --c-norse:      #89dceb; --c-norse-bg:      #1a3038;
+  --c-slavic:     #94e2d5; --c-slavic-bg:     #1a3330;
+  --c-iranian:    #f9e2af; --c-iranian-bg:    #3d3010;
+  --c-phoenician: #f9e2af; --c-phoenician-bg: #3d2f10;
+  --c-other:      #cba6f7; --c-other-bg:      #2a1a3d;
+
+  --row-h: 26px;
+  --guide-w: 20px;
+
+  --graph-link:     #585b70;
+  --graph-link-dim: #45475a;
+  --panel-shadow:   0 8px 32px rgba(0,0,0,0.45);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-base:    #eff1f5;
+    --bg-surface: #e6e9ef;
+    --bg-hover:   #dce0e8;
+    --border:     #ccd0da;
+    --tree-line:  #ccd0da;
+
+    --text-primary:   #4c4f69;
+    --text-secondary: #5c5f77;
+    --text-muted:     #9ca0b0;
+
+    --accent:     #1e66f5;
+    --accent-bg:  #d4e0f7;
+
+    --c-pie:        #d20f39; --c-pie-bg:        #f7d3da;
+    --c-latin:      #fe640b; --c-latin-bg:      #fde8d0;
+    --c-greek:      #40a02b; --c-greek-bg:      #d2efca;
+    --c-english:    #1e66f5; --c-english-bg:    #d4e0f7;
+    --c-norse:      #04a5e5; --c-norse-bg:      #cdedf7;
+    --c-slavic:     #179299; --c-slavic-bg:     #c4e8e9;
+    --c-iranian:    #df8e1d; --c-iranian-bg:    #f5e3b6;
+    --c-phoenician: #e64553; --c-phoenician-bg: #f9d3d6;
+    --c-other:      #8839ef; --c-other-bg:      #e8d8f9;
+
+    --graph-link:     #b8bfd6;
+    --graph-link-dim: #ccd0da;
+    --panel-shadow:   0 4px 16px rgba(0,0,0,0.10);
+  }
+}
+
+/* ── RESET ───────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'SF Mono', 'Cascadia Code', 'Menlo', 'Consolas', monospace;
+  font-size: 13px;
+  height: 100dvh;
+  display: flex;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  html, body { max-width: 100vw; overflow-x: hidden; }
+  body { height: 100dvh; }
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── LANGUAGE TAG CLASSES ────────────────────────────────────── */
+
+.lang-tag {
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.lang-pie        { background: var(--c-pie-bg);        color: var(--c-pie);        }
+.lang-latin      { background: var(--c-latin-bg);      color: var(--c-latin);      }
+.lang-greek      { background: var(--c-greek-bg);      color: var(--c-greek);      }
+.lang-english    { background: var(--c-english-bg);    color: var(--c-english);    }
+.lang-norse      { background: var(--c-norse-bg);      color: var(--c-norse);      }
+.lang-slavic     { background: var(--c-slavic-bg);     color: var(--c-slavic);     }
+.lang-iranian    { background: var(--c-iranian-bg);    color: var(--c-iranian);    }
+.lang-phoenician { background: var(--c-phoenician-bg); color: var(--c-phoenician); }
+.lang-other      { background: var(--c-other-bg);      color: var(--c-other);      }
+
+/* ── TREE GUIDE LINES ────────────────────────────────────────── */
+
+.guides {
+  display: flex;
+  align-items: stretch;
+  height: var(--row-h);
+  flex-shrink: 0;
+}
+
+.guide {
+  width: var(--guide-w);
+  height: var(--row-h);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.guide.pass::before {
+  content: '';
+  position: absolute;
+  left: 9px; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--tree-line);
+}
+
+.guide.tee::before {
+  content: '';
+  position: absolute;
+  left: 9px; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--tree-line);
+}
+.guide.tee::after {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: calc(var(--row-h) / 2);
+  right: 0;
+  height: 1px;
+  background: var(--tree-line);
+}
+
+.guide.elbow::before {
+  content: '';
+  position: absolute;
+  left: 9px; top: 0;
+  height: calc(var(--row-h) / 2);
+  width: 1px;
+  background: var(--tree-line);
+}
+.guide.elbow::after {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: calc(var(--row-h) / 2);
+  right: 0;
+  height: 1px;
+  background: var(--tree-line);
+}
+
+/* ── GRAPH TEXT LABELS ───────────────────────────────────────── */
+
+/* filled via CSS so light/dark theming works without D3 repaint */
+.glt-focused { fill: var(--accent); }
+.glt-word    { fill: var(--text-primary); }
+.glt-muted   { fill: var(--text-muted); }
+
+/* ── SHARED BTN ──────────────────────────────────────────────── */
+
+.btn {
+  font-family: inherit;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: color 0.1s, border-color 0.1s;
+}
+.btn:hover { color: var(--text-primary); border-color: var(--text-muted); }
+
+/* ── KBD ─────────────────────────────────────────────────────── */
+
+.hk {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0 4px;
+  line-height: 1.5;
+  font-family: inherit;
+}
