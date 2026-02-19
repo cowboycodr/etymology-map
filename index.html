@@ -674,13 +674,13 @@
 
 <div class="main">
   <div class="view-tabs">
-    <button class="view-tab active" id="tabTree" onclick="switchTab('tree')">tree</button>
-    <button class="view-tab" id="tabGraph" onclick="switchTab('graph')">graph</button>
+    <button class="view-tab" id="tabTree" onclick="switchTab('tree')">tree</button>
+    <button class="view-tab active" id="tabGraph" onclick="switchTab('graph')">graph</button>
   </div>
-  <div class="tree-area" id="treeArea">
+  <div class="tree-area hidden" id="treeArea">
     <div class="empty-state">← select a word to trace its roots</div>
   </div>
-  <div class="graph-area hidden" id="graphArea">
+  <div class="graph-area" id="graphArea">
     <button class="graph-back hidden" id="graphBack" onclick="showGlobalGraph()">← all words</button>
     <div class="graph-label" id="graphLabel"></div>
     <div class="graph-tooltip" id="graphTooltip"></div>
@@ -1327,8 +1327,14 @@ function switchTab(tab) {
   document.getElementById('treeArea').classList.toggle('hidden', tab !== 'tree');
   document.getElementById('graphArea').classList.toggle('hidden', tab !== 'graph');
   document.getElementById('hintContent').innerHTML = tab === 'tree' ? HINT_TREE : HINT_GRAPH;
-  if (tab === 'graph' && !document.querySelector('#graphArea svg')) {
-    requestAnimationFrame(() => showGlobalGraph());
+  if (tab === 'graph') {
+    const target = _currentView?.type === 'word' ? _currentView.key : null;
+    if (!document.querySelector('#graphArea svg')) {
+      requestAnimationFrame(() => showGlobalGraph(target));
+    } else if (target) {
+      highlightGraphNode(target);
+      focusGraphNode(target);
+    }
   }
 }
 
@@ -1580,13 +1586,17 @@ function renderGraph(data, opts = {}) {
   });
 }
 
-function showGlobalGraph() {
+function showGlobalGraph(targetWordId = null) {
   _graphMode = 'global';
   _graphFocusedWord = null;
   document.getElementById('graphBack').classList.add('hidden');
   document.getElementById('graphLabel').textContent = `${WORD_IDS.length} words`;
   closeGraphPanel();
   renderGraph(buildGlobalGraphData(), { mode: 'global' });
+  if (targetWordId) {
+    // Highlight immediately; pan once simulation has had time to spread nodes out
+    setTimeout(() => { highlightGraphNode(targetWordId); focusGraphNode(targetWordId); }, 900);
+  }
 }
 
 function showLocalGraph(wordId) {
@@ -1635,7 +1645,7 @@ async function init() {
     listEl.appendChild(el);
   }
 
-  selectWord(WORD_IDS[0], false);
+  switchTab('graph');
 }
 
 init();
