@@ -26,35 +26,35 @@
 </script>
 
 <div class="tree-node">
-  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-  <div
-    class="node-row"
-    class:root-hl={highlightId && node._id === highlightId}
-    class:selected={selectedId === node._id}
-    onclick={() => onRowClick?.(node._id)}
-  >
-    {#if !isRoot}
+  {#if !isRoot}
+    <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+    <div
+      class="node-row"
+      class:root-hl={highlightId && node._id === highlightId}
+      class:selected={selectedId === node._id}
+      onclick={() => onRowClick?.(node._id)}
+    >
       <div class="guides">
         {#each ancestorHasMore as hasMore}
           <span class="guide" class:pass={hasMore}></span>
         {/each}
         <span class="guide" class:elbow={isLast} class:tee={!isLast}></span>
       </div>
-    {/if}
-    <div class="node-label">
-      <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-      <span
-        class="node-word"
-        data-nav-id={node._id}
-        onclick={(e) => { e.stopPropagation(); onNodeClick?.(node._id); }}
-      >{node.word}</span>
-      {#if node.date}<span class="node-date">{node.date}</span>{/if}
-      <LangTag lang={node.lang} small />
-      {#if node.meaning && !compact}
-        <span class="node-meaning">"{node.meaning}"</span>
-      {/if}
+      <div class="node-label">
+        <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+        <span
+          class="node-word"
+          data-nav-id={node._id}
+          onclick={(e) => { e.stopPropagation(); onNodeClick?.(node._id); }}
+        >{node.word}</span>
+        {#if node.date}<span class="node-date">{node.date}</span>{/if}
+        <LangTag lang={node.lang} small />
+        {#if node.meaning && !compact}
+          <span class="node-meaning">"{node.meaning}"</span>
+        {/if}
+      </div>
     </div>
-  </div>
+  {/if}
   {#if node.roots && node.roots.length > 0}
     <div class="node-children">
       {#each node.roots as child, i}

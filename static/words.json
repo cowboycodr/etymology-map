@@ -8910,6 +8910,1513 @@
       "roots": [
         "ml.villanus"
       ]
+    },
+    "en.etymology": {
+      "word": "etymology",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "study of word origins",
+      "roots": [
+        "la.etymologia"
+      ]
+    },
+    "la.etymologia": {
+      "word": "etymologia",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "study of the true sense of a word",
+      "roots": [
+        "grc.etymologia"
+      ]
+    },
+    "grc.etymologia": {
+      "word": "etymología",
+      "lang": "Ancient Greek",
+      "date": "c. 300 BCE",
+      "meaning": "analysis of a word to find its true origin",
+      "roots": [
+        "grc.etymon",
+        "grc.logos"
+      ]
+    },
+    "grc.etymon": {
+      "word": "étymon",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "true sense or origin of a word",
+      "roots": [
+        "grc.etymos"
+      ]
+    },
+    "grc.etymos": {
+      "word": "étymos",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "true, real, actual",
+      "roots": [
+        "pie.es"
+      ]
+    },
+    "pie.es": {
+      "word": "*h₁es-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to be",
+      "roots": []
+    },
+    "en.lexicon": {
+      "word": "lexicon",
+      "lang": "English",
+      "date": "1603",
+      "meaning": "vocabulary of a language; a dictionary",
+      "roots": [
+        "grc.lexikon"
+      ]
+    },
+    "grc.lexikon": {
+      "word": "lexikón",
+      "lang": "Ancient Greek",
+      "date": "c. 300 BCE",
+      "meaning": "of or for words",
+      "roots": [
+        "grc.lexis"
+      ]
+    },
+    "grc.lexis": {
+      "word": "léxis",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "word, speech, diction",
+      "roots": [
+        "grc.legein"
+      ]
+    },
+    "grc.legein": {
+      "word": "légein",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "to speak, to read, to gather",
+      "roots": [
+        "pie.leg"
+      ]
+    },
+    "en.syntax": {
+      "word": "syntax",
+      "lang": "English",
+      "date": "1590s",
+      "meaning": "the arrangement of words in a sentence",
+      "roots": [
+        "la.syntaxis"
+      ]
+    },
+    "la.syntaxis": {
+      "word": "syntaxis",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "arrangement, syntax",
+      "roots": [
+        "grc.syntaxis"
+      ]
+    },
+    "grc.syntaxis": {
+      "word": "sýntaxis",
+      "lang": "Ancient Greek",
+      "date": "c. 300 BCE",
+      "meaning": "arrangement, putting together in order",
+      "roots": [
+        "grc.sym",
+        "grc.tassein"
+      ]
+    },
+    "grc.tassein": {
+      "word": "tássein",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "to arrange, to put in order",
+      "roots": [
+        "pie.tag"
+      ]
+    },
+    "en.metaphor": {
+      "word": "metaphor",
+      "lang": "English",
+      "date": "late 15c.",
+      "meaning": "a figure of speech transferring a name or description to something else",
+      "roots": [
+        "la.metaphora"
+      ]
+    },
+    "la.metaphora": {
+      "word": "metaphora",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "figure of speech, metaphor",
+      "roots": [
+        "grc.metaphora"
+      ]
+    },
+    "grc.metaphora": {
+      "word": "metaphorá",
+      "lang": "Ancient Greek",
+      "date": "c. 350 BCE",
+      "meaning": "a transfer, a carrying over",
+      "roots": [
+        "grc.meta",
+        "grc.pherein"
+      ]
+    },
+    "grc.meta": {
+      "word": "metá",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "with, after, beyond, over",
+      "roots": []
+    },
+    "grc.pherein": {
+      "word": "phérein",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "to carry, to bear",
+      "roots": [
+        "pie.bher"
+      ]
+    },
+    "en.rhetoric": {
+      "word": "rhetoric",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "the art of effective or persuasive speaking",
+      "roots": [
+        "ofr.rhetorique"
+      ]
+    },
+    "ofr.rhetorique": {
+      "word": "rhetorique",
+      "lang": "Old French",
+      "date": "c. 13c.",
+      "meaning": "rhetoric, art of public speaking",
+      "roots": [
+        "la.rhetorica"
+      ]
+    },
+    "la.rhetorica": {
+      "word": "rhetorica",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "the art of oratory",
+      "roots": [
+        "grc.rhetorike"
+      ]
+    },
+    "grc.rhetorike": {
+      "word": "rhētorikḗ",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "the art of the orator, rhetoric",
+      "roots": [
+        "grc.rhetor"
+      ]
+    },
+    "grc.rhetor": {
+      "word": "rhḗtōr",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "orator, public speaker",
+      "roots": [
+        "grc.rhein"
+      ]
+    },
+    "grc.rhein": {
+      "word": "rhein",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "to flow, to speak",
+      "roots": [
+        "pie.sreu"
+      ]
+    },
+    "pie.sreu": {
+      "word": "*srew-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to flow",
+      "roots": []
+    },
+    "en.palindrome": {
+      "word": "palindrome",
+      "lang": "English",
+      "date": "1620s",
+      "meaning": "a word or phrase that reads the same backward as forward",
+      "roots": [
+        "grc.palindromos"
+      ]
+    },
+    "grc.palindromos": {
+      "word": "palíndromos",
+      "lang": "Ancient Greek",
+      "date": "c. 200 BCE",
+      "meaning": "running back again",
+      "roots": [
+        "grc.palin",
+        "grc.dromos"
+      ]
+    },
+    "grc.palin": {
+      "word": "pálin",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "again, back",
+      "roots": [
+        "pie.kwel"
+      ]
+    },
+    "grc.dromos": {
+      "word": "drómos",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "a running, a racecourse",
+      "roots": [
+        "pie.drem"
+      ]
+    },
+    "pie.drem": {
+      "word": "*drem-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to run",
+      "roots": []
+    },
+    "en.acronym": {
+      "word": "acronym",
+      "lang": "English",
+      "date": "1943",
+      "meaning": "a word formed from the initial letters of a phrase",
+      "roots": [
+        "grc.akros",
+        "grc.onoma"
+      ]
+    },
+    "grc.akros": {
+      "word": "ákros",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "at the tip, topmost, extreme",
+      "roots": [
+        "pie.ak"
+      ]
+    },
+    "pie.ak": {
+      "word": "*h₂eḱ-",
+      "lang": "Proto-Indo-European",
+      "meaning": "sharp, pointed",
+      "roots": []
+    },
+    "en.dialect": {
+      "word": "dialect",
+      "lang": "English",
+      "date": "1570s",
+      "meaning": "a regional variety of a language",
+      "roots": [
+        "mfr.dialecte"
+      ]
+    },
+    "mfr.dialecte": {
+      "word": "dialecte",
+      "lang": "Middle French",
+      "date": "c. 16c.",
+      "meaning": "dialect",
+      "roots": [
+        "la.dialectus"
+      ]
+    },
+    "la.dialectus": {
+      "word": "dialectus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "dialect, way of speaking",
+      "roots": [
+        "grc.dialektos"
+      ]
+    },
+    "grc.dialektos": {
+      "word": "diálektos",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "discourse, way of speaking, dialect",
+      "roots": [
+        "grc.dia",
+        "grc.legein"
+      ]
+    },
+    "grc.dia": {
+      "word": "diá",
+      "lang": "Ancient Greek",
+      "date": "c. 800 BCE",
+      "meaning": "through, across, apart",
+      "roots": []
+    },
+    "en.vernacular": {
+      "word": "vernacular",
+      "lang": "English",
+      "date": "1601",
+      "meaning": "native language or dialect of a region",
+      "roots": [
+        "la.vernaculus"
+      ]
+    },
+    "la.vernaculus": {
+      "word": "vernāculus",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "native, domestic, indigenous",
+      "roots": [
+        "la.verna"
+      ]
+    },
+    "la.verna": {
+      "word": "verna",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "home-born slave, native",
+      "roots": [
+        "ett.verna"
+      ]
+    },
+    "ett.verna": {
+      "word": "verna",
+      "lang": "Etruscan",
+      "meaning": "native, home-born",
+      "roots": []
+    },
+    "en.syllable": {
+      "word": "syllable",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "a unit of pronunciation forming a word or part of a word",
+      "roots": [
+        "ofr.sillabe"
+      ]
+    },
+    "ofr.sillabe": {
+      "word": "sillabe",
+      "lang": "Old French",
+      "date": "c. 13c.",
+      "meaning": "syllable",
+      "roots": [
+        "la.syllaba"
+      ]
+    },
+    "la.syllaba": {
+      "word": "syllaba",
+      "lang": "Latin",
+      "date": "classical",
+      "meaning": "syllable",
+      "roots": [
+        "grc.syllabe"
+      ]
+    },
+    "grc.syllabe": {
+      "word": "syllabḗ",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "a taking together, a syllable",
+      "roots": [
+        "grc.sym",
+        "grc.lambanein"
+      ]
+    },
+    "grc.lambanein": {
+      "word": "lambánein",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "to take, to grasp",
+      "roots": [
+        "pie.slAgw"
+      ]
+    },
+    "pie.slAgw": {
+      "word": "*slāgw-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to seize, to take",
+      "roots": []
+    },
+    "en.physics": {
+      "word": "physics",
+      "lang": "English",
+      "date": "1580s",
+      "meaning": "science of matter and energy",
+      "roots": [
+        "la.physica"
+      ]
+    },
+    "la.physica": {
+      "word": "physica",
+      "lang": "Latin",
+      "meaning": "natural science",
+      "roots": [
+        "grc.physike"
+      ]
+    },
+    "grc.physike": {
+      "word": "physikē",
+      "lang": "Ancient Greek",
+      "meaning": "natural science, knowledge of nature",
+      "roots": [
+        "grc.physis"
+      ]
+    },
+    "grc.physis": {
+      "word": "physis",
+      "lang": "Ancient Greek",
+      "meaning": "nature, origin, growth",
+      "roots": [
+        "grc.phyein"
+      ]
+    },
+    "grc.phyein": {
+      "word": "phyein",
+      "lang": "Ancient Greek",
+      "meaning": "to grow, produce, bring forth",
+      "roots": [
+        "pie.bhuH"
+      ]
+    },
+    "en.atom": {
+      "word": "atom",
+      "lang": "English",
+      "date": "late 15c.",
+      "meaning": "smallest indivisible unit of matter",
+      "roots": [
+        "la.atomus"
+      ]
+    },
+    "la.atomus": {
+      "word": "atomus",
+      "lang": "Latin",
+      "meaning": "indivisible particle",
+      "roots": [
+        "grc.atomos"
+      ]
+    },
+    "grc.atomos": {
+      "word": "atomos",
+      "lang": "Ancient Greek",
+      "meaning": "indivisible, uncut",
+      "roots": [
+        "grc.a_prefix",
+        "grc.tomos"
+      ]
+    },
+    "grc.a_prefix": {
+      "word": "a-",
+      "lang": "Ancient Greek",
+      "meaning": "not, without (negative prefix)",
+      "roots": [
+        "pie.ne"
+      ]
+    },
+    "grc.tomos": {
+      "word": "tomos",
+      "lang": "Ancient Greek",
+      "meaning": "cutting, section",
+      "roots": [
+        "grc.temnein"
+      ]
+    },
+    "grc.temnein": {
+      "word": "temnein",
+      "lang": "Ancient Greek",
+      "meaning": "to cut",
+      "roots": [
+        "pie.tem"
+      ]
+    },
+    "pie.tem": {
+      "word": "*tem-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to cut",
+      "roots": []
+    },
+    "pie.ne": {
+      "word": "*ne-",
+      "lang": "Proto-Indo-European",
+      "meaning": "not (negative particle)",
+      "roots": []
+    },
+    "en.quantum": {
+      "word": "quantum",
+      "lang": "English",
+      "date": "1900",
+      "meaning": "discrete unit of energy",
+      "roots": [
+        "la.quantum"
+      ]
+    },
+    "la.quantum": {
+      "word": "quantum",
+      "lang": "Latin",
+      "meaning": "how much, how great an amount",
+      "roots": [
+        "la.quantus"
+      ]
+    },
+    "la.quantus": {
+      "word": "quantus",
+      "lang": "Latin",
+      "meaning": "how great, how much",
+      "roots": [
+        "pie.kwo"
+      ]
+    },
+    "pie.kwo": {
+      "word": "*kwo-",
+      "lang": "Proto-Indo-European",
+      "meaning": "who, what, which (interrogative/relative stem)",
+      "roots": []
+    },
+    "en.entropy": {
+      "word": "entropy",
+      "lang": "English",
+      "date": "1865",
+      "meaning": "measure of disorder in a thermodynamic system",
+      "roots": [
+        "grc.en_prep",
+        "grc.trope"
+      ]
+    },
+    "grc.trope": {
+      "word": "tropē",
+      "lang": "Ancient Greek",
+      "meaning": "turning, transformation, change",
+      "roots": [
+        "grc.trepein"
+      ]
+    },
+    "grc.trepein": {
+      "word": "trepein",
+      "lang": "Ancient Greek",
+      "meaning": "to turn, to change direction",
+      "roots": [
+        "pie.trep"
+      ]
+    },
+    "pie.trep": {
+      "word": "*trep-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to turn",
+      "roots": []
+    },
+    "en.photon": {
+      "word": "photon",
+      "lang": "English",
+      "date": "1926",
+      "meaning": "quantum of electromagnetic radiation",
+      "roots": [
+        "grc.photos"
+      ]
+    },
+    "grc.photos": {
+      "word": "phōtos",
+      "lang": "Ancient Greek",
+      "meaning": "of light (genitive of phōs)",
+      "roots": [
+        "grc.phos"
+      ]
+    },
+    "grc.phos": {
+      "word": "phōs",
+      "lang": "Ancient Greek",
+      "meaning": "light",
+      "roots": [
+        "pie.bha"
+      ]
+    },
+    "en.electron": {
+      "word": "electron",
+      "lang": "English",
+      "date": "1891",
+      "meaning": "subatomic particle with negative charge",
+      "roots": [
+        "grc.elektron"
+      ]
+    },
+    "grc.elektron": {
+      "word": "ēlektron",
+      "lang": "Ancient Greek",
+      "meaning": "amber (source of static electricity)",
+      "roots": [
+        "pie.h1el"
+      ]
+    },
+    "pie.h1el": {
+      "word": "*h1el-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to shine, glow",
+      "roots": []
+    },
+    "en.proton": {
+      "word": "proton",
+      "lang": "English",
+      "date": "1920",
+      "meaning": "subatomic particle with positive charge",
+      "roots": [
+        "grc.proton"
+      ]
+    },
+    "grc.proton": {
+      "word": "prōton",
+      "lang": "Ancient Greek",
+      "meaning": "first thing, the first",
+      "roots": [
+        "grc.protos"
+      ]
+    },
+    "grc.protos": {
+      "word": "prōtos",
+      "lang": "Ancient Greek",
+      "meaning": "first, foremost",
+      "roots": [
+        "grc.pro"
+      ]
+    },
+    "grc.pro": {
+      "word": "pro",
+      "lang": "Ancient Greek",
+      "meaning": "before, in front of",
+      "roots": [
+        "pie.per"
+      ]
+    },
+    "en.neutron": {
+      "word": "neutron",
+      "lang": "English",
+      "date": "1932",
+      "meaning": "subatomic particle with no electric charge",
+      "roots": [
+        "la.neuter"
+      ]
+    },
+    "la.neuter": {
+      "word": "neuter",
+      "lang": "Latin",
+      "meaning": "neither (of two)",
+      "roots": [
+        "la.ne",
+        "la.uter"
+      ]
+    },
+    "la.ne": {
+      "word": "ne",
+      "lang": "Latin",
+      "meaning": "not (negative particle)",
+      "roots": [
+        "pie.ne"
+      ]
+    },
+    "la.uter": {
+      "word": "uter",
+      "lang": "Latin",
+      "meaning": "which of two, either",
+      "roots": [
+        "pie.kwo"
+      ]
+    },
+    "en.momentum": {
+      "word": "momentum",
+      "lang": "English",
+      "date": "1690s",
+      "meaning": "quantity of motion of a moving body",
+      "roots": [
+        "la.momentum"
+      ]
+    },
+    "la.momentum": {
+      "word": "momentum",
+      "lang": "Latin",
+      "meaning": "movement, impulse, brief space of time",
+      "roots": [
+        "la.movere"
+      ]
+    },
+    "la.movere": {
+      "word": "movere",
+      "lang": "Latin",
+      "meaning": "to move, set in motion",
+      "roots": [
+        "pie.meue"
+      ]
+    },
+    "pie.meue": {
+      "word": "*meue-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to push away, move",
+      "roots": []
+    },
+    "en.force": {
+      "word": "force",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "strength, power; influence causing acceleration",
+      "roots": [
+        "ofr.force"
+      ]
+    },
+    "ofr.force": {
+      "word": "force",
+      "lang": "Old French",
+      "meaning": "strength, power",
+      "roots": [
+        "la.fortia"
+      ]
+    },
+    "la.fortia": {
+      "word": "fortia",
+      "lang": "Latin",
+      "meaning": "strength, power",
+      "roots": [
+        "la.fortis"
+      ]
+    },
+    "la.fortis": {
+      "word": "fortis",
+      "lang": "Latin",
+      "meaning": "strong, mighty",
+      "roots": [
+        "pie.bhrgh"
+      ]
+    },
+    "en.mass": {
+      "word": "mass",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "amount of matter in a body",
+      "roots": [
+        "ofr.masse"
+      ]
+    },
+    "ofr.masse": {
+      "word": "masse",
+      "lang": "Old French",
+      "date": "c. 12c.",
+      "meaning": "lump, mass",
+      "roots": [
+        "la.massa"
+      ]
+    },
+    "la.massa": {
+      "word": "massa",
+      "lang": "Latin",
+      "date": "c. 1c.",
+      "meaning": "lump, mass, dough",
+      "roots": [
+        "grc.maza"
+      ]
+    },
+    "grc.maza": {
+      "word": "maza",
+      "lang": "Ancient Greek",
+      "date": "c. 5c. BCE",
+      "meaning": "barley cake, lump",
+      "roots": [
+        "grc.massein"
+      ]
+    },
+    "grc.massein": {
+      "word": "massein",
+      "lang": "Ancient Greek",
+      "date": "c. 5c. BCE",
+      "meaning": "to knead",
+      "roots": [
+        "pie.mag"
+      ]
+    },
+    "pie.mag": {
+      "word": "*mag-",
+      "lang": "Proto-Indo-European",
+      "date": "prehistoric",
+      "meaning": "to knead, fashion",
+      "roots": []
+    },
+    "en.velocity": {
+      "word": "velocity",
+      "lang": "English",
+      "date": "mid-15c.",
+      "meaning": "speed in a given direction",
+      "roots": [
+        "la.velocitas"
+      ]
+    },
+    "la.velocitas": {
+      "word": "velocitas",
+      "lang": "Latin",
+      "date": "c. 1c. BCE",
+      "meaning": "swiftness, speed",
+      "roots": [
+        "la.velox"
+      ]
+    },
+    "la.velox": {
+      "word": "velox",
+      "lang": "Latin",
+      "date": "c. 2c. BCE",
+      "meaning": "swift, quick",
+      "roots": [
+        "pie.weg"
+      ]
+    },
+    "pie.weg": {
+      "word": "*weg-",
+      "lang": "Proto-Indo-European",
+      "date": "prehistoric",
+      "meaning": "vigorous, lively",
+      "roots": []
+    },
+    "en.molecule": {
+      "word": "molecule",
+      "lang": "English",
+      "date": "1794",
+      "meaning": "smallest unit of a chemical compound",
+      "roots": [
+        "fr.molecule"
+      ]
+    },
+    "fr.molecule": {
+      "word": "molécule",
+      "lang": "French",
+      "date": "1674",
+      "meaning": "small particle of matter",
+      "roots": [
+        "ml.molecula"
+      ]
+    },
+    "ml.molecula": {
+      "word": "molecula",
+      "lang": "Medieval Latin",
+      "date": "17c.",
+      "meaning": "small mass",
+      "roots": [
+        "la.moles"
+      ]
+    },
+    "la.moles": {
+      "word": "moles",
+      "lang": "Latin",
+      "date": "c. 1c. BCE",
+      "meaning": "mass, pile, burden",
+      "roots": [
+        "pie.mel"
+      ]
+    },
+    "pie.mel": {
+      "word": "*mel-",
+      "lang": "Proto-Indo-European",
+      "date": "prehistoric",
+      "meaning": "strong, great",
+      "roots": []
+    },
+    "en.nucleus": {
+      "word": "nucleus",
+      "lang": "English",
+      "date": "1704",
+      "meaning": "central core of an atom or cell",
+      "roots": [
+        "la.nucleus"
+      ]
+    },
+    "la.nucleus": {
+      "word": "nucleus",
+      "lang": "Latin",
+      "date": "c. 1c.",
+      "meaning": "kernel, nut, inner part",
+      "roots": [
+        "la.nux"
+      ]
+    },
+    "la.nux": {
+      "word": "nux",
+      "lang": "Latin",
+      "date": "c. 3c. BCE",
+      "meaning": "nut",
+      "roots": [
+        "pie.kneu"
+      ]
+    },
+    "pie.kneu": {
+      "word": "*kneu-",
+      "lang": "Proto-Indo-European",
+      "date": "prehistoric",
+      "meaning": "nut",
+      "roots": []
+    },
+    "en.magnet": {
+      "word": "magnet",
+      "lang": "English",
+      "date": "15c.",
+      "meaning": "object that attracts iron",
+      "roots": [
+        "la.magnes"
+      ]
+    },
+    "la.magnes": {
+      "word": "magnes",
+      "lang": "Latin",
+      "date": "c. 1c.",
+      "meaning": "magnet, lodestone",
+      "roots": [
+        "grc.magnetes"
+      ]
+    },
+    "grc.magnetes": {
+      "word": "magnētes (lithos)",
+      "lang": "Ancient Greek",
+      "date": "c. 5c. BCE",
+      "meaning": "stone of Magnesia",
+      "roots": [
+        "grc.magnesia"
+      ]
+    },
+    "grc.magnesia": {
+      "word": "Magnesia",
+      "lang": "Ancient Greek",
+      "date": "c. 5c. BCE",
+      "meaning": "region in Thessaly, Greece",
+      "roots": []
+    },
+    "en.vacuum": {
+      "word": "vacuum",
+      "lang": "English",
+      "date": "1540s",
+      "meaning": "space devoid of matter",
+      "roots": [
+        "la.vacuum"
+      ]
+    },
+    "la.vacuum": {
+      "word": "vacuum",
+      "lang": "Latin",
+      "date": "c. 1c. BCE",
+      "meaning": "empty space, void",
+      "roots": [
+        "la.vacuus"
+      ]
+    },
+    "la.vacuus": {
+      "word": "vacuus",
+      "lang": "Latin",
+      "date": "c. 2c. BCE",
+      "meaning": "empty, free, devoid",
+      "roots": [
+        "la.vacare"
+      ]
+    },
+    "la.vacare": {
+      "word": "vacare",
+      "lang": "Latin",
+      "date": "c. 2c. BCE",
+      "meaning": "to be empty, be free",
+      "roots": [
+        "pie.wak"
+      ]
+    },
+    "pie.wak": {
+      "word": "*wak-",
+      "lang": "Proto-Indo-European",
+      "date": "prehistoric",
+      "meaning": "to be empty",
+      "roots": []
+    },
+    "en.plasma": {
+      "word": "plasma",
+      "lang": "English",
+      "date": "1712",
+      "meaning": "ionized gas; liquid part of blood",
+      "roots": [
+        "grc.plasma"
+      ]
+    },
+    "grc.plasma": {
+      "word": "plasma",
+      "lang": "Ancient Greek",
+      "date": "c. 4c. BCE",
+      "meaning": "something molded or formed",
+      "roots": [
+        "grc.plassein"
+      ]
+    },
+    "grc.plassein": {
+      "word": "plassein",
+      "lang": "Ancient Greek",
+      "date": "c. 5c. BCE",
+      "meaning": "to mold, to form",
+      "roots": [
+        "pie.pleh2"
+      ]
+    },
+    "pie.pleh2": {
+      "word": "*pleh2-",
+      "lang": "Proto-Indo-European",
+      "date": "prehistoric",
+      "meaning": "flat, to spread",
+      "roots": []
+    },
+    "en.spectrum": {
+      "word": "spectrum",
+      "lang": "English",
+      "date": "1610s",
+      "meaning": "range of colors or values",
+      "roots": [
+        "la.spectrum"
+      ]
+    },
+    "la.spectrum": {
+      "word": "spectrum",
+      "lang": "Latin",
+      "date": "c. 1c.",
+      "meaning": "appearance, image, specter",
+      "roots": [
+        "la.specere"
+      ]
+    },
+    "la.specere": {
+      "word": "specere",
+      "lang": "Latin",
+      "date": "c. 3c. BCE",
+      "meaning": "to look at, behold",
+      "roots": [
+        "pie.spek"
+      ]
+    },
+    "en.comet": {
+      "word": "comet",
+      "lang": "English",
+      "date": "late 13c.",
+      "meaning": "icy body with tail orbiting the sun",
+      "roots": [
+        "la.cometa"
+      ]
+    },
+    "la.cometa": {
+      "word": "cometa",
+      "lang": "Latin",
+      "date": "c. 1c.",
+      "meaning": "comet, long-haired star",
+      "roots": [
+        "grc.kometes"
+      ]
+    },
+    "grc.kometes": {
+      "word": "komētēs",
+      "lang": "Ancient Greek",
+      "date": "c. 4c. BCE",
+      "meaning": "long-haired (star)",
+      "roots": [
+        "grc.kome"
+      ]
+    },
+    "grc.kome": {
+      "word": "komē",
+      "lang": "Ancient Greek",
+      "date": "c. 5c. BCE",
+      "meaning": "hair of the head",
+      "roots": [
+        "pie.ghes"
+      ]
+    },
+    "pie.ghes": {
+      "word": "*ghes-",
+      "lang": "Proto-Indo-European",
+      "date": "prehistoric",
+      "meaning": "hair",
+      "roots": []
+    },
+    "en.planet": {
+      "word": "planet",
+      "lang": "English",
+      "date": "late 14c.",
+      "meaning": "celestial body orbiting a star",
+      "roots": [
+        "la.planeta"
+      ]
+    },
+    "la.planeta": {
+      "word": "planeta",
+      "lang": "Latin",
+      "date": "c. 2c.",
+      "meaning": "wandering star, planet",
+      "roots": [
+        "grc.planetes"
+      ]
+    },
+    "grc.planetes": {
+      "word": "planētēs",
+      "lang": "Ancient Greek",
+      "date": "c. 4c. BCE",
+      "meaning": "wanderer",
+      "roots": [
+        "grc.planasthai"
+      ]
+    },
+    "grc.planasthai": {
+      "word": "planasthai",
+      "lang": "Ancient Greek",
+      "date": "c. 5c. BCE",
+      "meaning": "to wander, roam",
+      "roots": [
+        "pie.pleh2"
+      ]
+    },
+    "en.satellite": {
+      "word": "satellite",
+      "lang": "English",
+      "date": "c. 1548",
+      "meaning": "attendant; orbiting body (astronomical sense, Kepler 1611)",
+      "roots": [
+        "la.satelles"
+      ]
+    },
+    "la.satelles": {
+      "word": "satelles",
+      "lang": "Latin",
+      "date": "c. 200 BCE",
+      "meaning": "attendant, bodyguard, escort",
+      "roots": []
+    },
+    "en.telescope": {
+      "word": "telescope",
+      "lang": "English",
+      "date": "c. 1648",
+      "meaning": "optical instrument for viewing distant objects",
+      "roots": [
+        "la.telescopium"
+      ]
+    },
+    "la.telescopium": {
+      "word": "telescopium",
+      "lang": "Latin (Modern)",
+      "date": "1611",
+      "meaning": "telescope — coined by Giovanni Demisiani for Galileo's instrument",
+      "roots": [
+        "grc.tele",
+        "grc.skopos"
+      ]
+    },
+    "en.microscope": {
+      "word": "microscope",
+      "lang": "English",
+      "date": "c. 1656",
+      "meaning": "optical instrument for viewing very small objects",
+      "roots": [
+        "la.microscopium"
+      ]
+    },
+    "la.microscopium": {
+      "word": "microscopium",
+      "lang": "Latin (Modern)",
+      "date": "c. 1625",
+      "meaning": "microscope — coined from Greek components",
+      "roots": [
+        "grc.mikros",
+        "grc.skopos"
+      ]
+    },
+    "grc.mikros": {
+      "word": "mikros (μικρός)",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "small, little",
+      "roots": [
+        "pie.smikros"
+      ]
+    },
+    "pie.smikros": {
+      "word": "*smikros-",
+      "lang": "Proto-Indo-European",
+      "meaning": "small",
+      "roots": []
+    },
+    "en.laboratory": {
+      "word": "laboratory",
+      "lang": "English",
+      "date": "c. 1605",
+      "meaning": "a place equipped for scientific experiments and research",
+      "roots": [
+        "la.laboratorium"
+      ]
+    },
+    "la.laboratorium": {
+      "word": "laboratorium",
+      "lang": "Latin (Medieval)",
+      "date": "c. 1300",
+      "meaning": "a place of work or toil",
+      "roots": [
+        "la.laborare"
+      ]
+    },
+    "la.laborare": {
+      "word": "laborare",
+      "lang": "Latin",
+      "date": "c. 200 BCE",
+      "meaning": "to work, toil, strive",
+      "roots": [
+        "la.labor"
+      ]
+    },
+    "la.labor": {
+      "word": "labor",
+      "lang": "Latin",
+      "date": "c. 200 BCE",
+      "meaning": "work, toil, effort",
+      "roots": [
+        "pie.sleh2b"
+      ]
+    },
+    "pie.sleh2b": {
+      "word": "*sleh2b-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to hang loosely, be weak, slack",
+      "roots": []
+    },
+    "en.chemical": {
+      "word": "chemical",
+      "lang": "English",
+      "date": "c. 1570",
+      "meaning": "relating to chemistry or produced by chemical processes",
+      "roots": [
+        "la.chimicus"
+      ]
+    },
+    "la.chimicus": {
+      "word": "chimicus",
+      "lang": "Latin (New)",
+      "date": "c. 1500",
+      "meaning": "of or relating to alchemy or chemistry",
+      "roots": [
+        "la.alchimia"
+      ]
+    },
+    "la.alchimia": {
+      "word": "alchimia",
+      "lang": "Latin (Medieval)",
+      "date": "c. 1100",
+      "meaning": "alchemy — the art of transmuting metals",
+      "roots": [
+        "ar.al_kimiya"
+      ]
+    },
+    "ar.al_kimiya": {
+      "word": "al-kīmiyā",
+      "lang": "Arabic",
+      "date": "c. 800",
+      "meaning": "alchemy — the art of alloying or transmuting metals",
+      "roots": [
+        "grc.khemia"
+      ]
+    },
+    "grc.khemia": {
+      "word": "khēmia (χημεία)",
+      "lang": "Ancient Greek",
+      "date": "c. 300 CE",
+      "meaning": "art of alloying metals; possibly from Coptic keme (black earth of Egypt)",
+      "roots": []
+    },
+    "en.element": {
+      "word": "element",
+      "lang": "English",
+      "date": "c. 1300",
+      "meaning": "fundamental constituent; one of the basic substances of nature",
+      "roots": [
+        "la.elementum"
+      ]
+    },
+    "la.elementum": {
+      "word": "elementum",
+      "lang": "Latin",
+      "date": "c. 100 BCE",
+      "meaning": "first principle, rudiment; one of the four elements (fire, water, earth, air)",
+      "roots": []
+    },
+    "en.crystal": {
+      "word": "crystal",
+      "lang": "English",
+      "date": "c. 1000",
+      "meaning": "clear transparent mineral; body with regular atomic structure",
+      "roots": [
+        "la.crystallus"
+      ]
+    },
+    "la.crystallus": {
+      "word": "crystallus",
+      "lang": "Latin",
+      "date": "c. 100 CE",
+      "meaning": "crystal, clear ice",
+      "roots": [
+        "grc.krystallos"
+      ]
+    },
+    "grc.krystallos": {
+      "word": "krystallos (κρύσταλλος)",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "ice; clear mineral resembling ice",
+      "roots": [
+        "grc.kryos"
+      ]
+    },
+    "grc.kryos": {
+      "word": "kryos (κρύος)",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "icy cold, frost",
+      "roots": [
+        "pie.kreus"
+      ]
+    },
+    "pie.kreus": {
+      "word": "*kreus-",
+      "lang": "Proto-Indo-European",
+      "meaning": "to begin to freeze, form a crust",
+      "roots": []
+    },
+    "en.mineral": {
+      "word": "mineral",
+      "lang": "English",
+      "date": "c. 1400",
+      "meaning": "naturally occurring inorganic substance with definite chemical composition",
+      "roots": [
+        "la.minerale"
+      ]
+    },
+    "la.minerale": {
+      "word": "minerale",
+      "lang": "Latin (Medieval)",
+      "date": "c. 1200",
+      "meaning": "of or pertaining to mines or ore",
+      "roots": [
+        "la.minera"
+      ]
+    },
+    "la.minera": {
+      "word": "minera",
+      "lang": "Latin (Medieval)",
+      "date": "c. 1100",
+      "meaning": "mine, ore, source of metal",
+      "roots": [
+        "ofr.miniere"
+      ]
+    },
+    "ofr.miniere": {
+      "word": "minière",
+      "lang": "Old French",
+      "date": "c. 1100",
+      "meaning": "mine, ore deposit",
+      "roots": [
+        "cel.meini"
+      ]
+    },
+    "cel.meini": {
+      "word": "*meini-",
+      "lang": "Celtic",
+      "date": "ancient",
+      "meaning": "ore, stone, mineral",
+      "roots": []
+    },
+    "en.theory": {
+      "word": "theory",
+      "lang": "English",
+      "date": "c. 1592",
+      "meaning": "a system of ideas explaining a phenomenon; abstract knowledge",
+      "roots": [
+        "la.theoria"
+      ]
+    },
+    "la.theoria": {
+      "word": "theoria",
+      "lang": "Latin (Late)",
+      "date": "c. 400 CE",
+      "meaning": "contemplation, speculation",
+      "roots": [
+        "grc.theoria"
+      ]
+    },
+    "grc.theoria": {
+      "word": "theōria (θεωρία)",
+      "lang": "Ancient Greek",
+      "date": "c. 450 BCE",
+      "meaning": "a looking at, contemplation, speculation",
+      "roots": [
+        "grc.theorein"
+      ]
+    },
+    "grc.theorein": {
+      "word": "theōrein (θεωρεῖν)",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "to look at, observe, consider",
+      "roots": [
+        "grc.theoros"
+      ]
+    },
+    "grc.theoros": {
+      "word": "theōros (θεωρός)",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "spectator; one who watches",
+      "roots": [
+        "grc.thea",
+        "grc.horan"
+      ]
+    },
+    "grc.thea": {
+      "word": "thea (θέα)",
+      "lang": "Ancient Greek",
+      "date": "c. 500 BCE",
+      "meaning": "a viewing, a sight, act of seeing",
+      "roots": [
+        "pie.weid"
+      ]
+    },
+    "grc.horan": {
+      "word": "horan (ὁράν)",
+      "lang": "Ancient Greek",
+      "date": "c. 700 BCE",
+      "meaning": "to see, to look at",
+      "roots": [
+        "pie.weid"
+      ]
+    },
+    "en.hypothesis": {
+      "word": "hypothesis",
+      "lang": "English",
+      "date": "c. 1596",
+      "meaning": "a proposed explanation made on the basis of limited evidence",
+      "roots": [
+        "grc.hypothesis"
+      ]
+    },
+    "grc.hypothesis": {
+      "word": "hypothesis (ὑπόθεσις)",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "base, foundation; supposition — literally 'that which is placed under'",
+      "roots": [
+        "grc.hypo",
+        "grc.thesis"
+      ]
+    },
+    "grc.hypo": {
+      "word": "hypo (ὑπο-)",
+      "lang": "Ancient Greek",
+      "date": "ancient",
+      "meaning": "under, beneath — a prefix indicating subordination or lesser degree",
+      "roots": [
+        "pie.upo"
+      ]
+    },
+    "grc.thesis": {
+      "word": "thesis (θέσις)",
+      "lang": "Ancient Greek",
+      "date": "c. 400 BCE",
+      "meaning": "a placing, setting down; a proposition",
+      "roots": [
+        "grc.tithenai"
+      ]
     }
   },
   "words": [
@@ -9226,6 +10733,46 @@
     "en.toxic",
     "en.trivial",
     "en.torture",
-    "en.villain"
+    "en.villain",
+    "en.etymology",
+    "en.lexicon",
+    "en.syntax",
+    "en.metaphor",
+    "en.rhetoric",
+    "en.palindrome",
+    "en.acronym",
+    "en.dialect",
+    "en.vernacular",
+    "en.syllable",
+    "en.physics",
+    "en.atom",
+    "en.quantum",
+    "en.entropy",
+    "en.photon",
+    "en.electron",
+    "en.proton",
+    "en.neutron",
+    "en.momentum",
+    "en.force",
+    "en.mass",
+    "en.velocity",
+    "en.molecule",
+    "en.nucleus",
+    "en.magnet",
+    "en.vacuum",
+    "en.plasma",
+    "en.spectrum",
+    "en.comet",
+    "en.planet",
+    "en.satellite",
+    "en.telescope",
+    "en.microscope",
+    "en.laboratory",
+    "en.chemical",
+    "en.element",
+    "en.crystal",
+    "en.mineral",
+    "en.theory",
+    "en.hypothesis"
   ]
 }
