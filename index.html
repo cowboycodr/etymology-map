@@ -565,6 +565,56 @@
       z-index: 5;
       pointer-events: none;
     }
+    .graph-panel {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      width: 272px;
+      max-height: 420px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+    }
+    .graph-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .graph-panel-word {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .graph-panel-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0 2px;
+      line-height: 1;
+      flex-shrink: 0;
+      font-family: inherit;
+      transition: color 0.1s;
+    }
+    .graph-panel-close:hover { color: var(--text-primary); }
+    .graph-panel-tree {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px 8px 10px 4px;
+    }
     .graph-key {
       position: absolute;
       bottom: 14px;
@@ -634,6 +684,14 @@
     <button class="graph-back hidden" id="graphBack" onclick="showGlobalGraph()">← all words</button>
     <div class="graph-label" id="graphLabel"></div>
     <div class="graph-tooltip" id="graphTooltip"></div>
+    <div class="graph-panel hidden" id="graphPanel">
+      <div class="graph-panel-header" id="graphPanelHeader">
+        <span class="graph-panel-word" id="graphPanelWord"></span>
+        <span id="graphPanelLang" class="lang-tag" style="font-size:10px;padding:1px 5px;flex-shrink:0"></span>
+        <button class="graph-panel-close" onclick="closeGraphPanel()">×</button>
+      </div>
+      <div class="graph-panel-tree" id="graphPanelTree"></div>
+    </div>
     <div class="graph-key">
       <div class="graph-key-title">origin</div>
       <div class="graph-key-item"><span class="graph-key-dot" style="background:#f38ba8"></span>Proto-Indo-European</div>
@@ -1140,8 +1198,10 @@ document.addEventListener('keydown', e => {
 
     case 'Escape':
       e.preventDefault();
-      if (_currentTab === 'graph' && _graphMode === 'local') showGlobalGraph();
-      else goBack();
+      if (_currentTab === 'graph') {
+        if (!document.getElementById('graphPanel').classList.contains('hidden')) closeGraphPanel();
+        else if (_graphMode === 'local') showGlobalGraph();
+      } else goBack();
       break;
   }
 });
@@ -1198,12 +1258,21 @@ function goBack() {
   else showRootPage(prev.nodeId, false);
 }
 
-// Click delegation: word labels navigate to root page
+// Click delegation: word labels navigate to root page (or graph panel context)
 document.addEventListener('click', e => {
   const span = e.target.closest('.node-word[data-nav-id]');
   if (!span) return;
   e.stopPropagation();
-  showRootPage(span.dataset.navId);
+  const navId = span.dataset.navId;
+  if (span.closest('#graphPanel')) {
+    // Inside the graph panel — navigate to that word's panel (if it's a top-level word)
+    if (WORD_IDS.includes(navId)) {
+      showGraphPanel(navId);
+      focusGraphNode(navId);
+    }
+    return;
+  }
+  showRootPage(navId);
 });
 
 // ── WORD SELECTION ──────────────────────────────────────────────────────────
@@ -1239,9 +1308,13 @@ let _currentTab       = 'tree';
 let _graphMode        = 'global'; // 'global' | 'local'
 let _graphFocusedWord = null;
 let _graphSim         = null;
+let _graphZoom        = null;
+let _graphSvg         = null;
+let _graphNodeG       = null;
+let _graphNodes       = null;
 
 const HINT_TREE = `<span><kbd class="hk">⌘K</kbd> search roots</span><span><kbd class="hk">j</kbd><kbd class="hk">k</kbd> navigate</span><span><kbd class="hk">h</kbd><kbd class="hk">l</kbd> parent / child</span><span><kbd class="hk">gg</kbd> top&nbsp;<kbd class="hk">G</kbd> bottom</span><span><kbd class="hk">enter</kbd> open</span>`;
-const HINT_GRAPH = `<span>drag to pan &nbsp;·&nbsp; scroll to zoom</span><span>click word for local graph</span><span>click focused word to open tree</span><span><kbd class="hk">esc</kbd> global view</span>`;
+const HINT_GRAPH = `<span>drag to pan &nbsp;·&nbsp; scroll to zoom</span><span>click word to inspect</span><span><kbd class="hk">esc</kbd> close panel</span>`;
 
 function langFillColor(lang) {
   const l = lang.toLowerCase();
@@ -1357,6 +1430,47 @@ function destroyGraph() {
   if (_graphSim) { _graphSim.stop(); _graphSim = null; }
 }
 
+function showGraphPanel(wordId) {
+  const n = NODES[wordId];
+  if (!n) return;
+  _id = 0;
+  document.getElementById('graphPanelTree').innerHTML = renderNode(buildTree(wordId), true, [], true);
+  document.getElementById('graphPanelWord').textContent = n.word;
+  const langEl = document.getElementById('graphPanelLang');
+  langEl.textContent = n.lang;
+  langEl.className = `lang-tag ${langClass(n.lang)}`;
+  langEl.style.cssText = 'font-size:10px;padding:1px 5px;flex-shrink:0';
+  document.getElementById('graphPanel').classList.remove('hidden');
+  highlightGraphNode(wordId);
+}
+
+function closeGraphPanel() {
+  document.getElementById('graphPanel').classList.add('hidden');
+  highlightGraphNode(null);
+}
+
+function highlightGraphNode(wordId) {
+  if (!_graphNodeG) return;
+  _graphNodeG.select('circle')
+    .attr('stroke', d => d.id === wordId ? '#89b4fa' : (d.isFocused ? '#89b4fa' : 'none'))
+    .attr('stroke-width', d => d.id === wordId ? 3 : (d.isFocused ? 2 : 0))
+    .style('filter', d => d.id === wordId
+      ? 'drop-shadow(0 0 8px rgba(137,180,250,.75))'
+      : (d.isFocused ? 'drop-shadow(0 0 6px rgba(137,180,250,.6))' : null));
+}
+
+function focusGraphNode(wordId) {
+  if (!_graphSvg || !_graphNodes || !_graphZoom) return;
+  const node = _graphNodes.find(n => n.id === wordId);
+  if (!node || node.x == null) return;
+  const area = document.getElementById('graphArea');
+  const W = area.clientWidth, H = area.clientHeight;
+  _graphSvg.transition().duration(550).call(
+    _graphZoom.transform,
+    d3.zoomIdentity.translate(W / 2, H / 2).scale(1.6).translate(-node.x, -node.y)
+  );
+}
+
 function renderGraph(data, opts = {}) {
   const { mode = 'global', focusedId = null } = opts;
   destroyGraph();
@@ -1377,10 +1491,13 @@ function renderGraph(data, opts = {}) {
   svg.on('dblclick.zoom', null);
   svg.on('dblclick', () =>
     svg.transition().duration(500).call(zoomBehavior.transform, d3.zoomIdentity.translate(W / 2, H / 2).scale(1)));
+  _graphZoom = zoomBehavior;
+  _graphSvg  = svg;
 
   const nodes = data.nodes.map(n => ({
     ...n, x: W / 2 + (Math.random() - .5) * 500, y: H / 2 + (Math.random() - .5) * 400
   }));
+  _graphNodes = nodes;
   const edges = data.edges.map(e => ({ ...e }));
 
   // Links
@@ -1391,7 +1508,9 @@ function renderGraph(data, opts = {}) {
     .attr('stroke-dasharray', e => e.isTreeEdge === false ? '4,3' : null);
 
   // Node groups
-  const nodeG = g.append('g').selectAll('g').data(nodes).join('g')
+  const nodeG = g.append('g').selectAll('g').data(nodes).join('g');
+  _graphNodeG = nodeG;
+  nodeG
     .attr('cursor', 'pointer')
     .call(d3.drag()
       .on('start', (e, d) => { if (!e.active) _graphSim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
@@ -1444,9 +1563,8 @@ function renderGraph(data, opts = {}) {
     e.stopPropagation();
     if (!WORD_IDS.includes(d.id)) return;
     if (mode === 'global') {
-      switchTab('tree');
-      _history.length = 0; _currentView = null;
-      selectWord(d.id, false);
+      showGraphPanel(d.id);
+      focusGraphNode(d.id);
     } else if (d.isFocused) {
       switchTab('tree');
       _history.length = 0; _currentView = null;
@@ -1476,6 +1594,7 @@ function showGlobalGraph() {
   _graphFocusedWord = null;
   document.getElementById('graphBack').classList.add('hidden');
   document.getElementById('graphLabel').textContent = `${WORD_IDS.length} words`;
+  closeGraphPanel();
   renderGraph(buildGlobalGraphData(), { mode: 'global' });
 }
 
