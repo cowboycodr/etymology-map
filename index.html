@@ -80,7 +80,7 @@
 
     .word-item .dot {
       font-size: 9px;
-      color: var(--text-muted);
+      color: var(--dot-color, var(--text-muted));
       flex-shrink: 0;
     }
     .word-item.active .dot { color: var(--accent); }
@@ -565,6 +565,40 @@
       z-index: 5;
       pointer-events: none;
     }
+    .graph-key {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .graph-key-title {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+    }
+    .graph-key-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .graph-key-item:last-child { margin-bottom: 0; }
+    .graph-key-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 </head>
@@ -600,6 +634,17 @@
     <button class="graph-back hidden" id="graphBack" onclick="showGlobalGraph()">← all words</button>
     <div class="graph-label" id="graphLabel"></div>
     <div class="graph-tooltip" id="graphTooltip"></div>
+    <div class="graph-key">
+      <div class="graph-key-title">origin</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:#f38ba8"></span>Proto-Indo-European</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:#a6e3a1"></span>Greek</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:#fab387"></span>Latin / Romance</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:#89dceb"></span>Germanic</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:#89b4fa"></span>English</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:#94e2d5"></span>Slavic</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:#f9e2af"></span>Iranian / Semitic</div>
+      <div class="graph-key-item"><span class="graph-key-dot" style="background:#cba6f7"></span>Other</div>
+    </div>
   </div>
   <div class="hint-bar">
     <span id="hintContent">
@@ -1224,9 +1269,11 @@ function switchTab(tab) {
 }
 
 function buildGlobalGraphData() {
-  const nodes = WORD_IDS.map(id => ({
-    id, word: NODES[id].word, lang: NODES[id].lang, meaning: NODES[id].meaning || '', isWord: true
-  }));
+  const nodes = WORD_IDS.map(id => {
+    const parentId = (NODES[id]?.roots || [])[0];
+    const originLang = NODES[parentId]?.lang || NODES[id].lang;
+    return { id, word: NODES[id].word, lang: NODES[id].lang, originLang, meaning: NODES[id].meaning || '', isWord: true };
+  });
   const pairCount = {};
   for (const [, inWords] of Object.entries(CONTAINED_IN)) {
     if (inWords.length < 2) continue;
@@ -1359,7 +1406,7 @@ function renderGraph(data, opts = {}) {
       if (mode === 'global') return Math.max(4, Math.min(4 + (d.degree || 0) * 1.2, 11));
       return d.isWord ? 7 : 4;
     })
-    .attr('fill', d => langFillColor(d.lang))
+    .attr('fill', d => langFillColor(d.originLang || d.lang))
     .attr('fill-opacity', d => d.isNeighbor ? 0.6 : 1)
     .attr('stroke', d => d.isFocused ? '#89b4fa' : 'none')
     .attr('stroke-width', 2)
@@ -1397,7 +1444,9 @@ function renderGraph(data, opts = {}) {
     e.stopPropagation();
     if (!WORD_IDS.includes(d.id)) return;
     if (mode === 'global') {
-      showLocalGraph(d.id);
+      switchTab('tree');
+      _history.length = 0; _currentView = null;
+      selectWord(d.id, false);
     } else if (d.isFocused) {
       switchTab('tree');
       _history.length = 0; _currentView = null;
@@ -1464,7 +1513,9 @@ async function init() {
     const el = document.createElement('div');
     el.className = 'word-item';
     el.dataset.key = nodeId;
-    el.innerHTML = `<span class="dot">◆</span>${esc(n.word)}`;
+    const parentId = (NODES[nodeId]?.roots || [])[0];
+    const dotColor = langFillColor(NODES[parentId]?.lang || n.lang);
+    el.innerHTML = `<span class="dot" style="--dot-color:${dotColor}">◆</span><span>${esc(n.word)}</span>`;
     el.addEventListener('click', () => {
       if (_currentTab === 'graph') switchTab('tree');
       _history.length = 0;
