@@ -1,0 +1,23 @@
+{
+  "name": "etymology-map",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "latest",
+    "@sveltejs/kit": "latest",
+    "@tailwindcss/vite": "latest",
+    "svelte": "^5",
+    "tailwindcss": "^4",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "dependencies": {
+    "d3": "^7"
+  }
+}
