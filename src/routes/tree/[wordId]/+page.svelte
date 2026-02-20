@@ -12,13 +12,13 @@
   // Fetch this word's subtree on mount and on wordId change
   $effect(() => {
     const wid = wordId;
-    if (data.isLoaded(wid)) return;
+    if (data.allLoaded || data.isLoaded(wid)) return;
     fetch(`/api/words/${wid}`)
       .then(r => r.json())
       .then(json => mergeData(wid, json.nodes, json.containedIn));
   });
 
-  const ready = $derived(data.isLoaded(wordId));
+  const ready = $derived(data.allLoaded || data.isLoaded(wordId));
   const node  = $derived(ready ? data.nodes[wordId] : null);
   const tree  = $derived(node  ? buildTree(wordId, data.nodes) : null);
 

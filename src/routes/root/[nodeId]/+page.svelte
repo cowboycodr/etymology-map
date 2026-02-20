@@ -12,14 +12,14 @@
   $effect(() => {
     const nid = nodeId;
     const key = `node:${nid}`;
-    if (data.isLoaded(key)) return;
+    if (data.allLoaded || data.isLoaded(key)) return;
     fetch(`/api/nodes/${nid}`)
       .then(r => r.json())
       .then(json => mergeData(key, json.nodes, json.containedIn, json.containingWordIds ?? []));
   });
 
   const nodeKey = $derived(`node:${nodeId}`);
-  const ready            = $derived(data.isLoaded(nodeKey));
+  const ready            = $derived(data.allLoaded || data.isLoaded(nodeKey));
   const node             = $derived(ready ? data.nodes[nodeId] : null);
   const containingWordIds = $derived(ready ? (data.containedIn[nodeId] ?? []) : []);
 </script>

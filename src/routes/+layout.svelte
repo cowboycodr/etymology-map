@@ -1,7 +1,7 @@
 <script lang="ts">
   import '../app.css';
   import { onMount } from 'svelte';
-  import { initManifest, data } from '$lib/stores/data.svelte.js';
+  import { initManifest, initFromWordsJson, data } from '$lib/stores/data.svelte.js';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import ViewTabs from '$lib/components/ViewTabs.svelte';
   import HintBar from '$lib/components/HintBar.svelte';
@@ -10,9 +10,18 @@
   let { children }: { children: import('svelte').Snippet } = $props();
 
   onMount(async () => {
-    const res = await fetch('/api/words');
-    const json = await res.json();
-    initManifest(json.wordIds, json.manifest);
+    try {
+      const res = await fetch('/api/words');
+      if (!res.ok) throw new Error(`${res.status}`);
+      const json = await res.json();
+      if (!json.manifest) throw new Error('no manifest');
+      initManifest(json.wordIds, json.manifest);
+    } catch {
+      // API not available (e.g. vite preview without wrangler) — fall back to full words.json
+      const res = await fetch('/words.json');
+      const json = await res.json();
+      initFromWordsJson(json.nodes, json.words);
+    }
   });
 
   let drawerOpen = $state(false);

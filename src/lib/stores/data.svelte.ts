@@ -1,5 +1,6 @@
-import type { NodesMap, ContainedInMap, SearchIndex, WordManifest } from '$lib/types.js';
+import type { NodesMap, ContainedInMap, SearchIndex, WordManifest, WordManifestEntry } from '$lib/types.js';
 import { buildSearchIndex } from '$lib/searchEngine.js';
+import { buildContainedIn } from '$lib/treeBuilder.js';
 
 // ── Manifest — tiny, loaded first by the layout ──────────────────────────────
 let _wordIds = $state<string[]>([]);
@@ -44,6 +45,31 @@ export function mergeData(
   Object.assign(_containedIn, containedIn);
   _loaded[key] = true;
   for (const k of extraKeys) _loaded[k] = true;
+}
+
+/**
+ * Initialise everything client-side from the raw words.json payload.
+ * Used as a fallback when the API Worker is not available (e.g. vite preview).
+ */
+export function initFromWordsJson(nodes: NodesMap, wordIds: string[]) {
+  if (_loaded['__all__']) return;
+  const containedIn = buildContainedIn(nodes, wordIds);
+  // Build manifest entries inline
+  const manifest: WordManifest = {};
+  for (const id of wordIds) {
+    const node = nodes[id];
+    const parentId = (node.roots as string[] | undefined)?.[0];
+    const originLang = (parentId && nodes[parentId]?.lang) || node.lang;
+    manifest[id] = { word: node.word, lang: node.lang, originLang };
+  }
+  _wordIds = wordIds;
+  _manifest = manifest;
+  _manifestReady = true;
+  _nodes = nodes;
+  _containedIn = containedIn;
+  _searchIndex = buildSearchIndex(nodes, containedIn);
+  _searchReady = true;
+  _loaded['__all__'] = true;
 }
 
 /**
