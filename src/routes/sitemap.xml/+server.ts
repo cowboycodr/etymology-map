@@ -3,7 +3,7 @@ import { env } from '$env/dynamic/public';
 
 export const prerender = true;
 
-const BASE = (env.PUBLIC_BASE_URL ?? 'https://etymology-map.pages.dev').replace(/\/$/, '');
+const BASE = (env.PUBLIC_BASE_URL ?? 'https://map.kian.im').replace(/\/$/, '');
 
 function url(path: string) {
   return `<url><loc>${BASE}${path}</loc></url>`;
