@@ -37,6 +37,18 @@
   }
 </script>
 
+<svelte:head>
+  {#if data.manifest[wordId]}
+    {@const entry = data.manifest[wordId]}
+    <title>{entry.word} – Etymology Map</title>
+    <meta name="description" content="Explore the etymology of '{entry.word}' ({entry.lang}) and its connections to related words, showing shared {entry.originLang} roots." />
+    <link rel="canonical" href="https://map.kian.im/graph/{wordId}" />
+    <meta property="og:url" content="https://map.kian.im/graph/{wordId}" />
+    <meta property="og:title" content="{entry.word} – Etymology Map" />
+    <meta property="og:description" content="Explore the etymology of '{entry.word}' and its connections to related words." />
+  {/if}
+</svelte:head>
+
 <div class="graph-wrapper">
   {#if graphData}
     <button class="graph-back" onclick={() => goto('/graph')}>← all words</button>

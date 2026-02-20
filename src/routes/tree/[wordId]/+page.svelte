@@ -128,6 +128,21 @@
 
 <svelte:window onkeydown={handleKeydown} />
 
+<svelte:head>
+  {#if node}
+    <title>{node.word} Etymology Tree – Etymology Map</title>
+    <meta name="description" content="{node.meaning ? `"${node.meaning}" — ` : ''}Trace the full etymology tree of '{node.word}' ({node.lang}) back through its historical roots." />
+    <link rel="canonical" href="https://map.kian.im/tree/{wordId}" />
+    <meta property="og:url" content="https://map.kian.im/tree/{wordId}" />
+    <meta property="og:title" content="{node.word} Etymology Tree – Etymology Map" />
+    <meta property="og:description" content="{node.meaning ? `"${node.meaning}" — ` : ''}Full etymology tree for '{node.word}' ({node.lang})." />
+  {:else if data.manifest[wordId]}
+    {@const entry = data.manifest[wordId]}
+    <title>{entry.word} Etymology Tree – Etymology Map</title>
+    <link rel="canonical" href="https://map.kian.im/tree/{wordId}" />
+  {/if}
+</svelte:head>
+
 {#if node && tree}
   <div class="tree-area">
     <div class="root-page">

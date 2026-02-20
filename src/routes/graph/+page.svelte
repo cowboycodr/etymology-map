@@ -31,6 +31,15 @@
   }
 </script>
 
+<svelte:head>
+  <title>Etymology Map – Visual Word Origins</title>
+  <meta name="description" content="Browse {data.wordIds.length || 354} English words as an interactive force-directed graph showing shared etymological roots and linguistic relationships." />
+  <link rel="canonical" href="https://map.kian.im/graph" />
+  <meta property="og:url" content="https://map.kian.im/graph" />
+  <meta property="og:title" content="Etymology Map – Visual Word Origins" />
+  <meta property="og:description" content="Browse English words as an interactive graph showing shared etymological roots across Proto-Indo-European, Latin, Greek, and more." />
+</svelte:head>
+
 <div class="graph-wrapper">
   {#if graphData}
     <div class="graph-label">{data.wordIds.length} words</div>

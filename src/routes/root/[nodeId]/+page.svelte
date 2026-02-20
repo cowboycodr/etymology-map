@@ -24,6 +24,17 @@
   const containingWordIds = $derived(ready ? (data.containedIn[nodeId] ?? []) : []);
 </script>
 
+<svelte:head>
+  {#if node}
+    <title>{node.word} ({node.lang}) – Etymology Map</title>
+    <meta name="description" content="{node.meaning ? `"${node.meaning}" — ` : ''}The {node.lang} root '{node.word}' appears in {containingWordIds.length} word {containingWordIds.length === 1 ? 'hierarchy' : 'hierarchies'}." />
+    <link rel="canonical" href="https://map.kian.im/root/{nodeId}" />
+    <meta property="og:url" content="https://map.kian.im/root/{nodeId}" />
+    <meta property="og:title" content="{node.word} ({node.lang}) – Etymology Map" />
+    <meta property="og:description" content="{node.meaning ? `"${node.meaning}" — ` : ''}The {node.lang} root '{node.word}' found in {containingWordIds.length} word {containingWordIds.length === 1 ? 'hierarchy' : 'hierarchies'}." />
+  {/if}
+</svelte:head>
+
 {#if node}
   <div class="tree-area">
     <div class="root-page">
