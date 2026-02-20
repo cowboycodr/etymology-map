@@ -1,7 +1,7 @@
 <script lang="ts">
   import '../app.css';
   import { onMount } from 'svelte';
-  import { initData, data } from '$lib/stores/data.svelte.js';
+  import { initManifest, data } from '$lib/stores/data.svelte.js';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import ViewTabs from '$lib/components/ViewTabs.svelte';
   import HintBar from '$lib/components/HintBar.svelte';
@@ -12,7 +12,7 @@
   onMount(async () => {
     const res = await fetch('/api/words');
     const json = await res.json();
-    initData(json.nodes, json.words);
+    initManifest(json.wordIds, json.manifest);
   });
 
   let drawerOpen = $state(false);
@@ -34,7 +34,7 @@
 <Sidebar bind:open={drawerOpen} />
 <div class="main">
   <ViewTabs onToggleDrawer={() => drawerOpen = !drawerOpen} onOpenSearch={() => paletteOpen = true} />
-  {#if data.initialized}
+  {#if data.manifestReady}
     {@render children()}
   {:else}
     <div class="app-loading">

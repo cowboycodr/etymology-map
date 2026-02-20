@@ -1,9 +1,9 @@
 import type { RequestHandler } from './$types.js';
-import { allWordIds, manifest } from '$lib/server/wordStore.js';
+import { nodes, allWordIds, containedIn } from '$lib/server/wordStore.js';
 
 export const GET: RequestHandler = () => {
   return Response.json(
-    { wordIds: allWordIds, manifest },
+    { wordIds: allWordIds, nodes, containedIn },
     { headers: { 'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400' } }
   );
 };

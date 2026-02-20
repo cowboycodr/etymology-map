@@ -1,31 +1,85 @@
-import type { NodesMap, ContainedInMap, SearchIndex } from '$lib/types.js';
-import { buildContainedIn } from '$lib/treeBuilder.js';
+import type { NodesMap, ContainedInMap, SearchIndex, WordManifest } from '$lib/types.js';
 import { buildSearchIndex } from '$lib/searchEngine.js';
 
-/**
- * Global reactive data store — set once from the layout on load.
- * Uses Svelte 5 runes ($state).
- */
-
-let _nodes = $state<NodesMap>({});
+// ── Manifest — tiny, loaded first by the layout ──────────────────────────────
 let _wordIds = $state<string[]>([]);
-let _containedIn = $state<ContainedInMap>({});
-let _searchIndex = $state<SearchIndex>({});
-let _initialized = $state(false);
+let _manifest = $state<WordManifest>({});
+let _manifestReady = $state(false);
 
-export function initData(nodes: NodesMap, wordIds: string[]) {
-  if (_initialized) return;
-  _nodes = nodes;
+// ── Nodes — accumulates as routes fetch their slices ─────────────────────────
+let _nodes = $state<NodesMap>({});
+let _containedIn = $state<ContainedInMap>({});
+
+// Track which data slices are loaded. Using a plain Record so Svelte 5
+// can track individual key reads with fine-grained reactivity.
+let _loaded = $state<Record<string, boolean>>({});
+
+// ── Search index — built only when full dataset is available ─────────────────
+let _searchIndex = $state<SearchIndex>({});
+let _searchReady = $state(false);
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+export function initManifest(wordIds: string[], manifest: WordManifest) {
+  if (_manifestReady) return;
   _wordIds = wordIds;
-  _containedIn = buildContainedIn(nodes, wordIds);
-  _searchIndex = buildSearchIndex(nodes, _containedIn);
-  _initialized = true;
+  _manifest = manifest;
+  _manifestReady = true;
+}
+
+/**
+ * Merge a slice of node/containedIn data into the store.
+ * `key`       — unique identifier for this slice (wordId, `node:${nodeId}`, etc.)
+ * `extraKeys` — additional keys to mark loaded (e.g. containingWordIds covered
+ *               by a node bundle, so the tree pages skip redundant fetches)
+ */
+export function mergeData(
+  key: string,
+  nodes: NodesMap,
+  containedIn: ContainedInMap,
+  extraKeys: string[] = []
+) {
+  if (_loaded[key]) return;
+  Object.assign(_nodes, nodes);
+  Object.assign(_containedIn, containedIn);
+  _loaded[key] = true;
+  for (const k of extraKeys) _loaded[k] = true;
+}
+
+/**
+ * Load the complete dataset (graph views + search).
+ * Replaces partial node data with the authoritative full set.
+ */
+export function initAllData(wordIds: string[], nodes: NodesMap, containedIn: ContainedInMap) {
+  if (_loaded['__all__']) return;
+  _wordIds = wordIds;
+  _nodes = nodes;
+  _containedIn = containedIn;
+  _searchIndex = buildSearchIndex(nodes, containedIn);
+  _searchReady = true;
+  _loaded['__all__'] = true;
 }
 
 export const data = {
-  get nodes() { return _nodes; },
-  get wordIds() { return _wordIds; },
-  get containedIn() { return _containedIn; },
-  get searchIndex() { return _searchIndex; },
-  get initialized() { return _initialized; }
+  // Manifest (always available after layout mount)
+  get wordIds()      { return _wordIds; },
+  get manifest()     { return _manifest; },
+  get manifestReady(){ return _manifestReady; },
+
+  // Accumulated node data
+  get nodes()        { return _nodes; },
+  get containedIn()  { return _containedIn; },
+
+  // Search
+  get searchIndex()  { return _searchIndex; },
+  get searchReady()  { return _searchReady; },
+
+  // Full-data flag
+  get allLoaded()    { return Boolean(_loaded['__all__']); },
+
+  /** Returns true once the named slice has been merged into the store. */
+  isLoaded: (key: string) => Boolean(_loaded[key]),
+
+  // Backward-compat alias — true once manifest is ready
+  get initialized()  { return _manifestReady; },
 };

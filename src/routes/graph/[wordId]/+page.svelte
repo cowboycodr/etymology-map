@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
-  import { data } from '$lib/stores/data.svelte.js';
+  import { data, initAllData } from '$lib/stores/data.svelte.js';
   import { buildLocalGraphData } from '$lib/graphData.js';
   import GraphView from '$lib/components/GraphView.svelte';
   import GraphPanel from '$lib/components/GraphPanel.svelte';
@@ -10,24 +10,29 @@
   const wordId = $derived($page.params.wordId);
   const panelWordId = $derived($page.url.searchParams.get('panel'));
 
+  // Local graph also needs full containedIn to find neighbor words
+  $effect(() => {
+    if (data.allLoaded) return;
+    fetch('/api/all')
+      .then(r => r.json())
+      .then(json => initAllData(json.wordIds, json.nodes, json.containedIn));
+  });
+
   const graphData = $derived(
-    data.initialized && wordId
+    data.allLoaded && wordId
       ? buildLocalGraphData(wordId, data.nodes, data.wordIds, data.containedIn)
       : null
   );
 
   function handleNodeClick(nodeId: string, isWord: boolean, isFocused: boolean) {
     if (!isWord) {
-      // Root/non-word node → root detail
       goto(`/root/${nodeId}`);
       return;
     }
     if (isFocused) {
-      // Clicking the focused word itself → go to its tree view
       goto(`/tree/${nodeId}`);
       return;
     }
-    // Neighbor word → new local graph + open panel
     goto(`/graph/${nodeId}?panel=${nodeId}`);
   }
 </script>
@@ -50,6 +55,10 @@
       />
     {/if}
     <GraphKey />
+  {:else}
+    <div class="graph-loading">
+      <span class="loading-dot"></span>
+    </div>
   {/if}
 </div>
 
@@ -90,6 +99,24 @@
     color: var(--text-muted);
     z-index: 5;
     pointer-events: none;
+  }
+
+  .graph-loading {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loading-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50%       { opacity: 1;   transform: scale(1.1); }
   }
 
   @media (max-width: 640px) {
