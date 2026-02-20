@@ -1,17 +1,28 @@
 <script lang="ts">
   import '../app.css';
-  import { initData } from '$lib/stores/data.svelte.js';
+  import { onMount } from 'svelte';
+  import { initManifest, initFromWordsJson, data } from '$lib/stores/data.svelte.js';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import ViewTabs from '$lib/components/ViewTabs.svelte';
   import HintBar from '$lib/components/HintBar.svelte';
   import SearchPalette from '$lib/components/SearchPalette.svelte';
-  import type { LayoutData } from './$types.js';
 
-  let { data, children }: { data: LayoutData; children: import('svelte').Snippet } = $props();
+  let { children }: { children: import('svelte').Snippet } = $props();
 
-  // Initialize synchronously so child components see initialized data on first render.
-  // Using $effect would delay until after paint, causing a "loading…" flash.
-  initData(data.nodes, data.wordIds);
+  onMount(async () => {
+    try {
+      const res = await fetch('/api/words');
+      if (!res.ok) throw new Error(`${res.status}`);
+      const json = await res.json();
+      if (!json.manifest) throw new Error('no manifest');
+      initManifest(json.wordIds, json.manifest);
+    } catch {
+      // API not available (e.g. vite preview without wrangler) — fall back to full words.json
+      const res = await fetch('/words.json');
+      const json = await res.json();
+      initFromWordsJson(json.nodes, json.words);
+    }
+  });
 
   let drawerOpen = $state(false);
   let paletteOpen = $state(false);
@@ -32,7 +43,13 @@
 <Sidebar bind:open={drawerOpen} />
 <div class="main">
   <ViewTabs onToggleDrawer={() => drawerOpen = !drawerOpen} onOpenSearch={() => paletteOpen = true} />
-  {@render children()}
+  {#if data.manifestReady}
+    {@render children()}
+  {:else}
+    <div class="app-loading">
+      <span class="app-loading-dot"></span>
+    </div>
+  {/if}
   <HintBar />
 </div>
 
@@ -54,6 +71,26 @@
     flex-direction: column;
     overflow: hidden;
     min-width: 0;
+  }
+
+  .app-loading {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-loading-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50%       { opacity: 1;   transform: scale(1.1); }
   }
 
   @media (max-width: 640px) {

@@ -39,3 +39,12 @@ export interface SearchIndexEntry {
 }
 
 export type SearchIndex = Record<string, SearchIndexEntry>;
+
+/** Minimal per-word data for the sidebar (no subtree nodes needed) */
+export interface WordManifestEntry {
+  word: string;
+  lang: string;
+  originLang: string; // lang of first parent, for dot color
+}
+
+export type WordManifest = Record<string, WordManifestEntry>;

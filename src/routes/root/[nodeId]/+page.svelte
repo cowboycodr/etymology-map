@@ -1,14 +1,27 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
-  import { data } from '$lib/stores/data.svelte.js';
+  import { data, mergeData } from '$lib/stores/data.svelte.js';
   import { buildTree } from '$lib/treeBuilder.js';
   import LangTag from '$lib/components/LangTag.svelte';
   import TreeNode from '$lib/components/TreeNode.svelte';
 
   const nodeId = $derived($page.params.nodeId);
-  const node = $derived(data.initialized ? data.nodes[nodeId] : null);
-  const containingWordIds = $derived(data.initialized ? (data.containedIn[nodeId] || []) : []);
+
+  // Fetch node bundle (node + all containing-word subtrees) on demand
+  $effect(() => {
+    const nid = nodeId;
+    const key = `node:${nid}`;
+    if (data.allLoaded || data.isLoaded(key)) return;
+    fetch(`/api/nodes/${nid}`)
+      .then(r => r.json())
+      .then(json => mergeData(key, json.nodes, json.containedIn, json.containingWordIds ?? []));
+  });
+
+  const nodeKey = $derived(`node:${nodeId}`);
+  const ready            = $derived(data.allLoaded || data.isLoaded(nodeKey));
+  const node             = $derived(ready ? data.nodes[nodeId] : null);
+  const containingWordIds = $derived(ready ? (data.containedIn[nodeId] ?? []) : []);
 </script>
 
 {#if node}
@@ -53,19 +66,32 @@
       {/if}
     </div>
   </div>
-{:else if data.initialized}
+{:else if ready}
   <div class="tree-area">
     <div class="empty-state">node not found: {nodeId}</div>
   </div>
 {:else}
   <div class="tree-area">
-    <div class="empty-state">loading…</div>
+    <div class="empty-state loading-state">
+      <span class="loading-dot"></span>
+    </div>
   </div>
 {/if}
 
 <style>
   .tree-area { flex: 1; min-height: 0; overflow: auto; padding: 12px 24px 24px 12px; }
   .root-page { padding: 2px 0 24px; }
+  .empty-state { color: var(--text-muted); padding: 48px 24px; font-size: 12px; }
+  .loading-state { display: flex; align-items: center; justify-content: center; padding: 0; }
+  .loading-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50%       { opacity: 1;   transform: scale(1.1); }
+  }
   .back-btn {
     display: inline-flex; align-items: center; gap: 5px;
     font-family: inherit; font-size: 11px; color: var(--text-muted);

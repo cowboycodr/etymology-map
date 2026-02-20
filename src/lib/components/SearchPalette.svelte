@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { data } from '$lib/stores/data.svelte.js';
+  import { data, initAllData } from '$lib/stores/data.svelte.js';
   import { searchAllNodes, hlMatch } from '$lib/searchEngine.js';
   import { langClass } from '$lib/langUtils.js';
   import type { SearchResult } from '$lib/types.js';
@@ -12,6 +12,15 @@
   let focusedIndex = $state(-1);
   let inputEl = $state<HTMLInputElement | undefined>(undefined);
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+  // Lazy-load full data the first time the palette opens
+  $effect(() => {
+    if (!open) return;
+    if (data.allLoaded) return;
+    fetch('/api/all')
+      .then(r => r.json())
+      .then(json => initAllData(json.wordIds, json.nodes, json.containedIn));
+  });
 
   $effect(() => {
     if (open && inputEl) {
@@ -25,6 +34,7 @@
   function handleInput() {
     if (debounceTimer) clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
+      if (!data.searchReady) return; // full index not yet built
       results = searchAllNodes(query, data.nodes, data.containedIn, data.searchIndex);
       focusedIndex = -1;
     }, 80);
@@ -92,7 +102,9 @@
       <kbd class="cmd-esc-key">esc</kbd>
     </div>
     <div class="cmd-results">
-      {#if !query.trim()}
+      {#if !data.searchReady}
+        <div class="cmd-hint">loading search index…</div>
+      {:else if !query.trim()}
         <div class="cmd-hint">search across all etymology trees</div>
       {:else if results.length === 0}
         <div class="cmd-hint">no results</div>
@@ -245,14 +257,6 @@
     margin-left: auto;
   }
 
-  .cmd-path {
-    font-size: 11px;
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   .cmd-meaning {
     font-size: 11px;
     color: var(--text-muted);
@@ -260,15 +264,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .cmd-section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding: 8px 20px 4px;
   }
 
   @media (max-width: 640px) {

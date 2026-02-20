@@ -1,15 +1,26 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
-  import { data } from '$lib/stores/data.svelte.js';
+  import { data, mergeData } from '$lib/stores/data.svelte.js';
   import { buildTree } from '$lib/treeBuilder.js';
   import LangTag from '$lib/components/LangTag.svelte';
   import TreeNode from '$lib/components/TreeNode.svelte';
   import type { TreeNode as TreeNodeType } from '$lib/types.js';
 
   const wordId = $derived($page.params.wordId);
-  const node = $derived(data.initialized ? data.nodes[wordId] : null);
-  const tree = $derived(node ? buildTree(wordId, data.nodes) : null);
+
+  // Fetch this word's subtree on mount and on wordId change
+  $effect(() => {
+    const wid = wordId;
+    if (data.allLoaded || data.isLoaded(wid)) return;
+    fetch(`/api/words/${wid}`)
+      .then(r => r.json())
+      .then(json => mergeData(wid, json.nodes, json.containedIn));
+  });
+
+  const ready = $derived(data.allLoaded || data.isLoaded(wordId));
+  const node  = $derived(ready ? data.nodes[wordId] : null);
+  const tree  = $derived(node  ? buildTree(wordId, data.nodes) : null);
 
   // Vim cursor: track selected nodeId
   let selectedId = $state<string | null>(null);
@@ -21,7 +32,6 @@
   });
 
   // Collect all visible nodeIds in DOM order (for j/k navigation)
-  // We derive them from the tree structure (DFS order)
   function collectIds(t: TreeNodeType | null): string[] {
     if (!t) return [];
     return [t._id, ...t.roots.flatMap(c => collectIds(c))];
@@ -95,7 +105,6 @@
     }, 0);
   }
 
-  // Find parent ID of a given node in the tree (DFS)
   function findParent(t: TreeNodeType | null, targetId: string, parent: string | null = null): string | null {
     if (!t) return null;
     if (t._id === targetId) return parent;
@@ -106,7 +115,6 @@
     return null;
   }
 
-  // Find first child ID of a given node
   function findFirstChild(t: TreeNodeType | null, targetId: string): string | null {
     if (!t) return null;
     if (t._id === targetId) return t.roots[0]?._id ?? null;
@@ -144,13 +152,15 @@
       </div>
     </div>
   </div>
-{:else if data.initialized}
+{:else if ready}
   <div class="tree-area">
     <div class="empty-state">word not found: {wordId}</div>
   </div>
 {:else}
   <div class="tree-area">
-    <div class="empty-state">loading…</div>
+    <div class="empty-state loading-state">
+      <span class="loading-dot"></span>
+    </div>
   </div>
 {/if}
 
@@ -162,6 +172,16 @@
     padding: 12px 24px 24px 12px;
   }
   .empty-state { color: var(--text-muted); padding: 48px 24px; font-size: 12px; }
+  .loading-state { display: flex; align-items: center; justify-content: center; padding: 0; }
+  .loading-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50%       { opacity: 1;   transform: scale(1.1); }
+  }
   .root-page { padding: 2px 0 24px; }
   .root-hero {
     display: flex;

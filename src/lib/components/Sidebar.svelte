@@ -20,10 +20,8 @@
 <div class="sidebar" class:open>
   <div class="word-list">
     {#each data.wordIds as wordId (wordId)}
-      {@const node = data.nodes[wordId]}
-      {@const parentId = (node?.roots ?? [])[0]}
-      {@const originLang = (parentId && data.nodes[parentId]?.lang) ? data.nodes[parentId].lang : (node?.lang ?? '')}
-      {@const dotColor = langFillColor(originLang)}
+      {@const entry = data.manifest[wordId]}
+      {@const dotColor = langFillColor(entry?.originLang ?? '')}
       {@const isActive = $page.params.wordId === wordId}
       <div
         class="word-item"
@@ -34,7 +32,7 @@
         onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleWordClick(wordId); }}
       >
         <span class="dot" style="--dot-color: {dotColor}">◆</span>
-        <span>{node?.word ?? wordId}</span>
+        <span>{entry?.word ?? wordId}</span>
       </div>
     {/each}
   </div>
