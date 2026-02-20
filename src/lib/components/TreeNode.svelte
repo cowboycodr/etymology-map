@@ -82,6 +82,7 @@
     cursor: pointer;
     padding-right: 10px;
     white-space: nowrap;
+    overflow: hidden;
     transition: background 0.07s;
   }
   .node-row:hover { background: var(--bg-hover); }
@@ -98,6 +99,7 @@
     gap: 7px;
     padding-left: 2px;
     overflow: hidden;
+    min-width: 0;
   }
 
   .node-word {
@@ -114,7 +116,14 @@
   }
 
   .node-date { font-size: 11px; color: var(--text-muted); opacity: 0.7; }
-  .node-meaning { font-size: 11.5px; color: var(--text-muted); font-style: italic; }
+  .node-meaning {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
 
   @media (max-width: 640px) {
     .node-meaning { display: none; }
