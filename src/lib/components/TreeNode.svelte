@@ -40,17 +40,19 @@
         {/each}
         <span class="guide" class:elbow={isLast} class:tee={!isLast}></span>
       </div>
-      <div class="node-label">
-        <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-        <span
-          class="node-word"
-          data-nav-id={node._id}
-          onclick={(e) => { e.stopPropagation(); onNodeClick?.(node._id); }}
-        >{node.word}</span>
-        {#if node.date}<span class="node-date">{node.date}</span>{/if}
-        <LangTag lang={node.lang} small />
+      <div class="node-content">
+        <div class="node-first-line">
+          <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+          <span
+            class="node-word"
+            data-nav-id={node._id}
+            onclick={(e) => { e.stopPropagation(); onNodeClick?.(node._id); }}
+          >{node.word}</span>
+          {#if node.date}<span class="node-date">{node.date}</span>{/if}
+          <LangTag lang={node.lang} small />
+        </div>
         {#if node.meaning && !compact}
-          <span class="node-meaning">"{node.meaning}"</span>
+          <div class="node-meaning">"{node.meaning}"</div>
         {/if}
       </div>
     </div>
@@ -76,12 +78,11 @@
 <style>
   .node-row {
     display: flex;
-    align-items: center;
-    height: var(--row-h);
+    align-items: flex-start;
+    min-height: var(--row-h);
     border-radius: 3px;
     cursor: pointer;
     padding-right: 10px;
-    white-space: nowrap;
     overflow: hidden;
     transition: background 0.07s;
   }
@@ -93,11 +94,20 @@
   .node-row.root-hl { background: rgba(137, 180, 250, 0.07); }
   .node-row.root-hl :global(.node-word) { color: var(--accent); }
 
-  .node-label {
+  .node-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    padding-left: 2px;
+  }
+
+  .node-first-line {
     display: flex;
     align-items: center;
     gap: 7px;
-    padding-left: 2px;
+    height: var(--row-h);
+    white-space: nowrap;
     overflow: hidden;
     min-width: 0;
   }
@@ -107,7 +117,7 @@
     color: var(--text-primary);
     cursor: pointer;
     transition: color 0.1s;
-    min-width: 0;
+    flex-shrink: 0;
   }
   .node-word:hover {
     color: var(--accent);
@@ -115,18 +125,18 @@
     text-underline-offset: 2px;
   }
 
-  .node-date { font-size: 11px; color: var(--text-muted); opacity: 0.7; }
+  .node-date { font-size: 11px; color: var(--text-muted); opacity: 0.7; flex-shrink: 0; }
+
   .node-meaning {
-    font-size: 11.5px;
+    font-size: 11px;
     color: var(--text-muted);
     font-style: italic;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 0;
+    line-height: 1.5;
+    padding-bottom: 5px;
+    white-space: normal;
   }
 
   @media (max-width: 640px) {
-    .node-meaning { display: none; }
     .node-word { overflow: hidden; text-overflow: ellipsis; }
   }
 </style>
