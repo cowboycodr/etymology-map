@@ -38,52 +38,18 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
 <span
-  class="lang-tag {langClass(lang)}"
-  class:small
-  class:has-tip={!!tooltip}
+  class="lang-tag {langClass(lang)} text-[10px] px-[5px] rounded-sm font-medium tracking-[0.02em] flex-shrink-0"
+  class:text-[10px]={small}
+  class:px-[5px]={small}
+  class:cursor-help={!!tooltip}
   onmouseenter={(e) => tooltip && show(e.currentTarget as HTMLElement)}
   onmouseleave={() => tooltip && hide()}
   onclick={handleClick}
 >{lang}</span>
 
 {#if visible && tooltip}
-  <div class="lang-tooltip" style="left:{x}px;top:{y}px">
-    <strong>{lang}</strong>
+  <div class="fixed z-[9999] transform -translate-x-1/2 -translate-y-full bg-bg-surface border border-border rounded-md py-1.5 px-2.5 text-xs leading-[1.5] text-text-muted pointer-events-none max-w-[260px] whitespace-normal text-center shadow-[0_4px_16px_rgba(0,0,0,0.25)]" style="left:{x}px;top:{y}px">
+    <strong class="block text-text-primary mb-0.5 text-xs">{lang}</strong>
     {tooltip}
   </div>
 {/if}
-
-<style>
-  .lang-tag.has-tip { cursor: help; }
-
-  /* small variant */
-  .lang-tag.small {
-    font-size: 10px;
-    padding: 1px 5px;
-  }
-
-  .lang-tooltip {
-    position: fixed;
-    transform: translate(-50%, -100%);
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 11.5px;
-    line-height: 1.5;
-    color: var(--text-muted);
-    pointer-events: none;
-    z-index: 9999;
-    max-width: 260px;
-    white-space: normal;
-    text-align: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  }
-
-  .lang-tooltip strong {
-    display: block;
-    color: var(--text-primary);
-    margin-bottom: 2px;
-    font-size: 12px;
-  }
-</style>

@@ -29,36 +29,39 @@
   {#if !isRoot}
     <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
     <div
-      class="node-row"
-      class:root-hl={highlightId && node._id === highlightId}
-      class:selected={selectedId === node._id}
+      class="flex items-start min-h-[26px] rounded-sm cursor-pointer pr-2.5 overflow-hidden transition-colors duration-70"
+      class:bg-bg-hover={selectedId === node._id}
+      class:shadow-[inset_2px_0_0_var(--accent)]={selectedId === node._id}
+      class:hover:bg-bg-hover={selectedId !== node._id}
+      class:bg-[rgba(137,180,250,0.07)]={highlightId && node._id === highlightId && selectedId !== node._id}
       onclick={() => onRowClick?.(node._id)}
     >
-      <div class="guides">
+      <div class="flex items-stretch h-[26px] flex-shrink-0">
         {#each ancestorHasMore as hasMore}
           <span class="guide" class:pass={hasMore}></span>
         {/each}
         <span class="guide" class:elbow={isLast} class:tee={!isLast}></span>
       </div>
-      <div class="node-content">
-        <div class="node-first-line">
+      <div class="flex flex-col flex-1 min-w-0 pl-0.5">
+        <div class="flex items-center gap-1.75 h-[26px] whitespace-nowrap overflow-hidden min-w-0">
           <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
           <span
-            class="node-word"
+            class="font-medium text-text-primary cursor-pointer transition-colors duration-100 flex-shrink-0 hover:text-accent hover:underline hover:underline-offset-2"
+            class:text-accent={highlightId && node._id === highlightId}
             data-nav-id={node._id}
             onclick={(e) => { e.stopPropagation(); onNodeClick?.(node._id); }}
           >{node.word}</span>
-          {#if node.date}<span class="node-date">{node.date}</span>{/if}
+          {#if node.date}<span class="text-xs text-text-muted opacity-70 flex-shrink-0">{node.date}</span>{/if}
           <LangTag lang={node.lang} small />
         </div>
         {#if node.meaning && !compact}
-          <div class="node-meaning">"{node.meaning}"</div>
+          <div class="text-xs text-text-muted italic leading-6 pb-1.25 whitespace-normal">"{node.meaning}"</div>
         {/if}
       </div>
     </div>
   {/if}
   {#if node.roots && node.roots.length > 0}
-    <div class="node-children">
+    <div>
       {#each node.roots as child, i}
         <TreeNode
           node={child}
@@ -76,67 +79,50 @@
 </div>
 
 <style>
-  .node-row {
-    display: flex;
-    align-items: flex-start;
-    min-height: var(--row-h);
-    border-radius: 3px;
-    cursor: pointer;
-    padding-right: 10px;
-    overflow: hidden;
-    transition: background 0.07s;
-  }
-  .node-row:hover { background: var(--bg-hover); }
-  .node-row.selected {
-    background: var(--bg-hover);
-    box-shadow: inset 2px 0 0 var(--accent);
-  }
-  .node-row.root-hl { background: rgba(137, 180, 250, 0.07); }
-  .node-row.root-hl :global(.node-word) { color: var(--accent); }
-
-  .node-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
-    padding-left: 2px;
-  }
-
-  .node-first-line {
-    display: flex;
-    align-items: center;
-    gap: 7px;
+  .guide {
+    width: var(--guide-w);
     height: var(--row-h);
-    white-space: nowrap;
-    overflow: hidden;
-    min-width: 0;
-  }
-
-  .node-word {
-    font-weight: 500;
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: color 0.1s;
+    position: relative;
     flex-shrink: 0;
   }
-  .node-word:hover {
-    color: var(--accent);
-    text-decoration: underline;
-    text-underline-offset: 2px;
+  .guide.pass::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--tree-line);
   }
-
-  .node-date { font-size: 11px; color: var(--text-muted); opacity: 0.7; flex-shrink: 0; }
-
-  .node-meaning {
-    font-size: 11px;
-    color: var(--text-muted);
-    font-style: italic;
-    line-height: 1.5;
-    padding-bottom: 5px;
-    white-space: normal;
+  .guide.tee::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--tree-line);
   }
-
-  @media (max-width: 640px) {
-    .node-word { overflow: hidden; text-overflow: ellipsis; }
+  .guide.tee::after {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: calc(var(--row-h) / 2);
+    right: 0;
+    height: 1px;
+    background: var(--tree-line);
+  }
+  .guide.elbow::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 0;
+    height: calc(var(--row-h) / 2);
+    width: 1px;
+    background: var(--tree-line);
+  }
+  .guide.elbow::after {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: calc(var(--row-h) / 2);
+    right: 0;
+    height: 1px;
+    background: var(--tree-line);
   }
 </style>
