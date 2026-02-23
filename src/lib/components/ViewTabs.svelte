@@ -21,61 +21,9 @@
   }
 </script>
 
-<div class="view-tabs">
-  <button class="menu-btn" onclick={onToggleDrawer} aria-label="words">☰</button>
-  <button class="view-tab" class:active={treeActive} onclick={gotoTree}>tree</button>
-  <button class="view-tab" class:active={graphActive} onclick={gotoGraph}>graph</button>
-  <button class="menu-btn search-btn" onclick={onOpenSearch} aria-label="search">⌕</button>
+<div class="flex bg-bg-surface border-b border-border flex-shrink-0">
+  <button class="hidden items-center justify-center bg-none border-none text-text-muted text-[17px] cursor-pointer p-0 pr-2.5 pl-1 line-height-1 flex-shrink-0 transition-colors duration-100 hover:text-text-primary max-md:flex" onclick={onToggleDrawer} aria-label="words">☰</button>
+  <button class="font-inherit text-xs py-1.5 px-[14px] border-none border-b-2 border-transparent bg-transparent text-text-muted cursor-pointer tracking-[0.03em] transition-colors duration-100 -mb-px hover:text-text-primary" class:text-accent={treeActive} class:border-accent={treeActive} onclick={gotoTree}>tree</button>
+  <button class="font-inherit text-xs py-1.5 px-[14px] border-none border-b-2 border-transparent bg-transparent text-text-muted cursor-pointer tracking-[0.03em] transition-colors duration-100 -mb-px hover:text-text-primary" class:text-accent={graphActive} class:border-accent={graphActive} onclick={gotoGraph}>graph</button>
+  <button class="hidden items-center justify-center bg-none border-none text-text-muted cursor-pointer p-0 pl-2.5 pr-1 flex-shrink-0 transition-colors duration-100 hover:text-text-primary max-md:flex ml-auto text-[19px]" onclick={onOpenSearch} aria-label="search">⌕</button>
 </div>
-
-<style>
-  .view-tabs {
-    display: flex;
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .view-tab {
-    font-family: inherit;
-    font-size: 11px;
-    padding: 6px 14px;
-    border: none;
-    border-bottom: 2px solid transparent;
-    background: transparent;
-    color: var(--text-muted);
-    cursor: pointer;
-    letter-spacing: 0.03em;
-    transition: color 0.1s, border-color 0.1s;
-    margin-bottom: -1px;
-  }
-  .view-tab:hover { color: var(--text-primary); }
-  .view-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-  .menu-btn {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-size: 17px;
-    cursor: pointer;
-    padding: 0 10px 0 4px;
-    line-height: 1;
-    flex-shrink: 0;
-    transition: color 0.1s;
-  }
-  .menu-btn:hover { color: var(--text-primary); }
-
-  .search-btn {
-    margin-left: auto;
-    padding: 0 4px 0 10px;
-    font-size: 19px;
-  }
-
-  @media (max-width: 640px) {
-    .menu-btn { display: flex; }
-    .view-tab { padding: 9px 18px; }
-  }
-</style>

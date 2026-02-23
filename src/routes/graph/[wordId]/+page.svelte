@@ -49,10 +49,10 @@
   {/if}
 </svelte:head>
 
-<div class="graph-wrapper">
+<div class="flex-1 overflow-hidden relative flex flex-col min-h-0">
   {#if graphData}
-    <button class="graph-back" onclick={() => goto('/graph')}>← all words</button>
-    <div class="graph-label">{data.nodes[wordId]?.word ?? wordId}</div>
+    <button class="absolute top-[10px] left-[12px] font-inherit text-xs text-text-muted bg-bg-surface border border-border rounded px-2.5 py-1 cursor-pointer z-5 transition-colors duration-100 hover:text-accent hover:border-accent max-md:px-4 max-md:text-sm" onclick={() => goto('/graph')}>← all words</button>
+    <div class="absolute top-[13px] right-[14px] text-[10px] tracking-[0.05em] text-text-muted z-5 pointer-events-none">{data.nodes[wordId]?.word ?? wordId}</div>
     <GraphView
       mode="local"
       data={graphData}
@@ -68,70 +68,8 @@
     {/if}
     <GraphKey />
   {:else}
-    <div class="graph-loading">
-      <span class="loading-dot"></span>
+    <div class="flex-1 flex items-center justify-center">
+      <span class="w-[7px] h-[7px] rounded-full bg-accent animate-pulse-slow"></span>
     </div>
   {/if}
 </div>
-
-<style>
-  .graph-wrapper {
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .graph-back {
-    position: absolute;
-    top: 10px;
-    left: 12px;
-    font-family: inherit;
-    font-size: 11px;
-    color: var(--text-muted);
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 4px 10px;
-    cursor: pointer;
-    z-index: 5;
-    transition: color 0.1s, border-color 0.1s;
-  }
-
-  .graph-back:hover { color: var(--accent); border-color: var(--accent); }
-
-  .graph-label {
-    position: absolute;
-    top: 13px;
-    right: 14px;
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    z-index: 5;
-    pointer-events: none;
-  }
-
-  .graph-loading {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .loading-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 1.2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.2; transform: scale(0.8); }
-    50%       { opacity: 1;   transform: scale(1.1); }
-  }
-
-  @media (max-width: 640px) {
-    .graph-back { padding: 8px 16px; font-size: 13px; }
-  }
-</style>

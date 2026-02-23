@@ -172,43 +172,13 @@
   });
 </script>
 
-<div class="graph-area" bind:this={containerEl}>
-  <svg bind:this={svgEl}></svg>
-  <div class="graph-tooltip" bind:this={tooltipEl}></div>
+<div class="flex-1 overflow-hidden relative bg-bg-base min-h-0" bind:this={containerEl}>
+  <svg bind:this={svgEl} class="absolute top-0 left-0"></svg>
+  <div class="absolute bg-bg-surface border border-border rounded-md py-1.75 px-2.75 text-xs pointer-events-none opacity-0 transition-opacity duration-120 max-w-[220px] z-10 leading-[1.6]" bind:this={tooltipEl}></div>
 </div>
 
 <style>
-  .graph-area {
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-    background: var(--bg-base);
-    min-height: 0;
-  }
-
-  svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .graph-tooltip {
-    position: absolute;
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 7px 11px;
-    font-size: 11px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.12s;
-    max-width: 220px;
-    z-index: 10;
-    line-height: 1.6;
-  }
-
   :global(.graph-tooltip.visible) { opacity: 1; }
-
   :global(.tip-word) { font-weight: 600; font-size: 12px; color: var(--text-primary); }
   :global(.tip-lang) { color: var(--text-muted); font-size: 10px; }
   :global(.tip-meaning) { color: var(--text-muted); font-style: italic; }

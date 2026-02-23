@@ -144,17 +144,17 @@
 </svelte:head>
 
 {#if node && tree}
-  <div class="tree-area">
-    <div class="root-page">
-      <div class="root-hero">
-        <span class="root-hero-word">{node.word}</span>
+  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pr-6 pb-6 max-md:overflow-x-hidden">
+    <div class="py-[2px] pb-6">
+      <div class="flex items-baseline gap-2.5 flex-wrap mb-1">
+        <span class="text-xl font-semibold text-text-primary">{node.word}</span>
         <LangTag lang={node.lang} />
-        {#if node.date}<span class="node-date" style="font-size:12px;opacity:1">{node.date}</span>{/if}
+        {#if node.date}<span class="text-xs text-text-muted opacity-70">{node.date}</span>{/if}
       </div>
       {#if node.meaning}
-        <div class="root-hero-meaning">"{node.meaning}"</div>
+        <div class="text-xs text-text-muted italic mb-3.5">"{node.meaning}"</div>
       {/if}
-      <div style="margin-top:10px">
+      <div class="mt-2.5">
         <TreeNode
           node={tree}
           isLast={true}
@@ -168,48 +168,13 @@
     </div>
   </div>
 {:else if ready}
-  <div class="tree-area">
-    <div class="empty-state">word not found: {wordId}</div>
+  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pr-6 pb-6 max-md:overflow-x-hidden">
+    <div class="text-text-muted py-12 px-6 text-xs">word not found: {wordId}</div>
   </div>
 {:else}
-  <div class="tree-area">
-    <div class="empty-state loading-state">
-      <span class="loading-dot"></span>
+  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pr-6 pb-6 max-md:overflow-x-hidden">
+    <div class="flex items-center justify-center py-0 px-0">
+      <span class="w-[7px] h-[7px] rounded-full bg-accent animate-pulse-slow"></span>
     </div>
   </div>
 {/if}
-
-<style>
-  .tree-area {
-    flex: 1;
-    min-height: 0;
-    overflow: auto;
-    padding: 12px 24px 24px 12px;
-  }
-  .empty-state { color: var(--text-muted); padding: 48px 24px; font-size: 12px; }
-  .loading-state { display: flex; align-items: center; justify-content: center; padding: 0; }
-  .loading-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 1.2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.2; transform: scale(0.8); }
-    50%       { opacity: 1;   transform: scale(1.1); }
-  }
-  .root-page { padding: 2px 0 24px; }
-  .root-hero {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
-  .root-hero-word { font-size: 20px; font-weight: 600; color: var(--text-primary); }
-  .root-hero-meaning { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 14px; }
-  .node-date { font-size: 11px; color: var(--text-muted); opacity: 0.7; }
-
-  @media (max-width: 640px) {
-    .tree-area { overflow-x: hidden; }
-  }
-</style>

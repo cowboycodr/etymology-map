@@ -20,16 +20,16 @@
   );
 </script>
 
-<div class="graph-panel">
-  <div class="graph-panel-header">
+<div class="absolute bottom-[14px] left-[14px] w-[min(380px,42vw)] max-h-[420px] bg-bg-surface border border-border rounded-lg overflow-hidden z-[6] flex flex-col shadow-panel max-md:left-[10px] max-md:right-[10px] max-md:w-auto max-md:max-h-[44dvh] max-md:bottom-[calc(10px+env(safe-area-inset-bottom,0px))]">
+  <div class="flex items-center gap-1.75 px-2.5 py-2 border-b border-border flex-shrink-0">
     <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-    <span class="graph-panel-word" onclick={() => onWordClick(wordId)}>
+    <span class="font-semibold text-sm text-text-primary flex-1 whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer transition-colors duration-100 hover:text-accent after:content-['→'] after:font-normal after:opacity-0 after:transition-opacity after:duration-150 after:text-accent hover:after:opacity-100" onclick={() => onWordClick(wordId)}>
       {node?.word}
     </span>
     <LangTag lang={node?.lang ?? ''} small />
-    <button class="graph-panel-close" onclick={onClose}>×</button>
+    <button class="bg-none border-none text-text-muted cursor-pointer text-base p-0 px-0.5 line-height-1 flex-shrink-0 font-inherit transition-colors duration-100 hover:text-text-primary" onclick={onClose}>×</button>
   </div>
-  <div class="graph-panel-tree">
+  <div class="flex-1 overflow-y-auto overflow-x-hidden py-1.5 px-2 pb-2.5 pl-1">
     {#if tree}
       <TreeNode
         node={tree}
@@ -42,94 +42,3 @@
     {/if}
   </div>
 </div>
-
-<style>
-  .graph-panel {
-    position: absolute;
-    bottom: 14px;
-    left: 14px;
-    width: min(380px, 42vw);
-    max-height: 420px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    z-index: 6;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--panel-shadow);
-  }
-
-  .graph-panel-header {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 8px 10px;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .graph-panel-word {
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--text-primary);
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-    transition: color 0.1s;
-  }
-
-  .graph-panel-word::after {
-    content: ' →';
-    font-weight: 400;
-    opacity: 0;
-    transition: opacity 0.15s;
-    color: var(--accent);
-  }
-
-  .graph-panel-word:hover { color: var(--accent); }
-  .graph-panel-word:hover::after { opacity: 1; }
-
-  .graph-panel-close {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    cursor: pointer;
-    font-size: 16px;
-    padding: 0 2px;
-    line-height: 1;
-    flex-shrink: 0;
-    font-family: inherit;
-    transition: color 0.1s;
-  }
-
-  .graph-panel-close:hover { color: var(--text-primary); }
-
-  .graph-panel-tree {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 6px 8px 10px 4px;
-  }
-
-  /* panel tree is compact — hide meanings, clip labels to prevent overflow */
-  .graph-panel-tree :global(.node-meaning) { display: none; }
-  .graph-panel-tree :global(.node-label) { overflow: hidden; }
-  .graph-panel-tree :global(.node-word) {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  @media (max-width: 640px) {
-    .graph-panel {
-      left: 10px;
-      right: 10px;
-      width: auto;
-      max-height: 44dvh;
-      bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-    }
-  }
-</style>
