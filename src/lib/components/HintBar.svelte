@@ -4,7 +4,7 @@
   let isGraphRoute = $derived(($page.route.id ?? '').includes('/graph'));
 </script>
 
-<div class="flex-shrink-0 py-1.25 px-5.5 border-t border-border bg-bg-surface gap-4 flex items-center max-md:hidden">
+<div class="flex-shrink-0 px-[22px] py-1.25 border-t border-border bg-bg-surface gap-4 flex items-center max-md:hidden">
   {#if isGraphRoute}
     <span class="text-[10px] text-text-muted">drag to pan · scroll to zoom</span>
     <span class="text-[10px] text-text-muted">click word to inspect</span>

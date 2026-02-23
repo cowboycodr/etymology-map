@@ -103,11 +103,11 @@
     </div>
     <div class="max-h-[380px] overflow-y-auto py-1.5 pb-2 max-md:max-h-[48dvh] max-md:pb-2 max-md:pb-[calc(8px+env(safe-area-inset-bottom,0px))]">
       {#if !data.searchReady}
-        <div class="py-5 px-4.5 text-xs text-text-muted text-center">loading search index…</div>
+        <div class="py-5 px-[18px] text-xs text-text-muted text-center">loading search index…</div>
       {:else if !query.trim()}
-        <div class="py-5 px-4.5 text-xs text-text-muted text-center">search across all etymology trees</div>
+        <div class="py-5 px-[18px] text-xs text-text-muted text-center">search across all etymology trees</div>
       {:else if results.length === 0}
-        <div class="py-5 px-4.5 text-xs text-text-muted text-center">no results</div>
+        <div class="py-5 px-[18px] text-xs text-text-muted text-center">no results</div>
       {:else}
         {#each results as result, i}
           {@const isTopLevel = data.wordIds.includes(result.nodeId)}

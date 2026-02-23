@@ -23,7 +23,7 @@
 
 <div class="flex bg-bg-surface border-b border-border flex-shrink-0">
   <button class="hidden items-center justify-center bg-none border-none text-text-muted text-[17px] cursor-pointer p-0 pr-2.5 pl-1 line-height-1 flex-shrink-0 transition-colors duration-100 hover:text-text-primary max-md:flex" onclick={onToggleDrawer} aria-label="words">☰</button>
-  <button class="font-inherit text-xs py-1.5 px-3.5 border-none border-b-2 border-transparent bg-transparent text-text-muted cursor-pointer tracking-[0.03em] transition-colors duration-100 -mb-px hover:text-text-primary" class:text-accent={treeActive} class:border-accent={treeActive} onclick={gotoTree}>tree</button>
-  <button class="font-inherit text-xs py-1.5 px-3.5 border-none border-b-2 border-transparent bg-transparent text-text-muted cursor-pointer tracking-[0.03em] transition-colors duration-100 -mb-px hover:text-text-primary" class:text-accent={graphActive} class:border-accent={graphActive} onclick={gotoGraph}>graph</button>
+  <button class="font-inherit text-xs py-1.5 px-[14px] border-none border-b-2 border-transparent bg-transparent text-text-muted cursor-pointer tracking-[0.03em] transition-colors duration-100 -mb-px hover:text-text-primary" class:text-accent={treeActive} class:border-accent={treeActive} onclick={gotoTree}>tree</button>
+  <button class="font-inherit text-xs py-1.5 px-[14px] border-none border-b-2 border-transparent bg-transparent text-text-muted cursor-pointer tracking-[0.03em] transition-colors duration-100 -mb-px hover:text-text-primary" class:text-accent={graphActive} class:border-accent={graphActive} onclick={gotoGraph}>graph</button>
   <button class="hidden items-center justify-center bg-none border-none text-text-muted cursor-pointer p-0 pl-2.5 pr-1 flex-shrink-0 transition-colors duration-100 hover:text-text-primary max-md:flex ml-auto text-[19px]" onclick={onOpenSearch} aria-label="search">⌕</button>
 </div>
