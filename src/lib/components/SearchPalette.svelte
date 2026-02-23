@@ -99,7 +99,7 @@
         autocapitalize="none"
         autocorrect="off"
       />
-      <kbd class="font-inherit text-xs text-text-muted bg-bg-hover border border-[#45475a] rounded-sm px-1.5 py-0.5 flex-shrink-0 max-md:hidden">esc</kbd>
+      <kbd class="hk">esc</kbd>
     </div>
     <div class="max-h-[380px] overflow-y-auto py-1.5 pb-2 max-md:max-h-[48dvh] max-md:pb-2 max-md:pb-[calc(8px+env(safe-area-inset-bottom,0px))]">
       {#if !data.searchReady}
