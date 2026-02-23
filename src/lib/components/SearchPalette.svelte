@@ -101,7 +101,7 @@
       />
       <kbd class="hk">esc</kbd>
     </div>
-    <div class="max-h-[380px] overflow-y-auto py-1.5 pb-2 max-md:max-h-[48dvh] max-md:pb-2 max-md:pb-[calc(8px+env(safe-area-inset-bottom,0px))]">
+    <div class="max-h-[380px] overflow-y-auto pt-1.5 pb-2 px-0 max-md:max-h-[48dvh] max-md:pb-2 max-md:pb-[calc(8px+env(safe-area-inset-bottom,0px))]">
       {#if !data.searchReady}
         <div class="py-5 px-[18px] text-xs text-text-muted text-center">loading search index…</div>
       {:else if !query.trim()}
