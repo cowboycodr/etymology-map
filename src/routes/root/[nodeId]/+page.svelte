@@ -36,7 +36,7 @@
 </svelte:head>
 
 {#if node}
-  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pb-6 max-md:overflow-x-hidden">
+  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pr-6 pb-6 max-md:overflow-x-hidden">
     <div class="py-[2px] pb-6">
       <button class="inline-flex items-center gap-1.5 font-inherit text-xs text-text-muted bg-transparent border-none cursor-pointer py-1 pb-3 transition-colors duration-100 hover:text-accent" onclick={() => history.back()}>← back</button>
       <div class="flex items-baseline gap-2.5 flex-wrap mb-1">
@@ -78,11 +78,11 @@
     </div>
   </div>
 {:else if ready}
-  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pb-6 max-md:overflow-x-hidden">
+  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pr-6 pb-6 max-md:overflow-x-hidden">
     <div class="text-text-muted py-12 px-6 text-xs">node not found: {nodeId}</div>
   </div>
 {:else}
-  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pb-6 max-md:overflow-x-hidden">
+  <div class="flex-1 min-h-0 overflow-auto p-3 pl-[12px] pr-6 pb-6 max-md:overflow-x-hidden">
     <div class="flex items-center justify-center py-0 px-0">
       <span class="w-[7px] h-[7px] rounded-full bg-accent animate-pulse-slow"></span>
     </div>

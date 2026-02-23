@@ -25,7 +25,7 @@
       {@const isActive = $page.params.wordId === wordId}
       <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
       <div
-        class="flex items-center gap-1.75 px-2.5 mx-1 rounded-sm cursor-pointer text-text-secondary transition-colors duration-80 select-none"
+        class="flex items-center gap-1.75 px-2.5 py-1 mx-1 rounded-sm cursor-pointer text-text-secondary transition-colors duration-80 select-none"
         class:bg-bg-hover={isActive}
         class:text-accent={isActive}
         class:hover:bg-bg-hover={!isActive}
